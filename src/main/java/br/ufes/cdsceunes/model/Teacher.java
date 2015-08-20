@@ -4,6 +4,7 @@ import java.util.Calendar;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -12,7 +13,7 @@ import org.hibernate.validator.constraints.NotBlank;
 public class Teacher extends AbstractModel {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@NotBlank
 	private String name;
