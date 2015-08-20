@@ -3,7 +3,6 @@ package br.ufes.cdsceunes.controller;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -12,41 +11,39 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.ufes.cdsceunes.dao.TeacherDAO;
-import br.ufes.cdsceunes.model.Teacher;
+import br.ufes.cdsceunes.model.Department;
 
 @Controller
 @Transactional
-@RequestMapping("/teachers")
-public class TeacherController extends AbstractController {
+@RequestMapping("/department")
+public class DepartmentController extends AbstractController {
 
-	// TODO Substituir a entidade DAO pelos Repositories correspondentes.
-	@Autowired
-	private TeacherDAO teachers;
+	//TODO Colocar repository correspondente aqui:
+	
 	
 	@RequestMapping("/")
 	public ModelAndView list() {
-		ModelAndView mad = new ModelAndView("teacher/list");
-		mad.addObject("teachers", teachers.list());
+		ModelAndView mad = new ModelAndView("/list");
+		//Adicionar objeto com método list no ModelAndView
 		return mad;
 	}
-
+	
 	@RequestMapping(value = "/form", name = "add")
-	public ModelAndView form(@ModelAttribute Teacher teacher) {
-		ModelAndView mad = new ModelAndView("teacher/form");
+	public ModelAndView form(@ModelAttribute Department department) {
+		ModelAndView mad = new ModelAndView("/form");
 		return mad;
 	}
- 
+	
 	@RequestMapping(method = RequestMethod.POST, name="create", value="save")
-	public ModelAndView save(@ModelAttribute("teacher") @Valid Teacher teacher, BindingResult binding,
+	public ModelAndView save(@ModelAttribute("teacher") @Valid Department department, BindingResult binding,
 			RedirectAttributes redirectAttributes) {
 		if (binding.hasErrors()) {
-			return form(teacher);
+			return form(department);
 		}
 		
-		teachers.save(teacher);
+		//TODO Salvar no repository
 		
-		redirectAttributes.addFlashAttribute("sucess", "Professor cadastrado com sucesso");
+		redirectAttributes.addFlashAttribute("sucess", "Departamento cadastrado com sucesso");
 		return new ModelAndView("redirect:");
 	}
 }
