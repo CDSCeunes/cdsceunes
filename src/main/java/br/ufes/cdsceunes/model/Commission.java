@@ -1,5 +1,6 @@
 package br.ufes.cdsceunes.model;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import javax.persistence.Entity;
@@ -25,12 +26,19 @@ public class Commission extends AbstractModel {
 	@NotBlank
 	private Calendar creationDate;
 	@NotBlank
-	// Is this really a String? I'm not sure.
 	private String scope;
+	@NotBlank
+	private ArrayList<Position> positions;
 	
 	
 	/* Getters and Setters */
 	
+	public ArrayList<Position> getPositions() {
+		return positions;
+	}
+	public void setPositions(ArrayList<Position> positions) {
+		this.positions = positions;
+	}
 	public String getName() {
 		return name;
 	}

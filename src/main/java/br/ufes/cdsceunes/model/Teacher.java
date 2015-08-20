@@ -1,5 +1,6 @@
 package br.ufes.cdsceunes.model;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import javax.persistence.Entity;
@@ -20,11 +21,14 @@ public class Teacher extends AbstractModel {
 	@NotBlank
 	private String login;
 	@NotBlank
+	private boolean available;
+	@NotBlank
 	private Calendar admissionDate;
 	private Calendar returnFromLastRemoval;
 	private Calendar returnFromCapacitacion;
-	@NotBlank
-	private boolean available;
+	private ArrayList<Position> positions;
+	private Department department;
+	
 	
 	/* Getters and Setters */
 	
@@ -37,12 +41,10 @@ public class Teacher extends AbstractModel {
 	public String getLogin() {
 		return login;
 	}
-	
-	// Will this really be needed?
+	// Will this really be needed? Weird.
 	public void setLogin(String login) {
 		this.login = login;
 	}
-	
 	public Calendar getAdmissionDate() {
 		return admissionDate;
 	}
@@ -66,6 +68,18 @@ public class Teacher extends AbstractModel {
 	}
 	public void setAvailable(boolean available) {
 		this.available = available;
+	}
+	public ArrayList<Position> getPositions() {
+		return positions;
+	}
+	public void setPositions(ArrayList<Position> positions) {
+		this.positions = positions;
+	}
+	public Department getDepartment() {
+		return department;
+	}
+	public void setDepartment(Department department) {
+		this.department = department;
 	}
 	
 	

@@ -20,10 +20,17 @@ public class Position extends AbstractModel {
 	private double maxWorkload;
 	@NotBlank
 	private double currentWorkload;
-	
+	@NotBlank
+	private Commission commission;
 	
 	/* Getters and Setters */
 	
+	public Commission getCommission() {
+		return commission;
+	}
+	public void setCommission(Commission commission) {
+		this.commission = commission;
+	}
 	public double getMinWorkload() {
 		return minWorkload;
 	}
