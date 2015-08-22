@@ -1,12 +1,13 @@
 package br.ufes.cdsceunes.model;
 
-import java.util.ArrayList;
-import java.util.Calendar;
+import org.joda.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -24,19 +25,20 @@ public class Commission extends AbstractModel {
 	@NotBlank
 	private int maxNumber;
 	@NotBlank
-	private Calendar creationDate;
+	private LocalDate creationDate;
 	@NotBlank
 	private String scope;
 	@NotBlank
-	private ArrayList<Position> positions;
+	@OneToMany(mappedBy="commission")
+	private List<Position> positions;
 	
 	
 	/* Getters and Setters */
 	
-	public ArrayList<Position> getPositions() {
+	public List<Position> getPositions() {
 		return positions;
 	}
-	public void setPositions(ArrayList<Position> positions) {
+	public void setPositions(List<Position> positions) {
 		this.positions = positions;
 	}
 	public String getName() {
@@ -57,10 +59,10 @@ public class Commission extends AbstractModel {
 	public void setMaxNumber(int maxNumber) {
 		this.maxNumber = maxNumber;
 	}
-	public Calendar getCreationDate() {
+	public LocalDate getCreationDate() {
 		return creationDate;
 	}
-	public void setCreationDate(Calendar creationDate) {
+	public void setCreationDate(LocalDate creationDate) {
 		this.creationDate = creationDate;
 	}
 	public String getScope() {

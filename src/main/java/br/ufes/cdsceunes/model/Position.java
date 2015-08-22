@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -16,12 +17,19 @@ public class Position extends AbstractModel {
 	
 	@NotBlank
 	private double minWorkload;
+	
 	@NotBlank
 	private double maxWorkload;
+	
 	@NotBlank
 	private double currentWorkload;
+	
 	@NotBlank
+	@ManyToOne
 	private Commission commission;
+	
+	@ManyToOne
+	private Teacher teacher;
 	
 	/* Getters and Setters */
 	

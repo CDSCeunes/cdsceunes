@@ -1,9 +1,12 @@
 package br.ufes.cdsceunes.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -17,6 +20,10 @@ public class Department extends AbstractModel {
 	private String name;
 	@NotBlank
 	private String center;
+	
+	@OneToMany(mappedBy = "department")
+	private List<Teacher> teachers;
+	
 	
 	/* Getters and Setters */
 	
