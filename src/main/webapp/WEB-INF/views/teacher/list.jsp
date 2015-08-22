@@ -27,7 +27,7 @@
 		</c:forEach>
 	</table>
 	<footer>
-		<a href="${spring:mvcUrl("add").build()}">Adicionar novo professor</a>
+		<a href="${spring:mvcUrl("addTeacher").build()}">Adicionar novo professor</a>
 	</footer>
 </body>
 </html>

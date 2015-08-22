@@ -23,18 +23,18 @@ public class DepartmentController extends AbstractController {
 	
 	@RequestMapping("/")
 	public ModelAndView list() {
-		ModelAndView mad = new ModelAndView("/list");
+		ModelAndView mad = new ModelAndView("department/list");
 		//Adicionar objeto com método list no ModelAndView
 		return mad;
 	}
 	
-	@RequestMapping(value = "/form", name = "add")
+	@RequestMapping(value = "/form", name = "addDepartment")
 	public ModelAndView form(@ModelAttribute Department department) {
-		ModelAndView mad = new ModelAndView("/form");
+		ModelAndView mad = new ModelAndView("department/form");
 		return mad;
 	}
 	
-	@RequestMapping(method = RequestMethod.POST, name="create", value="save")
+	@RequestMapping(method = RequestMethod.POST, name="createDepartment", value="save")
 	public ModelAndView save(@ModelAttribute("teacher") @Valid Department department, BindingResult binding,
 			RedirectAttributes redirectAttributes) {
 		if (binding.hasErrors()) {

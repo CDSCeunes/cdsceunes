@@ -31,13 +31,13 @@ public class TeacherController extends AbstractController {
 		return mad;
 	}
 
-	@RequestMapping(value = "/form", name = "add")
+	@RequestMapping(value = "/form", name = "addTeacher")
 	public ModelAndView form(@ModelAttribute Teacher teacher) {
 		ModelAndView mad = new ModelAndView("teacher/form");
 		return mad;
 	}
  
-	@RequestMapping(method = RequestMethod.POST, name="create", value="save")
+	@RequestMapping(method = RequestMethod.POST, name="createTeacher", value="save")
 	public ModelAndView save(@ModelAttribute("teacher") @Valid Teacher teacher, BindingResult binding,
 			RedirectAttributes redirectAttributes) {
 		if (binding.hasErrors()) {
