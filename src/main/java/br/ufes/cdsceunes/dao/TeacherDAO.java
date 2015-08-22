@@ -7,10 +7,10 @@ import org.springframework.stereotype.Repository;
 import br.ufes.cdsceunes.model.Teacher;
 
 @Repository
-public class TeacherDAO extends AbstractDAO<Teacher> {
+public class TeacherDAO extends AbstractDAO<Teacher, Long> {
 
 	@Override
-	public Teacher findById(Integer id) {
+	public Teacher findById(Long id) {
 		Teacher teacher = manager.find(Teacher.class, id);
 		return teacher;
 	}

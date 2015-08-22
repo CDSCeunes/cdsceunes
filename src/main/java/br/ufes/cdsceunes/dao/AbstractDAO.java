@@ -5,14 +5,12 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-public abstract class AbstractDAO<T> {
+public abstract class AbstractDAO<T, ID> {
 
 	@PersistenceContext
 	protected EntityManager manager;
 	
-	public abstract T findById(Integer id);
+	public abstract T findById(ID id);
 	
 	public abstract void save(T object);
 	

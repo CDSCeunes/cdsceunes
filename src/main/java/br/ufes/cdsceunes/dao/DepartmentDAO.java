@@ -1,0 +1,24 @@
+package br.ufes.cdsceunes.dao;
+
+import java.util.List;
+
+import br.ufes.cdsceunes.model.Department;
+
+public class DepartmentDAO extends AbstractDAO<Department, Long> {
+
+	@Override
+	public Department findById(Long id) {
+		return manager.find(Department.class, id);
+	}
+
+	@Override
+	public void save(Department dep) {
+		manager.persist(dep);
+	}
+
+	@Override
+	public List<Department> list() {
+		return manager.createQuery("select t from Department t", Department.class).getResultList();
+	}
+
+}
