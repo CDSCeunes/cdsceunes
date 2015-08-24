@@ -20,10 +20,9 @@ import br.ufes.cdsceunes.model.Teacher;
 @RequestMapping("/teachers")
 public class TeacherController extends AbstractController {
 
-	// TODO Substituir a entidade DAO pelos Repositories correspondentes.
 	@Autowired
 	private TeacherDAO teachers;
-	
+
 	@RequestMapping("/")
 	public ModelAndView list() {
 		ModelAndView mad = new ModelAndView("teacher/list");
@@ -36,17 +35,15 @@ public class TeacherController extends AbstractController {
 		ModelAndView mad = new ModelAndView("teacher/form");
 		return mad;
 	}
- 
+
 	@RequestMapping(method = RequestMethod.POST, name="createTeacher", value="save")
 	public ModelAndView save(@ModelAttribute("teacher") @Valid Teacher teacher, BindingResult binding,
 			RedirectAttributes redirectAttributes) {
 		if (binding.hasErrors()) {
 			return form(teacher);
 		}
-		
 		teachers.save(teacher);
-		
-		redirectAttributes.addFlashAttribute("sucess", "Professor cadastrado com sucesso");
+		redirectAttributes.addFlashAttribute("sucess", "Professor cadastrado com sucesso!");
 		return new ModelAndView("redirect:");
 	}
 }
