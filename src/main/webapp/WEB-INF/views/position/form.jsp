@@ -6,7 +6,7 @@
 </head>
 <body>
 	<form:form action="${spring:mvcUrl('createPosition').build()}"
-		method="post" commandName="department">
+		method="post" commandName="position">
 		<div>
 			<label for="name">Nome:</label>
 			<form:input path="name" />
