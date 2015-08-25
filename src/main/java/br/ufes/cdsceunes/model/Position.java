@@ -16,6 +16,9 @@ public class Position extends AbstractModel {
 	private Long id;
 	
 	@NotBlank
+	private String name;
+	
+	@NotBlank
 	private double minWorkload;
 	
 	@NotBlank
@@ -32,7 +35,12 @@ public class Position extends AbstractModel {
 	private Teacher teacher;
 	
 	/* Getters and Setters */
-	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public Commission getCommission() {
 		return commission;
 	}
