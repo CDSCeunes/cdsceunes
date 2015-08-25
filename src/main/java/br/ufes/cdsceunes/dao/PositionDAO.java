@@ -2,8 +2,11 @@ package br.ufes.cdsceunes.dao;
 
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import br.ufes.cdsceunes.model.Position;
 
+@Repository
 public class PositionDAO extends AbstractDAO<Position, Long> {
 
 	@Override
