@@ -16,15 +16,9 @@
 			<label for="login">Login:</label>
 			<form:input path="login" />
 			<form:errors path="login" />
-		</div>
+		</div>		
 		<div>
-			<label for="department">Departamento:</label>
-			<form:input path="department" />
-			<form:errors path="department" />
-		</div>
-		
-		<div>
-			<label for="name">Data de admissão:</label>
+			<label for="admissionDate">Data de admissão:</label>
 			<form:input type="date" path="admissionDate" />
 			<form:errors path="admissionDate" />
 		</div>

@@ -6,6 +6,8 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.ufes.cdsceunes.dao.TeacherDAO;
 import br.ufes.cdsceunes.model.Teacher;
+import br.ufes.cdsceunes.validators.TeacherValidator;
 
 @Controller
 @Transactional
@@ -23,6 +26,11 @@ public class TeacherController extends AbstractController {
 	@Autowired
 	private TeacherDAO teachers;
 
+	@InitBinder
+	protected void initBinder(WebDataBinder binder) {
+		binder.setValidator(new TeacherValidator());
+	}
+	
 	@RequestMapping("/")
 	public ModelAndView list() {
 		ModelAndView mad = new ModelAndView("teacher/list");

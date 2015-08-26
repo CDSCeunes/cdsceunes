@@ -8,7 +8,7 @@
 	<form:form action="${spring:mvcUrl('createPosition').build()}"
 		method="post" commandName="position">
 		<div>
-			<label for="name">Nome:</label>
+			<label for="name">Nome do cargo:</label>
 			<form:input path="name" />
 			<form:errors path="name" />
 		</div>
@@ -21,6 +21,11 @@
 			<label for="maxWorkload">Carga horária máxima:</label>
 			<form:input path="maxWorkload" />
 			<form:errors path="maxWorkload" />
+		</div>
+		<div>
+			<label for="commission">Comissão pertencente:</label>
+			<form:input path="commission" />
+			<form:errors path="commission" />
 		</div>
 		<div>
 			<input type="submit" value="Enviar" />

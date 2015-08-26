@@ -22,7 +22,8 @@
 		<c:forEach items="${teachers}" var="teacher">
 			<tr>
 				<td>${teacher.name}</td>
-				<td>${teacher.age }</td>
+				<td>${teacher.login}</td>
+				<td>${teacher.admissionDate}</td>
 			</tr>
 		</c:forEach>
 	</table>

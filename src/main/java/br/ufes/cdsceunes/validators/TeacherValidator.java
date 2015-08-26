@@ -16,11 +16,17 @@ public class TeacherValidator implements Validator {
 	@Override
 	public void validate(Object object, Errors errors) {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "field.required");
-		@SuppressWarnings("unused")
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "login", "field.required");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "department", "field.required");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "admissionDate", "field.required");
+		
 		Teacher teacher = (Teacher) object;
-		//if (teacher.getAge() == 0) {
-			//errors.rejectValue("age", "field.required");
-		//}
+		if (teacher.getName() == null) {
+			errors.rejectValue("name", "field.required");
+		}
+		if (teacher.getLogin() == null) {
+			errors.rejectValue("login", "field.required");
+		}
 	}
 
 }
