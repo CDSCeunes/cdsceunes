@@ -29,7 +29,7 @@
 		</c:forEach>
 	</table>
 	<footer>
-		<a href="${spring:mvcUrl("addTeacher").build()}"> <spring:message code="teacher.list.footer"</a>
+		<a href="${spring:mvcUrl("addTeacher").build()}"> <spring:message code="teacher.list.footer"/></a>
 	</footer>
 </body>
 </html>
