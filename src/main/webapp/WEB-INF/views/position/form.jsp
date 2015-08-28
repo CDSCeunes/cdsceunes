@@ -2,28 +2,28 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <html>
 <head>
-<title>Adicionando novo cargo</title>
+<title> <spring:message code="position.form.title" /> </title>
 </head>
 <body>
 	<form:form action="${spring:mvcUrl('createPosition').build()}"
 		method="post" commandName="position">
 		<div>
-			<label for="name">Nome do cargo:</label>
+			<label for="name"> <spring:message code="position.form.name" /> </label>
 			<form:input path="name" />
 			<form:errors path="name" />
 		</div>
 		<div>
-			<label for="minWorkload">Carga horária mínima:</label>
+			<label for="minWorkload"> <spring:message code="position.form.minWorkLoad" /> </label>
 			<form:input path="minWorkload" />
 			<form:errors path="minWorkload" />
 		</div>
 		<div>
-			<label for="maxWorkload">Carga horária máxima:</label>
+			<label for="maxWorkload"><spring:message code="position.form.maxWorkLoad" /> </label>
 			<form:input path="maxWorkload" />
 			<form:errors path="maxWorkload" />
 		</div>
 		<div>
-			<label for="commission">Comissão pertencente:</label>
+			<label for="commission"> <spring:message code="position.form.comission" /> </label>
 			<form:input path="commission" />
 			<form:errors path="commission" />
 		</div>

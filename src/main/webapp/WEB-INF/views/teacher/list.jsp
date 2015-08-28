@@ -3,7 +3,7 @@
 
 <html>
 <head>
-<title>Lista de professores</title>
+<title> <spring:message code="teacher.list.title" /> </title>
 </head>
 <body>
 	${sucess}
@@ -16,8 +16,9 @@
 	</spring:hasBindErrors>
 	<table>
 		<tr>
-			<td>Nome</td>
-			<td>Idade</td>
+			<td> <spring:message code="teacher.list.name" /> </td>
+			<td> <spring:message code="teacher.list.login" /> </td>
+			<td> <spring:message code="teacher.list.admissionDate" /> </td>
 		</tr>
 		<c:forEach items="${teachers}" var="teacher">
 			<tr>
@@ -28,7 +29,7 @@
 		</c:forEach>
 	</table>
 	<footer>
-		<a href="${spring:mvcUrl("addTeacher").build()}">Adicionar novo professor</a>
+		<a href="${spring:mvcUrl("addTeacher").build()}"> <spring:message code="teacher.list.footer"</a>
 	</footer>
 </body>
 </html>

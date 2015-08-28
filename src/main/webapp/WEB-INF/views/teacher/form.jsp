@@ -2,23 +2,23 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <html>
 <head>
-<title>Adicionando novo professor</title>
+<title> <spring:message code="teacher.form.title" /> </title>
 </head>
 <body>
 	<form:form action="${spring:mvcUrl('createTeacher').build()}"
 		method="post" commandName="teacher">
 		<div>
-			<label for="name">Nome:</label>
+			<label for="name"> <spring:message code="teacher.form.name" /> </label>
 			<form:input path="name" />
 			<form:errors path="name" />
 		</div>
 		<div>
-			<label for="login">Login:</label>
+			<label for="login"> <spring:message code="teacher.form.login" /> </label>
 			<form:input path="login" />
 			<form:errors path="login" />
-		</div>		
+		</div>
 		<div>
-			<label for="admissionDate">Data de admissão:</label>
+			<label for="admissionDate"> <spring:message code="teacher.form.admissionDate" /> </label>
 			<form:input type="date" path="admissionDate" />
 			<form:errors path="admissionDate" />
 		</div>
