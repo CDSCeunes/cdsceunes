@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.ufes.cdsceunes.converter.DepartmentEditor;
+import br.ufes.cdsceunes.dao.DepartmentDAO;
 import br.ufes.cdsceunes.dao.TeacherDAO;
+import br.ufes.cdsceunes.model.Department;
 import br.ufes.cdsceunes.model.Teacher;
 import br.ufes.cdsceunes.validators.TeacherValidator;
 
@@ -25,10 +28,14 @@ public class TeacherController extends AbstractController {
 
 	@Autowired
 	private TeacherDAO teachers;
+	
+	@Autowired
+	private DepartmentDAO departments;
 
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) {
 		binder.setValidator(new TeacherValidator());
+		binder.registerCustomEditor(Department.class, new DepartmentEditor(departments));
 	}
 	
 	@RequestMapping("/")
@@ -41,6 +48,7 @@ public class TeacherController extends AbstractController {
 	@RequestMapping(value = "/form", name = "addTeacher")
 	public ModelAndView form(@ModelAttribute Teacher teacher) {
 		ModelAndView mad = new ModelAndView("teacher/form");
+		mad.addObject("departmentList", departments.list());
 		return mad;
 	}
 
@@ -48,8 +56,11 @@ public class TeacherController extends AbstractController {
 	public ModelAndView save(@ModelAttribute("teacher") @Valid Teacher teacher, BindingResult binding,
 			RedirectAttributes redirectAttributes) {
 		if (binding.hasErrors()) {
+			System.out.println(binding.getFieldError());
+			System.out.println("Deu erro");
 			return form(teacher);
 		}
+		System.out.println("Deu certo!");
 		teachers.save(teacher);
 		redirectAttributes.addFlashAttribute("sucess", "Professor cadastrado com sucesso!");
 		return new ModelAndView("redirect:");

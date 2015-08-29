@@ -24,7 +24,7 @@
 			<tr>
 				<td>${teacher.name}</td>
 				<td>${teacher.login}</td>
-				<td>${teacher.admissionDate}</td>
+				<td>${teacher.admissionDate.toString()}</td>
 			</tr>
 		</c:forEach>
 	</table>

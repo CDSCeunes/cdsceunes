@@ -1,6 +1,6 @@
 package br.ufes.cdsceunes.model;
 
-import org.joda.time.LocalDate;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -22,14 +24,19 @@ public class Teacher extends AbstractModel {
 	private String name;
 	@NotBlank
 	private String login;
-	@NotBlank
-	private boolean available;
-	@NotBlank
-	private LocalDate admissionDate;
-	private LocalDate returnFromLastRemoval;
-	private LocalDate returnFromCapacitacion;
+
+	private Boolean available;
+
+	@Temporal(value = TemporalType.DATE)
+	private Calendar admissionDate;
+
+	@Temporal(value = TemporalType.DATE)
+	private Calendar returnFromLastRemoval;
 	
-	@OneToMany(mappedBy="teacher")
+	@Temporal(value = TemporalType.DATE)
+	private Calendar returnFromCapacitacion;
+
+	@OneToMany(mappedBy = "teacher")
 	private List<Position> positions;
 
 	@ManyToOne
@@ -54,27 +61,27 @@ public class Teacher extends AbstractModel {
 		this.login = login;
 	}
 
-	public LocalDate getAdmissionDate() {
+	public Calendar getAdmissionDate() {
 		return admissionDate;
 	}
 
-	public void setAdmissionDate(LocalDate admissionDate) {
+	public void setAdmissionDate(Calendar admissionDate) {
 		this.admissionDate = admissionDate;
 	}
 
-	public LocalDate getReturnFromLastRemoval() {
+	public Calendar getReturnFromLastRemoval() {
 		return returnFromLastRemoval;
 	}
 
-	public void setReturnFromLastRemoval(LocalDate returnFromLastRemoval) {
+	public void setReturnFromLastRemoval(Calendar returnFromLastRemoval) {
 		this.returnFromLastRemoval = returnFromLastRemoval;
 	}
 
-	public LocalDate getReturnFromCapacitacion() {
+	public Calendar getReturnFromCapacitacion() {
 		return returnFromCapacitacion;
 	}
 
-	public void setReturnFromCapacitacion(LocalDate returnFromCapacitacion) {
+	public void setReturnFromCapacitacion(Calendar returnFromCapacitacion) {
 		this.returnFromCapacitacion = returnFromCapacitacion;
 	}
 
