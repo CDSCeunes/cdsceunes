@@ -37,7 +37,7 @@ public class DepartmentController extends AbstractController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, name="createDepartment", value="save")
-	public ModelAndView save(@ModelAttribute("teacher") @Valid Department department, BindingResult binding,
+	public ModelAndView save(@ModelAttribute("department") @Valid Department department, BindingResult binding,
 			RedirectAttributes redirectAttributes) {
 		if (binding.hasErrors()) {
 			return form(department);

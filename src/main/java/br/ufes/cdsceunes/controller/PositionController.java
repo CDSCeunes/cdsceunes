@@ -37,7 +37,7 @@ public class PositionController extends AbstractController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, name="createPosition", value="save")
-	public ModelAndView save(@ModelAttribute("teacher") @Valid Position position, BindingResult binding,
+	public ModelAndView save(@ModelAttribute("position") @Valid Position position, BindingResult binding,
 			RedirectAttributes redirectAttributes) {
 		if (binding.hasErrors()) {
 			return form(position);
