@@ -17,7 +17,7 @@ import br.ufes.cdsceunes.model.Commission;
 
 @Controller
 @Transactional
-@RequestMapping("/commissions")
+@RequestMapping("/commission")
 public class CommissionController extends AbstractController {
 
 	@Autowired
@@ -25,7 +25,7 @@ public class CommissionController extends AbstractController {
 	
 	@RequestMapping("/")
 	public ModelAndView list() {
-		ModelAndView mad = new ModelAndView("comission/list");
+		ModelAndView mad = new ModelAndView("commission/list");
 		mad.addObject("commissions",commissions.list());
 		return mad;
 	}
