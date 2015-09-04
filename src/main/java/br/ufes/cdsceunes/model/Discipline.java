@@ -23,11 +23,34 @@ public class Discipline extends AbstractModel {
 	@NotBlank
 	@OneToMany
 	private List<String> semesters;
+	@NotBlank
+	private int teoricLoad;
+	@NotBlank
+	private int exerciseLoad;
+	@NotBlank
+	private int labLoad;
 	
-	// TODO TEL? What kind of attribute is that?
 	
 	/* Getters and Setters */
 	
+	public int getTeoricLoad() {
+		return teoricLoad;
+	}
+	public void setTeoricLoad(int teoricLoad) {
+		this.teoricLoad = teoricLoad;
+	}
+	public int getExerciseLoad() {
+		return exerciseLoad;
+	}
+	public void setExerciseLoad(int exerciseLoad) {
+		this.exerciseLoad = exerciseLoad;
+	}
+	public int getLabLoad() {
+		return labLoad;
+	}
+	public void setLabLoad(int labLoad) {
+		this.labLoad = labLoad;
+	}
 	public List<String> getSemesters() {
 		return semesters;
 	}

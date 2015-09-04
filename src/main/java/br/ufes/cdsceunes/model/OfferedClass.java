@@ -11,7 +11,7 @@ import javax.persistence.OneToMany;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
-public class Class extends AbstractModel{
+public class OfferedClass extends AbstractModel {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
