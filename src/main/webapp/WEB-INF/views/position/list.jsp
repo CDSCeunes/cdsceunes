@@ -3,7 +3,7 @@
 
 <html>
 <head>
-<title> <spring:message code="position.list.title" /> </title>
+<title><spring:message code="position.list.title" /></title>
 </head>
 <body>
 	${sucess}
@@ -16,13 +16,21 @@
 	</spring:hasBindErrors>
 	<table>
 		<tr>
-			<td> <spring:message code="position.list.name" /> </td>
-			<td> <spring:message code="position.list.minWorkLoad" /> </td>
-			<td> <spring:message code="position.list.maxWorkLoad" /> </td>
+			<td><spring:message code="position.list.name" /></td>
+			<td><spring:message code="position.list.minWorkLoad" /></td>
+			<td><spring:message code="position.list.maxWorkLoad" /></td>
 		</tr>
+		<c:forEach items="${positions}" var="position">
+			<tr>
+				<td>${position.name}</td>
+				<td>${position.minWorkLoad}</td>
+				<td>${position.maxWorkLoad}</td>
+			</tr>
+		</c:forEach>
 	</table>
 	<footer>
-		<a href="${spring:mvcUrl("addPosition").build()}"> <spring:message code="position.list.footer"/></a>
+		<a href="${spring:mvcUrl("addPosition").build()}"> <spring:message
+				code="position.list.footer" /></a>
 	</footer>
 </body>
 </html>
