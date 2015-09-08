@@ -25,14 +25,14 @@ public class DisciplineController extends AbstractController {
 	
 	@RequestMapping("/")
 	public ModelAndView list() {
-		ModelAndView mad = new ModelAndView("disciplines/list");
+		ModelAndView mad = new ModelAndView("discipline/list");
 		mad.addObject("departments",disciplines.list());
 		return mad;
 	}
 
 	@RequestMapping(value = "/form", name = "addDiscipline")
 	public ModelAndView form(@ModelAttribute Discipline discipline) {
-		ModelAndView mad = new ModelAndView("disciplines/form");
+		ModelAndView mad = new ModelAndView("discipline/form");
 		return mad;
 	}
 

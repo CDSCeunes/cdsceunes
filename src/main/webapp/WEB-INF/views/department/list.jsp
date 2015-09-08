@@ -22,7 +22,7 @@
 		<c:forEach items="${departments}" var="department">
 			<tr>
 				<td>${department.name}</td>
-				<td>${departmente.center}</td>
+				<td>${department.center}</td>
 			</tr>
 		</c:forEach>
 	</table>

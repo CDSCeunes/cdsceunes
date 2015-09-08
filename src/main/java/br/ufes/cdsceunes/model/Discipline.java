@@ -11,7 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
-import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table
@@ -20,10 +19,9 @@ public class Discipline extends AbstractModel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@NotBlank
+
 	private String name;
 
-	@NotBlank
 	private String course;
 
 	@ElementCollection
@@ -31,11 +29,10 @@ public class Discipline extends AbstractModel {
 	@Column(name = "semester")
 	private List<String> semesters;
 
-	@NotBlank
 	private int teoricLoad;
-	@NotBlank
+	
 	private int exerciseLoad;
-	@NotBlank
+	
 	private int labLoad;
 
 	/* Getters and Setters */

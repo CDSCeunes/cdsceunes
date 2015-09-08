@@ -17,7 +17,7 @@ import br.ufes.cdsceunes.model.Department;
 
 @Controller
 @Transactional
-@RequestMapping("/department")
+@RequestMapping("/departments")
 public class DepartmentController extends AbstractController {
 
 	@Autowired

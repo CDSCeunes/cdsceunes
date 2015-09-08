@@ -2,29 +2,39 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <html>
 <head>
-<title> <spring:message code="position.form.title" /> </title>
+<title><spring:message code="position.form.title" /></title>
 </head>
 <body>
 	<form:form action="${spring:mvcUrl('createPosition').build()}"
 		method="post" commandName="position">
 		<div>
-			<label for="name"> <spring:message code="position.form.name" /> </label>
+			<label for="name"> <spring:message code="position.form.name" />
+			</label>
 			<form:input path="name" />
 			<form:errors path="name" />
 		</div>
 		<div>
-			<label for="minWorkload"> <spring:message code="position.form.minWorkLoad" /> </label>
+			<label for="minWorkload"> <spring:message
+					code="position.form.minWorkLoad" />
+			</label>
 			<form:input path="minWorkload" />
 			<form:errors path="minWorkload" />
 		</div>
 		<div>
-			<label for="maxWorkload"><spring:message code="position.form.maxWorkLoad" /> </label>
+			<label for="maxWorkload"><spring:message
+					code="position.form.maxWorkLoad" /> </label>
 			<form:input path="maxWorkload" />
 			<form:errors path="maxWorkload" />
 		</div>
 		<div>
-			<label for="commission"> <spring:message code="position.form.comission" /> </label>
-			<form:input path="commission" />
+			<label for="commission"> <spring:message
+					code="position.form.comission" />
+			</label>
+			<form:select path="commission">
+				<form:option label="-- Selecione --" value="${null}" />
+				<form:options items="${commissionList}" itemLabel="name"
+					itemValue="id" />
+			</form:select>
 			<form:errors path="commission" />
 		</div>
 		<div>

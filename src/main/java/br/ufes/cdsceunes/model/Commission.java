@@ -10,8 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.validator.constraints.NotBlank;
-
 @Entity
 @Table
 public class Commission extends AbstractModel {
@@ -20,17 +18,16 @@ public class Commission extends AbstractModel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotBlank
 	private String name;
-	@NotBlank
+	
 	private int minNumber;
-	@NotBlank
+	
 	private int maxNumber;
-	@NotBlank
+	
 	private LocalDate creationDate;
-	@NotBlank
+	
 	private String scope;
-	@NotBlank
+	
 	@OneToMany(mappedBy="commission")
 	private List<Position> positions;
 	

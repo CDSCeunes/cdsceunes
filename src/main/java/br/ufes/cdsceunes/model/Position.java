@@ -7,8 +7,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.hibernate.validator.constraints.NotBlank;
-
 @Entity
 @Table
 public class Position extends AbstractModel {
@@ -17,19 +15,14 @@ public class Position extends AbstractModel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotBlank
 	private String name;
 	
-	@NotBlank
-	private double minWorkload;
-	
-	@NotBlank
+	private double minWorkload;	
+
 	private double maxWorkload;
 	
-	@NotBlank
 	private double currentWorkload;
 	
-	@NotBlank
 	@ManyToOne
 	private Commission commission;
 	

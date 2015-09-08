@@ -27,7 +27,7 @@
 			<form:errors path="admissionDate" />
 		</div>
 		<div>
-			<label for="department">teacher.form.department</label>
+			<label for="department"><spring:message code="teacher.form.department" /></label>
 			<form:select path="department">
 				<form:option label="-- Selecione --" value="${null}" />
 				<form:options items="${departmentList}" itemLabel="name"

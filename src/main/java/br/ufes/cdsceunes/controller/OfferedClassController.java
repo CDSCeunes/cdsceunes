@@ -25,14 +25,14 @@ public class OfferedClassController extends AbstractController{
 	
 	@RequestMapping("/")
 	public ModelAndView list() {
-		ModelAndView mad = new ModelAndView("classes/list");
-		mad.addObject("classes",classes.list());
+		ModelAndView mad = new ModelAndView("class/list");
+		mad.addObject("class",classes.list());
 		return mad;
 	}
 
 	@RequestMapping(value = "/form", name = "addClasses")
 	public ModelAndView form(@ModelAttribute OfferedClass offeredClass) {
-		ModelAndView mad = new ModelAndView("classes/form");
+		ModelAndView mad = new ModelAndView("class/form");
 		return mad;
 	}
 
