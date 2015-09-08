@@ -2,15 +2,21 @@ package br.ufes.cdsceunes.model;
 
 import java.util.List;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
+@Table
 public class OfferedClass extends AbstractModel {
 	
 	@Id
@@ -20,10 +26,13 @@ public class OfferedClass extends AbstractModel {
 	private String year;
 	@NotBlank
 	private String semester;
-	@NotBlank
+	
+	@OneToOne
 	private Discipline discipline;
-	@NotBlank
-	@OneToMany
+	
+	@ElementCollection
+	@CollectionTable(name = "teacher_class", joinColumns = @JoinColumn(name = "offered_class_id") )
+	@Column(name = "teacher")
 	private List<Teacher> teachers;
 
 	/* Getters and Setters */
