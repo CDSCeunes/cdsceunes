@@ -21,7 +21,7 @@ public class DisciplineDAO extends AbstractDAO<Discipline, Long> {
 
 	@Override
 	public List<Discipline> list() {
-		return manager.createQuery("select d from Discipline d", Discipline.class).getResultList();
+		return manager.createQuery("from Discipline as d left join fetch d.semesters", Discipline.class).getResultList();
 	}
 
 }

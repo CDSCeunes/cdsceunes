@@ -28,7 +28,7 @@
 				<td>${discipline.name}</td>
 				<td>${discipline.course}</td>
 				<c:forEach items="${discipline.semesters}" var="semester">
-					<td>${semester.semester}</td>
+					<td>${semester}</td>
 				</c:forEach>
 				<td>${discipline.teoricLoad}</td>
 				<td>${discipline.exerciseLoad}</td>

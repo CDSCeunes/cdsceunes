@@ -37,6 +37,9 @@ public class Discipline extends AbstractModel {
 
 	/* Getters and Setters */
 
+	public Long getId() {
+		return id;
+	}
 	public int getTeoricLoad() {
 		return teoricLoad;
 	}
