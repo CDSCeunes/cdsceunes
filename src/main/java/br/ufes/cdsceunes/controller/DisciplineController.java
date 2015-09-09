@@ -26,7 +26,7 @@ public class DisciplineController extends AbstractController {
 	@RequestMapping("/")
 	public ModelAndView list() {
 		ModelAndView mad = new ModelAndView("discipline/list");
-		mad.addObject("departments",disciplines.list());
+		mad.addObject("disciplines",disciplines.list());
 		return mad;
 	}
 

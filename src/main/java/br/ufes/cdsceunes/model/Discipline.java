@@ -61,6 +61,7 @@ public class Discipline extends AbstractModel {
 		this.labLoad = labLoad;
 	}
 
+	@CollectionTable(name = "semesters", joinColumns = @JoinColumn(name = "discipline_id") )
 	public List<String> getSemesters() {
 		return semesters;
 	}

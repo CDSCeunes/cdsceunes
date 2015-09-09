@@ -19,12 +19,14 @@
 			<td><spring:message code="position.list.name" /></td>
 			<td><spring:message code="position.list.minWorkLoad" /></td>
 			<td><spring:message code="position.list.maxWorkLoad" /></td>
+			<td><spring:message code="position.list.commission" /></td>
 		</tr>
 		<c:forEach items="${positions}" var="position">
 			<tr>
 				<td>${position.name}</td>
-				<td>${position.minWorkLoad}</td>
-				<td>${position.maxWorkLoad}</td>
+				<td>${position.minWorkload}</td>
+				<td>${position.maxWorkload}</td>
+				<td>${position.commission.name}</td>
 			</tr>
 		</c:forEach>
 	</table>

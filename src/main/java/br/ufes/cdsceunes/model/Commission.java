@@ -37,6 +37,9 @@ public class Commission extends AbstractModel {
 	public List<Position> getPositions() {
 		return positions;
 	}
+	public Long getId() {
+		return id;
+	}
 	public void setPositions(List<Position> positions) {
 		this.positions = positions;
 	}
