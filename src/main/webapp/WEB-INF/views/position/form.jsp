@@ -2,12 +2,20 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <html>
 <head>
-<title><spring:message code="position.form.title" /></title>
+ 	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title><spring:message code="position.form.title" /></title>
+	
+	<!-- Bootstrap -->
+	<link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
-	<form:form action="${spring:mvcUrl('createPosition').build()}"
-		method="post" commandName="position">
-		<div>
+	<form:form  action="${spring:mvcUrl('createPosition').build()}"
+		method="post" commandName="position" class="form-horizontal" role="form" >
+		<div class="form-group">
 			<label for="name"> <spring:message code="position.form.name" />
 			</label>
 			<form:input path="name" />

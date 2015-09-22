@@ -10,6 +10,7 @@
 		<div>
 			<label for="year"> <spring:message code="class.form.year" />
 			</label>
+			
 			<form:input path="year" />
 			<form:errors path="year" />
 		</div>
