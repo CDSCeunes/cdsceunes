@@ -6,10 +6,9 @@
 	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 	
+		<spring:url value="/resources/css/home.css" var="home" />
+		<link href="${home}" rel="stylesheet" />
 	    <title>Login CDS Ceunes</title>
-		<style type="text/css">
-			<%@include file="style.css" %>
-		</style>
 	</head>
 	
 	<body>
