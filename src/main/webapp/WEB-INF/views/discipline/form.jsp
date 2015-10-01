@@ -2,54 +2,87 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <html>
 <head>
-<title><spring:message code="discipline.form.title" /></title>
+
+	<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+			
+	<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+			
+	<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		
+	<spring:url value="/resources/css/home.css" var="home" />
+	<link href="${home}" rel="stylesheet" />
+	
+	<title><spring:message code="discipline.form.title" /></title>
 </head>
 <body>
+
+	<nav class="navbar navbar-inverse"> </nav>
+
 	<form:form action="${spring:mvcUrl('createDiscipline').build()}"
 		method="post" commandName="discipline">
-		<div>
-			<label for="name"> <spring:message code="discipline.form.name" />
+		<div class="wrapper">
+			<label for="name" class="col-sm-2 control-label"> <spring:message code="discipline.form.name" />
 			</label>
-			<form:input path="name" />
-			<form:errors path="name" />
+			<div class="col-sm-10">
+				<form:input path="name" class="form-control" placeholder="Nome"/>
+				<form:errors path="name" />
+			</div>
 		</div>
-		<div>
-			<label for="course"> <spring:message
+		
+		<div class="wrapper">
+			<label for="course" class="col-sm-2 control-label"> <spring:message
 					code="discipline.form.course" />
 			</label>
-			<form:input path="course" />
-			<form:errors path="course" />
+			<div class="col-sm-10">
+				<form:input path="course" class="form-control" placeholder="Curso"/>
+				<form:errors path="course" />
+			</div>
 		</div>
-    <div>
-			<label for="semesters"> <spring:message
-					code="discipline.form.semesters" />
-			</label>
-			<form:input path="semesters" />
-			<form:errors path="semesters" />
+	    
+	    <div class="wrapper">
+				<label for="semesters" class="col-sm-2 control-label"> <spring:message
+						code="discipline.form.semesters" />
+				</label>
+				<div class="col-sm-10">
+					<form:input path="semesters" class="form-control" placeholder="Semestres"/>
+					<form:errors path="semesters" />
+				</div>
 		</div>
-    <div>
-			<label for="teoricLoad"> <spring:message
+		
+	    <div class="wrapper">
+			<label for="teoricLoad" class="col-sm-2 control-label"> <spring:message
 					code="discipline.form.teoricLoad" />
 			</label>
-			<form:input path="teoricLoad" />
-			<form:errors path="teoricLoad" />
+			<div class="col-sm-10">
+				<form:input path="teoricLoad" class="form-control" placeholder="Carga horária Teórica"/>
+				<form:errors path="teoricLoad" />
+			</div>
 		</div>
-    <div>
-			<label for="exerciseLoad"> <spring:message
-					code="discipline.form.exerciseLoad" />
-			</label>
-			<form:input path="exerciseLoad" />
-			<form:errors path="exerciseLoad" />
+		
+	    <div class="container-fluid">
+				<label for="exerciseLoad" class="col-sm-4 control-label"> <spring:message
+						code="discipline.form.exerciseLoad" />
+				</label>
+				<div class="col-sm-6">
+					<form:input path="exerciseLoad" class="form-control" placeholder="Carga Horária de Exercícios"/>
+					<form:errors path="exerciseLoad" />
+				</div>
 		</div>
-    <div>
-			<label for="labLoad"> <spring:message
+	    
+	    <div class="container-fluid">
+			<label for="labLoad" class="col-sm-2 control-label"> <spring:message
 					code="discipline.form.labLoad" />
 			</label>
-			<form:input path="labLoad" />
-			<form:errors path="labLoad" />
+			<div class="col-sm-8">
+				<form:input path="labLoad" class="form-control" placeholder="Carga Horária dos laboratórios"/>
+				<form:errors path="labLoad" />
+			</div>
 		</div>
-		<div>
-			<input type="submit" value="Enviar" />
+		<div class="wrapper">
+			<input type="submit" value="Enviar" class="btn btn-primary btn-md"/>
 		</div>
 	</form:form>
 </body>
