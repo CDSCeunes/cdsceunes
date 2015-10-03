@@ -21,27 +21,35 @@
 	</head>
 	
 	<body>
-		
-		<nav class="navbar navbar-inverse">
-  
-		</nav>
-		
-		<div>
-		    <div class="col-md-offset-4 col-md-4">
-			    <div class="form-login">
-					<h4>Welcome</h4>
-					<input type="text" id="userName" class="form-control input-sm chat-input" placeholder="username" />
-					</br>
-					<input type="text" id="userPassword" class="form-control input-sm chat-input" placeholder="password" />
-					</br>
-					<div class="wrapper">
-						<span class="group-btn">     
-						<a href="#" class="btn btn-primary btn-md">login <i class="fa fa-sign-in"></i></a>
-					</span>
-					</div>
-			    </div>
+		<div class="container">
+			<br><br><br>
+			<div class="row" style="text-align:center">
+		        <img src="resources/img/logos-ufes.png" >
+		        <br><br>
+		    </div>
+			
+			<form action="#" class="form-signin" method="post">
+		        <h2 class="col-md-4 col-md-offset-4">Login</h2>
+		        <div class="row">
+			        <div class="col-md-4 col-md-offset-4">
+				        <input id="login" name="login" class="form-control" placeholder="login único ufes" required autofocus type="text">
+				        <input id="senha" name="senha" class="form-control" placeholder="senha única ufes" required type="password">
+			        	<br><br>
+			        	<button class="btn btn-info btn-block" type="submit">Entrar</button>
+			        </div>
+		        </div>
+		    </form>
+		    
+		    <br><br>		
+			<hr />
+		    <div class="row">
+		        <footer style="text-align:center">
+		            <span style="font-size:small">
+		                &copy; Coordenação de Tecnologia da Informação do CEUNES - 2015
+		            </span>
+		        </footer>
 		    </div>
 		</div>
-		
-	</body>
+</body>
+
 </html>

@@ -1,3 +1,15 @@
 h4 {
 	color: red;
 }
+
+.navbar-inverse {
+	background-color: #1B4585
+}
+.navbar-inverse { 
+	background-image: none; 
+}
+.navbar-inverse { 
+	border-color: #70B8CF
+}
+
+
