@@ -1,14 +1,25 @@
 package br.ufes.cdsceunes.model;
 
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapKeyColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import br.ufes.cdsceunes.model.Discipline;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.joda.time.LocalDate;
@@ -27,20 +38,29 @@ public class Teacher extends AbstractModel {
 
 	private Boolean available;
 
-	//@Temporal(value = TemporalType.DATE)
+	// @Temporal(value = TemporalType.DATE)
 	private LocalDate admissionDate;
 
-	//@Temporal(value = TemporalType.DATE)
+	// @Temporal(value = TemporalType.DATE)
 	private LocalDate returnFromLastRemoval;
-	
-	//@Temporal(value = TemporalType.DATE)
+
+	// @Temporal(value = TemporalType.DATE)
 	private LocalDate returnFromCapacitacion;
 
 	@OneToMany(mappedBy = "teacher")
 	private List<Position> positions;
 
+	
+	@OneToMany(mappedBy = "teacher")
+	private List<Preferences> preferences;
+
+	
 	@ManyToOne
 	private Department department;
+
+	public Teacher() {
+		preferences = new LinkedList<>();
+	}
 
 	/* Getters and Setters */
 
@@ -56,7 +76,6 @@ public class Teacher extends AbstractModel {
 		return login;
 	}
 
-	// Will this really be needed? Weird.
 	public void setLogin(String login) {
 		this.login = login;
 	}
@@ -107,6 +126,22 @@ public class Teacher extends AbstractModel {
 
 	public void setDepartment(Department department) {
 		this.department = department;
+	}
+
+	public Boolean getAvailable() {
+		return available;
+	}
+
+	public void setAvailable(Boolean available) {
+		this.available = available;
+	}
+
+	public List<Preferences> getPreferences() {
+		return preferences;
+	}
+	
+	public Long getId() {
+		return id;
 	}
 
 }
