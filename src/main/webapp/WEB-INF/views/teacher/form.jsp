@@ -21,26 +21,27 @@
 
 	<form:form action="${spring:mvcUrl('createTeacher').build()}"
 		method="post" commandName="teacher">
-		<div class="wrapper">
-			<label for="name" class="col-sm-2 control-label"> <spring:message code="teacher.form.name" />
+		<br/><br/><br/><br/><br/><br/><br/>
+		<div class="container-fluid">
+			<label for="name" class="col-sm-2"> <spring:message code="teacher.form.name" />
 			</label>
 			<div class="col-sm-10">
 				<form:input path="name" class="form-control" placeholder="Nome"/>
 				<form:errors path="name" />
 			</div>
 		</div>
-		
-		<div class="wrapper">
-			<label for="login" class="col-sm-2 control-label"> <spring:message code="teacher.form.login" />
+		<br/>
+		<div class="container-fluid">
+			<label for="login" class="col-sm-2"> <spring:message code="teacher.form.login" />
 			</label>
 			<div class="col-sm-10">
 				<form:input path="login" class="form-control" placeholder="Login"/>
 				<form:errors path="login" />
 			</div>
 		</div>
-		
-		<div class="wrapper">
-			<label for="admissionDate" class="col-sm-2 control-label"> <spring:message
+		<br/>
+		<div class="container-fluid">
+			<label for="admissionDate" class="col-sm-2"> <spring:message
 					code="teacher.form.admissionDate" />
 			</label>
 			<div class="col-sm-10">
@@ -48,9 +49,9 @@
 				<form:errors path="admissionDate" />
 			</div>
 		</div>
-		
-		<div class="wrapper">
-			<label for="department" class="col-sm-2 control-label"><spring:message code="teacher.form.department" /></label>
+		<br/>
+		<div class="container-fluid">
+			<label for="department" class="col-sm-2"><spring:message code="teacher.form.department" /></label>
 			<div class="col-sm-10">
 				<form:select path="department" class="form-control">
 					<form:option label="-- Selecione --" value="${null}" />
@@ -61,7 +62,7 @@
 			</div>	
 		</div>
 		
-		<div class="wrapper">
+		<div class="center-bottom2">
 			<input type="submit" value="Enviar" class="btn btn-primary btn-md"/>
 		</div>
 	</form:form>

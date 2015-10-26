@@ -23,8 +23,9 @@
 
 	<form:form action="${spring:mvcUrl('createDepartment').build()}"
 		method="post" commandName="department">
-		<div class="wrapper">
-			<label for="name" class="col-sm-2 control-label"> <spring:message code="department.form.name" /> </label>
+		<br/><br/><br/><br/><br/><br/><br/>
+		<div class="container-fluid">
+			<label for="name" class="col-sm-2"> <spring:message code="department.form.name" /> </label>
 			
 			<div class="col-sm-10">
 				<form:input path="name" class="form-control" placeholder="Nome"/>
@@ -32,16 +33,16 @@
 			</div>
 			
 		</div>
-		<div class="wrapper">
-			<label for="center" class="col-sm-2 control-label"> <spring:message code="department.form.center" /> </label>
+		<br/>
+		<div class="container-fluid">
+			<label for="center" class="col-sm-2"> <spring:message code="department.form.center" /> </label>
 			
 			<div class="col-sm-10">
 				<form:input path="center" class="form-control" placeholder="Centro"/>
 				<form:errors path="center" />
 			</div>
-			
 		</div>
-		<div class="wrapper">
+		<div id="center-bottom2">
 			<input type="submit" value="Enviar"  class="btn btn-primary btn-md"/>
 		</div>
 	</form:form>

@@ -45,7 +45,7 @@
 		    <div class="row">
 		        <footer style="text-align:center">
 		            <span style="font-size:small">
-		                &copy; Coordenação de Tecnologia da Informação do CEUNES - 2015
+		                &copy; CDS-Centro de Desenvolvimento de Software 2015
 		            </span>
 		        </footer>
 		    </div>

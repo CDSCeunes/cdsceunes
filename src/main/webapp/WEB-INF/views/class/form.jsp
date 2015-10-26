@@ -10,29 +10,39 @@
 		
 <!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-		
+	<spring:url value="/resources/css/home.css" var="home" />
+	<link href="${home}" rel="stylesheet" />	
 
 		
 	<title><spring:message code="class.form.title" /></title>
 </head>
 <body>
 	
-	<nav class="navbar navbar-inverse"> </nav>
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#"> <img alt="Brand" 
+				src="/resources/img/ufes_logo_barra_superior.png">
+				</a>
+			</div>
+		</div>
+	</nav>
+	
 	
 	<form:form action="${spring:mvcUrl('createClasses').build()}"
 		method="post" commandName="offeredClass">
-		
-		<div class="wrapper">
-			<label for="year" class="col-sm-2 control-label">  <spring:message code="class.form.year" />
+		<br/><br/><br/><br/><br/><br/><br/>
+		<div class="container-fluid">
+			<label for="year" class="col-sm-2">  <spring:message code="class.form.year" />
 			</label>	
 			<div class="col-sm-10">
 				<form:input path="year" class="form-control" placeholder="Ano"/>
 				<form:errors path="year" />
 			</div>
 		</div>
-		
-		<div class="wrapper">
-			<label for="semester" class="col-sm-2 control-label"> <spring:message
+		<br/>
+		<div class="container-fluid">
+			<label for="semester" class="col-sm-2"> <spring:message
 					code="class.form.semester" />
 			</label>	
 			<div class="col-sm-10">
@@ -40,9 +50,9 @@
 				<form:errors path="semester" />
 			</div>			
 		</div>
-		
-		<div class="wrapper">
-			<label for="discipline" class="col-sm-2 control-label"> <spring:message
+		<br/>
+		<div class="container-fluid">
+			<label for="discipline" class="col-sm-2"> <spring:message
 					code="class.form.discipline" />
 			</label>
 			<div class="col-sm-10">
@@ -54,9 +64,9 @@
 			</div>
 			<form:errors path="discipline"  />
 		</div>
-		
-		<div class="wrapper">
-			<label for="teachers" class="col-sm-2 control-label"> <spring:message
+		<br/>
+		<div class="container-fluid">
+			<label for="teachers" class="col-sm-2"> <spring:message
 					code="class.form.teachers" />
 			</label>
 			<div class="col-sm-10">
@@ -69,7 +79,7 @@
 			</div>
 		</div>
 		
-		<div class="wrapper">
+		<div class="center-bottom2">
 			<input type="submit" value="Enviar" class="btn btn-primary btn-md"/>
 		</div>
 		

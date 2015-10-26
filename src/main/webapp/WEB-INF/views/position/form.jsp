@@ -23,8 +23,8 @@
 	<nav class="navbar navbar-inverse"></nav>
 	<form:form  action="${spring:mvcUrl('createPosition').build()}"
 		method="post" commandName="position" >
-		
-		<div class="wrapper">
+		<br/><br/><br/><br/><br/><br/><br/>
+		<div class="container-fluid">
 			<label for="name" class="col-sm-2 control-label"> <spring:message code="position.form.name" />
 			</label>
 			<div class="col-sm-10">
@@ -32,8 +32,8 @@
 				<form:errors path="name" />
 			</div>
 		</div>
-		
-		<div class="wrapper">
+		<br/>
+		<div class="container-fluid">
 			<label for="minWorkload" class="col-sm-2 control-label"> <spring:message
 					code="position.form.minWorkLoad" />
 			</label>
@@ -42,16 +42,19 @@
 				<form:errors path="minWorkload" />
 			</div>
 		</div>
-		
+		<br/>
 		<div class="container-fluid">
-			<label for="maxWorkload" class="col-sm-2 control-label"><spring:message
-					code="position.form.maxWorkLoad" /> </label>
-			<div class="col-sm-10">
-				<form:input path="maxWorkload" class="form-control" placeholder="Número de horas"/>
-				<form:errors path="maxWorkload" />
+			<div class="span8">
+				<label for="maxWorkload" class="col-sm-2 control-label"><spring:message
+						code="position.form.maxWorkLoad" /> </label>
+				<div class="col-sm-10">
+					<form:input path="maxWorkload" class="form-control" placeholder="Número de horas"/>
+					<form:errors path="maxWorkload" />
+				</div>
 			</div>
+				
 		</div>
-		
+		<br/>
 		<div class="container-fluid">
 			<label for="commission" class="col-sm-2 control-label"> <spring:message
 					code="position.form.comission" />
@@ -66,7 +69,7 @@
 			</div>
 		</div>
 		
-		<div class="wrapper">
+		<div class="center-bottom2">
 			<input type="submit" value="Enviar" class="btn btn-primary btn-md"/>
 		</div>
 		

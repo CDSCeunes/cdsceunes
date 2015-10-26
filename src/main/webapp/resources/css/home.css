@@ -12,4 +12,23 @@ h4 {
 	border-color: #70B8CF
 }
 
+#center-bottom {
+	width: 100px;
+	height: 100px;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -50px;
+	margin-left: -50px;
+}
+
+.center-bottom2 {
+	width: 100px;
+	height: 100px;
+	position: absolute;
+	top: 85%;
+	left: 50%;
+	margin-top: -50px;
+	margin-left: -50px;
+}
 
