@@ -24,5 +24,9 @@ public class TeacherDAO extends AbstractDAO<Teacher, Long> {
 	public List<Teacher> list() {
 		return manager.createQuery("select t from Teacher t", Teacher.class).getResultList();
 	}
+	
+	public Teacher update(Teacher teacher) {
+		return manager.merge(teacher);
+	}
 
 }

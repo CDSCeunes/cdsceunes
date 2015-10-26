@@ -16,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.ufes.cdsceunes.converter.DepartmentEditor;
 import br.ufes.cdsceunes.dao.DepartmentDAO;
+import br.ufes.cdsceunes.dao.DisciplineDAO;
 import br.ufes.cdsceunes.dao.TeacherDAO;
 import br.ufes.cdsceunes.model.Department;
 import br.ufes.cdsceunes.model.Teacher;
@@ -31,6 +32,9 @@ public class TeacherController extends AbstractController {
 	
 	@Autowired
 	private DepartmentDAO departments;
+	
+	@Autowired
+	private DisciplineDAO disciplines;
 
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) {
@@ -51,6 +55,14 @@ public class TeacherController extends AbstractController {
 		mad.addObject("departmentList", departments.list());
 		return mad;
 	}
+	
+	@RequestMapping(value = "/preferences", name = "addPreference")
+		public ModelAndView preference(@ModelAttribute Teacher teacher) {
+			ModelAndView mad = new ModelAndView("teacher/preferenceForm");
+			mad.addObject("teacherList", teachers.list());
+			mad.addObject("disciplineList", disciplines.list());
+			return mad;
+		}
 
 	@RequestMapping(method = RequestMethod.POST, name="createTeacher", value="save")
 	public ModelAndView save(@ModelAttribute("teacher") @Valid Teacher teacher, BindingResult binding,
@@ -63,6 +75,20 @@ public class TeacherController extends AbstractController {
 		System.out.println("Deu certo!");
 		teachers.save(teacher);
 		redirectAttributes.addFlashAttribute("sucess", "Professor cadastrado com sucesso!");
+		return new ModelAndView("redirect:");
+	}
+	
+	@RequestMapping(method = RequestMethod.PUT, name="createPreference", value="save")
+	public ModelAndView update(@ModelAttribute("teacher") @Valid Teacher teacher, BindingResult binding,
+			RedirectAttributes redirectAttributes) {
+		if (binding.hasErrors()) {
+			System.out.println(binding.getFieldError());
+			System.out.println("Deu erro");
+			return form(teacher);
+		}
+		System.out.println("Deu certo!");
+		teachers.update(teacher);
+		redirectAttributes.addFlashAttribute("sucess", "Preferência alterada com sucesso!");
 		return new ModelAndView("redirect:");
 	}
 }
