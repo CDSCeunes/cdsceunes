@@ -30,9 +30,9 @@ public class Discipline extends AbstractModel {
 	private List<String> semesters;
 
 	private int teoricLoad;
-	
+
 	private int exerciseLoad;
-	
+
 	private int labLoad;
 
 	/* Getters and Setters */

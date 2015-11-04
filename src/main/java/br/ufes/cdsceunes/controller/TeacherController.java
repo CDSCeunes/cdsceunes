@@ -33,8 +33,11 @@ public class TeacherController extends AbstractController {
 	@Autowired
 	private DepartmentDAO departments;
 	
+<<<<<<< HEAD
 	@Autowired
 	private DisciplineDAO disciplines;
+=======
+>>>>>>> nikolas-fix
 
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) {
@@ -56,6 +59,7 @@ public class TeacherController extends AbstractController {
 		return mad;
 	}
 	
+<<<<<<< HEAD
 	@RequestMapping(value = "/preferences", name = "addPreference")
 		public ModelAndView preference(@ModelAttribute Teacher teacher) {
 			ModelAndView mad = new ModelAndView("teacher/preferenceForm");
@@ -64,6 +68,8 @@ public class TeacherController extends AbstractController {
 			return mad;
 		}
 
+=======
+>>>>>>> nikolas-fix
 	@RequestMapping(method = RequestMethod.POST, name="createTeacher", value="save")
 	public ModelAndView save(@ModelAttribute("teacher") @Valid Teacher teacher, BindingResult binding,
 			RedirectAttributes redirectAttributes) {
