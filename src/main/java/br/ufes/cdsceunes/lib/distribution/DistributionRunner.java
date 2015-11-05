@@ -12,7 +12,7 @@ public class DistributionRunner {
 	private static HelpTable table;
 	private static List<HelpTable> tables = new LinkedList<HelpTable>();
 	
-	public static void generateDistribution(List<Preferences> preferences) {
+	public static Scenario generateDistribution(List<Preferences> preferences) {
 		/*
 		 * Sort preferences list by the Discipline name
 		 */
@@ -49,7 +49,7 @@ public class DistributionRunner {
 				table.increaseOccurrences(1);
 			}
 		}
-		DistributionRunner.chooseTeacher(preferences);
+		return DistributionRunner.chooseTeacher(preferences);
 
 	}
 

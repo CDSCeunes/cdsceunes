@@ -1,5 +1,6 @@
 package br.ufes.cdsceunes.model;
 
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -32,5 +33,12 @@ public class Scenario extends AbstractModel {
 		distribution.add(result);
 	}
 	
+	public List<DistributionResult> getDistributionList() {
+		return distribution;
+	}
 
+	public Scenario() {
+		distribution = new LinkedList<DistributionResult>();
+	}
+	
 }
