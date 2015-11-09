@@ -143,5 +143,10 @@ public class Teacher extends AbstractModel {
 	public Long getId() {
 		return id;
 	}
+	
+	@Override
+	public String toString() {
+		return name;
+	}
 
 }

@@ -89,4 +89,9 @@ public class Discipline extends AbstractModel {
 		this.course = course;
 	}
 
+	
+	@Override
+	public String toString() {
+		return name;
+	}
 }
