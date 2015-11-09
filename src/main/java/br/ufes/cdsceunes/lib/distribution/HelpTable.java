@@ -9,6 +9,7 @@ public class HelpTable {
 		private int numberOfOccurences;
 		private int indexOffset;
 		private List<Integer> indexes;
+		private String disciplineName;
 
 		public HelpTable() {
 			sumOfAllPreferences = 0;
@@ -17,6 +18,11 @@ public class HelpTable {
 			indexes = new LinkedList<Integer>();
 		}
 		
+		public HelpTable(String disciplineName) {
+			this();
+			this.disciplineName = disciplineName;
+		}
+			
 		public int getSumOfAllPreferences() {
 			return sumOfAllPreferences;
 		}
@@ -48,6 +54,10 @@ public class HelpTable {
 		
 		public void increaseOccurrences(int value) {
 			numberOfOccurences += value;
+		}
+		
+		public String getDisciplineName() {
+			return disciplineName;
 		}
 		
 		

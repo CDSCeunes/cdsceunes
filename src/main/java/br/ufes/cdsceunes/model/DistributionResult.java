@@ -45,4 +45,7 @@ public class DistributionResult extends AbstractModel {
 		this.discipline = discipline;
 		this.teacher = teacher;
 	}
+	
+	public DistributionResult() {
+	}
 }
