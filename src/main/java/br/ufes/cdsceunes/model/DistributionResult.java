@@ -46,6 +46,10 @@ public class DistributionResult extends AbstractModel {
 		this.teacher = teacher;
 	}
 	
+	public void setScenario(Scenario scenario) {
+		this.scenario = scenario;
+	}
+	
 	public DistributionResult() {
 	}
 }

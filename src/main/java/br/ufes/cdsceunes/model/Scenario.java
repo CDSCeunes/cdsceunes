@@ -3,6 +3,7 @@ package br.ufes.cdsceunes.model;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,7 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table//(name="t_scenario")
 public class Scenario extends AbstractModel {
 
 	@Id
@@ -22,7 +23,7 @@ public class Scenario extends AbstractModel {
 
 	private String semester;
 
-	@OneToMany(mappedBy="scenario", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="scenario", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
 	private List<DistributionResult> distribution;
 	
 	@Column(nullable=false)
@@ -42,8 +43,16 @@ public class Scenario extends AbstractModel {
 		activated = false;
 	}
 	
-	public void activate() {
-		activated = true;
+	public Long getId() {
+		return id;
+	}
+	
+	public void setState(boolean state) {
+		activated = state;
+	}
+	
+	public boolean getState() {
+		return activated;
 	}
 	
 	public String getSemester() {
