@@ -59,4 +59,8 @@ public class Scenario extends AbstractModel {
 		return semester;
 	}
 	
+	public void setSemester(String semester) {
+		this.semester = semester;
+	}
+	
 }
