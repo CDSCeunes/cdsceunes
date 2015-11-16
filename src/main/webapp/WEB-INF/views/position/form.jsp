@@ -2,25 +2,19 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <html>
 <head>
-	<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-			
-	<!-- Optional theme -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-			
-	<!-- Latest compiled and minified JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-		
-	<spring:url value="/resources/css/home.css" var="home" />
-	<link href="${home}" rel="stylesheet" />
 	
 	<title><spring:message code="position.form.title" /></title>
 	
 </head>
 
+<header>
+
+	<%@ include file="/WEB-INF/views/home/header.jsp" %>
+
+</header>
+
 <body>
 	
-	<nav class="navbar navbar-inverse"></nav>
 	<form:form  action="${spring:mvcUrl('createPosition').build()}"
 		method="post" commandName="position" >
 		<br/><br/><br/><br/><br/><br/><br/>
@@ -74,5 +68,8 @@
 		</div>
 		
 	</form:form>
+	<br><br><br><br><br><br><br><br>
+	<%@ include file="/WEB-INF/views/home/footer.jsp" %>
+	
 </body>
 </html>

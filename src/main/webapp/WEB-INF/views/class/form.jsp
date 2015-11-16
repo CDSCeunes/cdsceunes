@@ -2,36 +2,23 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <html>
 <head>
-<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-		
-<!-- Optional theme -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-		
-<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-	<spring:url value="/resources/css/home.css" var="home" />
-	<link href="${home}" rel="stylesheet" />	
-
 		
 	<title><spring:message code="class.form.title" /></title>
+	
 </head>
+
+<header>
+
+	<%@ include file="/WEB-INF/views/home/header.jsp" %>
+
+</header>
+
 <body>
-	
-	<nav class="navbar navbar-inverse">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="#"> <img alt="Brand" 
-				src="/resources/img/ufes_logo_barra_superior.png">
-				</a>
-			</div>
-		</div>
-	</nav>
-	
-	
+
 	<form:form action="${spring:mvcUrl('createClasses').build()}"
 		method="post" commandName="offeredClass">
 		<br/><br/><br/><br/><br/><br/><br/>
+		
 		<div class="container-fluid">
 			<label for="year" class="col-sm-2">  <spring:message code="class.form.year" />
 			</label>	
@@ -80,9 +67,13 @@
 		</div>
 		
 		<div class="center-bottom2">
-			<input type="submit" value="Enviar" class="btn btn-primary btn-md"/>
+			<input type="submit" value="Enviar" class="btn btn-primary btn-md" />
 		</div>
 		
 	</form:form>
+	<!--  Importing Footer -->
+	<br><br><br><br><br><br><br><br>
+	<%@ include file="/WEB-INF/views/home/footer.jsp" %>
+
 </body>
 </html>

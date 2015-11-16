@@ -2,8 +2,17 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <html>
 <head>
-<title><spring:message code="preference.form.title" /></title>
+
+	<title><spring:message code="preference.form.title" /></title>
+
 </head>
+
+<header>
+
+	<%@ include file="/WEB-INF/views/home/header.jsp" %>
+
+</header>
+
 <body>
 	<form:form action="${spring:mvcUrl('createPreferences').build()}"
 		method="post" commandName="preferences">
@@ -42,5 +51,8 @@
 			<input type="submit" value="Enviar" />
 		</div>
 	</form:form>
+	<br><br><br><br><br><br><br><br>
+	<%@ include file="/WEB-INF/views/home/footer.jsp" %>
+	
 </body>
 </html>

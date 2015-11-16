@@ -3,23 +3,17 @@
 <html>
 <head>
 
-<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-			
-	<!-- Optional theme -->
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-			
-	<!-- Latest compiled and minified JavaScript -->
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-		
-	<spring:url value="/resources/css/home.css" var="home" />
-	<link href="${home}" rel="stylesheet" />
-
 	<title> <spring:message code="department.form.title" /> </title>
-</head>
-<body>
 
-	<nav class="navbar navbar-inverse"> </nav>
+</head>
+
+<header>
+	
+	<%@ include file="/WEB-INF/views/home/header.jsp" %>
+	
+</header>
+
+<body>
 
 	<form:form action="${spring:mvcUrl('createDepartment').build()}"
 		method="post" commandName="department">
@@ -42,9 +36,15 @@
 				<form:errors path="center" />
 			</div>
 		</div>
-		<div id="center-bottom2">
+		
+		<div class="center-bottom2">
 			<input type="submit" value="Enviar"  class="btn btn-primary btn-md"/>
 		</div>
+		
 	</form:form>
+	
+	
+	<%@ include file="/WEB-INF/views/home/footer.jsp" %>
+	
 </body>
 </html>

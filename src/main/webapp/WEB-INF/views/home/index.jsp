@@ -24,7 +24,7 @@
 		<div class="container">
 			<br><br><br>
 			<div class="row" style="text-align:center">
-		        <img src="resources/img/logos-ufes.png" >
+		        <img src="/resources/img/logos-ufes.png" >
 		        <br><br>
 		    </div>
 			
