@@ -32,9 +32,10 @@ public class TeacherController extends AbstractController {
 	
 	@Autowired
 	private DepartmentDAO departments;
-	
+
 	@Autowired
 	private DisciplineDAO disciplines;
+
 
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) {
@@ -55,7 +56,7 @@ public class TeacherController extends AbstractController {
 		mad.addObject("departmentList", departments.list());
 		return mad;
 	}
-	
+
 	@RequestMapping(value = "/preferences", name = "addPreference")
 		public ModelAndView preference(@ModelAttribute Teacher teacher) {
 			ModelAndView mad = new ModelAndView("teacher/preferenceForm");
