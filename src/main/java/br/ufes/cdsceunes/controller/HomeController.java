@@ -8,10 +8,11 @@ import org.springframework.web.servlet.ModelAndView;
 public class HomeController extends AbstractController {
 
 	@RequestMapping("/")
-	public ModelAndView index() {
-		ModelAndView mad = new ModelAndView("home/index");
+	public String index() {
+		/*ModelAndView mad = new ModelAndView("home/index");
 		mad.addObject("name","CDS-Ceunes");
-		return mad;
+		return mad;*/
+		return "index.html";
 	}
-	
+
 }
