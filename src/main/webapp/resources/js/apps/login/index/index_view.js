@@ -1,9 +1,10 @@
 define(["app",
-        "text!apps/login/index/templates/index.html"],
-          function(CDSCeunes, indexTpl) {
+        "handlebars",
+        "text!apps/login/index/templates/index.hbs"],
+          function(CDSCeunes, Handlebars, indexTpl) {
   CDSCeunes.module("LoginApp.Index.View", function(View, CDSCeunes, Backbone, Marionette, $, _) {
     View.Layout = Marionette.LayoutView.extend({
-      template: _.template(indexTpl)
+      template: Handlebars.compile(indexTpl)
       /*events: {
 
       }*/

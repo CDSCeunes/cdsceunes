@@ -1,11 +1,12 @@
 requirejs.config({
   baseUrl: "resources/js",
   paths: {
-    underscore: "vendor/underscore",
     lodash: "vendor/lodash",
+    underscore: "vendor/underscore",
     "backbone.babysitter": "vendor/backbone.babysitter",
     "backbone.wreqr": "vendor/backbone.wreqr",
     backbone: "vendor/backbone",
+    handlebars: "vendor/handlebars.amd",
     jquery: "vendor/jquery-2.2.0",
     "jquery-ui": "vendor/jquery-ui",
     json2: "vendor/json2",
@@ -15,11 +16,11 @@ requirejs.config({
   },
 
   shim: {
-    underscore: {
+    lodash: {
       exports: "_"
     },
     backbone: {
-      deps: ["jquery", "underscore", "json2"],
+      deps: ["jquery", "lodash", "json2"],
       exports: "Backbone"
     },
     marionette: {
@@ -27,7 +28,10 @@ requirejs.config({
       exports: "Marionette"
     },
     "jquery-ui": ["jquery"],
-    localstorage: ["backbone"]
+    localstorage: ["backbone"],
+    handlebars: {
+      exports: "handlebars"
+    }
   }
 });
 

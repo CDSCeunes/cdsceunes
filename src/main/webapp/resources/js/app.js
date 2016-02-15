@@ -1,7 +1,11 @@
-define(["marionette"], function(Marionette) {
+define(["marionette", "handlebars"], function(Marionette, Handlebars) {
 	var CDSCeunes = new Marionette.Application();
 
-/*
+  Marionette.TemplateCache.prototype.compileTemplate = function(templateText) {
+    return Handlebars.compile(templateText);
+  }
+
+  /*
 	CDSCeunes.navigate = function(route, options) {
 		options || (options = {});
 		Backbone.history.navigate(route, options);
