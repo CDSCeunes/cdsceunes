@@ -3,6 +3,7 @@ requirejs.config({
   paths: {
     lodash: "vendor/lodash",
     underscore: "vendor/underscore",
+    q: "vendor/q",
     "backbone.babysitter": "vendor/backbone.babysitter",
     "backbone.wreqr": "vendor/backbone.wreqr",
     backbone: "vendor/backbone",
@@ -31,10 +32,10 @@ requirejs.config({
     localstorage: ["backbone"],
     handlebars: {
       exports: "handlebars"
-    }
+    },
   }
 });
 
-require(["app", "apps/login/login_app"], function(CDSCeunes){
+require(["app", "apps/login/login_app", "apps/teachers/teachers_app"], function(CDSCeunes){
   CDSCeunes.start();
 });
