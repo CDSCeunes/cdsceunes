@@ -2,13 +2,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>CDS Ceunes</title>
-  <spring:url value="resources/css/vendor/bootstrap.css" var="bootstrap" />
-  <link rel="stylesheet" href="${bootstrap}">
+<meta charset="UTF-8">
+<title>CDS Ceunes</title>
+<spring:url value="resources/css/vendor/bootstrap.css" var="bootstrap" />
+<link rel="stylesheet" href="${bootstrap}">
+<spring:url value="resources/css/font-awesome.min.css"
+	var="icons" />
+<link rel="stylesheet" href="${icons}">
 </head>
 <body>
-	<div id="app-container">
+	<div id="app-container" class="container-fluid">
 		<div id="header-container"></div>
 		<div id="main-container">
 			<p>CDS Ceunes</p>

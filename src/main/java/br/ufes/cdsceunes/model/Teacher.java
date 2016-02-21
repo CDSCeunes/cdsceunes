@@ -24,6 +24,8 @@ import br.ufes.cdsceunes.model.Discipline;
 import org.hibernate.validator.constraints.NotBlank;
 import org.joda.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table
 public class Teacher extends AbstractModel {
@@ -47,10 +49,11 @@ public class Teacher extends AbstractModel {
 	// @Temporal(value = TemporalType.DATE)
 	private LocalDate returnFromCapacitacion;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "teacher")
 	private List<Position> positions;
 
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "teacher")
 	private List<Preferences> preferences;
 

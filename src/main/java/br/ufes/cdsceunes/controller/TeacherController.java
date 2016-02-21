@@ -1,9 +1,13 @@
 package br.ufes.cdsceunes.controller;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -11,6 +15,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -25,6 +30,7 @@ import br.ufes.cdsceunes.validators.TeacherValidator;
 @Controller
 @Transactional
 @RequestMapping("/teachers")
+@RestController
 public class TeacherController extends AbstractController {
 
 	@Autowired
@@ -43,11 +49,20 @@ public class TeacherController extends AbstractController {
 		binder.registerCustomEditor(Department.class, new DepartmentEditor(departments));
 	}
 	
-	@RequestMapping("/")
+	/*@RequestMapping("/")
 	public ModelAndView list() {
 		ModelAndView mad = new ModelAndView("teacher/list");
 		mad.addObject("teachers", teachers.list());
 		return mad;
+	}*/
+	
+	@RequestMapping(value="", method= RequestMethod.GET)
+	public ResponseEntity<List<Teacher>> listAllTeachers() {
+		List<Teacher> list = teachers.list();
+		if (list.isEmpty()) {
+			return new ResponseEntity<List<Teacher>>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<Teacher>>(list, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/form", name = "addTeacher")
