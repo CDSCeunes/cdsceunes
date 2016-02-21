@@ -11,7 +11,7 @@ define(["app", "localstorage"], function(CDSCeunes) {
       }
 
       throw new Error("Unable to determine storage key.");
-    }
+    };
 
     var storageCache = {};
     var getStorage = function(key) {
@@ -22,12 +22,12 @@ define(["app", "localstorage"], function(CDSCeunes) {
       var newStorage = new Backbone.LocalStorage(key);
       storageCache[key] = newStorage;
       return newStorage;
-    }
+    };
 
     var StorageMixin = function(entityPrototype) {
       var storageKey = findStorageKey(entityPrototype);
       return { localstorage: getStorage(storageKey) };
-    }
+    };
 
     Entities.configureStorage = function(constructorString, constructor) {
       var OldConstructor = constructor;
@@ -35,11 +35,11 @@ define(["app", "localstorage"], function(CDSCeunes) {
         var obj = new OldConstructor(arguments[0], arguments[1]);
         _.extend(obj, new StorageMixin(OldConstructor.prototype));
         return obj;
-      }
+      };
 
       NewConstructor.prototype = OldConstructor.prototype;
       eval(constructorString + " = NewConstructor;");
-    }
+    };
   });
 
   return CDSCeunes.Entities.configureStorage;

@@ -6,8 +6,10 @@
 <title>CDS Ceunes</title>
 <spring:url value="resources/css/vendor/bootstrap.css" var="bootstrap" />
 <link rel="stylesheet" href="${bootstrap}">
-<spring:url value="resources/css/font-awesome.min.css"
-	var="icons" />
+<spring:url value="resources/css/vendor/foundation.min.css"
+	var="foundation" />
+<link rel="stylesheet" href="${foundation}">
+<spring:url value="resources/css/font-awesome.min.css" var="icons" />
 <link rel="stylesheet" href="${icons}">
 </head>
 <body>
@@ -18,7 +20,8 @@
 		</div>
 		<div id="footer-container"></div>
 	</div>
-  <spring:url value="resources/js/vendor/require.js" var="require" /><spring:url value="resources/js/main.js" var="main" />
-  <script type="text/javascript" data-main="${main}" src="${require}"></script>
+	<spring:url value="resources/js/vendor/require.js" var="require" />
+	<spring:url value="resources/js/main.js" var="main" />
+	<script type="text/javascript" data-main="${main}" src="${require}"></script>
 </body>
 </html>

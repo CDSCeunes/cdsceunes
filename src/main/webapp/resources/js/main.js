@@ -13,7 +13,8 @@ requirejs.config({
     json2: "vendor/json2",
     localstorage: "vendor/backbone.localStorage",
     marionette: "vendor/backbone.marionette",
-    text: "vendor/text"
+    text: "vendor/text",
+    foundation: "vendor/foundation.min"
   },
 
   shim: {
@@ -33,6 +34,9 @@ requirejs.config({
     handlebars: {
       exports: "handlebars"
     },
+    foundation: {
+      dep: ["jquery"]
+    }
   }
 });
 

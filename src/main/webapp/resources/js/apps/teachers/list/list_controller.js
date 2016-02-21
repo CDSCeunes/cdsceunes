@@ -27,7 +27,7 @@ define(["app", "apps/teachers/list/list_view", "q"], function(CDSCeunes, View, Q
           });
         });
       }
-    }
+    };
   });
   return CDSCeunes.TeachersApp.List.Controller;
 });

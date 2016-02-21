@@ -10,7 +10,7 @@ define(["app", "q", "apps/config/storage/localstorage"], function(CDSCeunes, Q) 
       }
     });
 
-    //Entities.configureStorage("CDSCeunes.Entities.Teacher", Entities.Teacher);
+    Entities.configureStorage("CDSCeunes.Entities.Teacher", Entities.Teacher);
 
     Entities.TeachersCollection = Backbone.Collection.extend({
       url: "teachers",
@@ -18,23 +18,21 @@ define(["app", "q", "apps/config/storage/localstorage"], function(CDSCeunes, Q) 
       comparator: "name"
     });
 
-    //Entities.configureStorage("CDSCeunes.Entities.TeachersCollection", Entities.TeachersCollection);
+    Entities.configureStorage("CDSCeunes.Entities.TeachersCollection", Entities.TeachersCollection);
 
     var API = {
       getTeacherEntity: function(teacherId) {
         var teacher = new Entities.Teacher({ id: teacherId });
-        var defer = $.Deferred();
-        setTimeout(function() {
-          teacher.fetch({
+        return Q.promise(function(resolve) {
+          teachers.fetch({
             success: function(data) {
-              defer.resolve(data);
+              resolve(data);
             },
             error: function(data) {
-              defer.resolve(undefined);
+              resolve(undefined);
             }
           });
-        }, 2000);
-        return defer.promise();
+        });
       },
       getTeachersEntities: function() {
         var teachers = new Entities.TeachersCollection();
