@@ -6,7 +6,7 @@ define(["marionette", "handlebars", "jquery-ui", "backbone.syphon"], function(Ma
   };
 
   Backbone.Syphon.InputReaders.register('checkbox', function($el){
-    return $el.prop('checked') ? $el.val() : false;
+    return $el.prop('checked') ? true : false;
   });
 
 	CDSCeunes.navigate = function(route, options) {
@@ -49,7 +49,6 @@ define(["marionette", "handlebars", "jquery-ui", "backbone.syphon"], function(Ma
 
 		CDSCeunes.regions = new RootContainer();
     CDSCeunes.regions.dialog.onShow = function(view) {
-      console.log("dialog view");
       var self = this;
       var closeDialog = function() {
         self.stopListening();
@@ -63,6 +62,10 @@ define(["marionette", "handlebars", "jquery-ui", "backbone.syphon"], function(Ma
         modal: true,
         title: view.title,
         width: "auto",
+        maxWidth: 600,
+        fluid: true,
+        responsive: true,
+        resizable: false,
         close: function(e, ui) {
           closeDialog();
         }

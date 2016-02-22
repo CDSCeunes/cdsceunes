@@ -24,4 +24,10 @@ public class DepartmentDAO extends AbstractDAO<Department, Long> {
 		return manager.createQuery("select t from Department t", Department.class).getResultList();
 	}
 
+	@Override
+	public void delete(Department object) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

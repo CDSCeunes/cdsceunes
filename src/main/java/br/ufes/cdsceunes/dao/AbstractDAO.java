@@ -16,4 +16,6 @@ public abstract class AbstractDAO<T, ID> {
 	
 	public abstract List<T> list();
 	
+	public abstract void delete(T object);
+	
 }

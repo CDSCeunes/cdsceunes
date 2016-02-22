@@ -24,7 +24,6 @@ define(["app", "apps/teachers/list/list_view", "q"], function(CDSCeunes, View, Q
             });
 
             listPanel.on("teacher:new", function() {
-              console.log("teacher new");
               require(["apps/teachers/new/new_view", "entities/department", "entities/teacher"], function(NewView) {
                 var teacher = CDSCeunes.request("teacher:entity:new");
                 Q.all(CDSCeunes.request("department:entities")).then(function(departments) {
@@ -40,12 +39,38 @@ define(["app", "apps/teachers/list/list_view", "q"], function(CDSCeunes, View, Q
                   newView.on("teacher:form:submit", function(data) {
                     if (teacher.save(data)) {
                       teachers.add(teacher);
-                      CDSCeunes.startSubApp("TeachersApp");
+                      newView.trigger("dialog:close");
                     }
                   });
 
                 });
               });
+            });
+
+            teachersListView.on("childview:teacher:edit", function(childview, args) {
+              require(["apps/teachers/edit/edit_view", "entities/department"], function(EditView) {
+                var model = args.model;
+                Q.all(CDSCeunes.request("department:entities")).then(function(departments) {
+                  var editView = new EditView.Teacher({
+                    model: model,
+                    departments: departments
+                  });
+
+                  editView.on("teacher:form:submit", function(data) {
+                    if (model.save(data)) {
+                      childview.render();
+                      editView.trigger("dialog:close");
+                    }
+                  });
+
+                  CDSCeunes.regions.dialog.show(editView);
+                });
+
+              });
+            });
+
+            teachersListView.on("childview:teacher:delete", function(childview, args) {
+              args.model.destroy();
             });
 
             CDSCeunes.regions.main.show(listLayout);

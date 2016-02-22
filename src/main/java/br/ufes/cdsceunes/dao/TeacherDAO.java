@@ -29,4 +29,9 @@ public class TeacherDAO extends AbstractDAO<Teacher, Long> {
 		return manager.merge(teacher);
 	}
 
+	@Override
+	public void delete(Teacher teacher) {
+		manager.remove(teacher);		
+	}
+
 }

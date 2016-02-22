@@ -21,6 +21,7 @@ import javax.persistence.Table;
 
 import br.ufes.cdsceunes.model.Discipline;
 
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.validator.constraints.NotBlank;
 import org.joda.time.LocalDate;
 
@@ -38,6 +39,7 @@ public class Teacher extends AbstractModel {
 	@NotBlank
 	private String login;
 
+	@ColumnDefault(value="true")
 	private Boolean available;
 
 	// @Temporal(value = TemporalType.DATE)

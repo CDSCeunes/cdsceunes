@@ -25,4 +25,10 @@ public class ScenarioDAO extends AbstractDAO<Scenario, Long> {
 		return manager.createQuery("select s from Scenario s", Scenario.class).getResultList();
 	}
 
+	@Override
+	public void delete(Scenario object) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

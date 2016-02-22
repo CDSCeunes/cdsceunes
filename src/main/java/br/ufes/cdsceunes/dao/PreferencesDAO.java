@@ -23,4 +23,10 @@ public class PreferencesDAO extends AbstractDAO<Preferences, Long> {
 	public List<Preferences> list() {
 		return manager.createQuery("select p from Preferences p", Preferences.class).getResultList();
 	}
+
+	@Override
+	public void delete(Preferences object) {
+		// TODO Auto-generated method stub
+		
+	}
 }

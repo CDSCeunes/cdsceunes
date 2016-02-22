@@ -13,6 +13,8 @@
 <link rel="stylesheet" href="${appcss}">
 <spring:url value="resources/css/font-awesome.min.css" var="icons" />
 <link rel="stylesheet" href="${icons}">
+<spring:url value="resources/css/vendor/jquery-ui.css" var="jqueryui" />
+<link rel="stylesheet" href="${jqueryui}">
 </head>
 <body>
 	<div id="app-container" class="container-fluid">

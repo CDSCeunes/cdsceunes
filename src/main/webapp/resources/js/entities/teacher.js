@@ -7,12 +7,6 @@ define(["app", "q", "apps/config/storage/localstorage"], function(CDSCeunes, Q) 
         name: "",
         login: "",
         available: true
-      },
-
-      initialize: function() {
-        this.bind("change", function() {
-          this.save();
-        });
       }
     });
 

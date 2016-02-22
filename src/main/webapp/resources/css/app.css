@@ -6,4 +6,10 @@
   border: 1px solid #cacaca;
   padding: 1rem;
   border-radius: 3px;
+  background-color: #FFFFFF;
+}
+
+.teacher-form-dimensions {
+  width: 18rem;
+  height: 2rem;
 }

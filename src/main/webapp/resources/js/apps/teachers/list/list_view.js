@@ -42,6 +42,12 @@ define(["app",
         "keydown @ui.endEdit": "endEditByKey"
       },
 
+      triggers: {
+        "click a.js-edit-teacher": "teacher:edit",
+        "click a.js-show-teacher": "teacher:show",
+        "click button.js-delete-teacher": "teacher:delete"
+      },
+
       modelEvents: {
         "change": "fieldChanged"
       },
@@ -60,6 +66,7 @@ define(["app",
         var myEl = this.$el.find(".js-edit-name");
         var input = $("input.js-edit-name").val();
         this.model.set("name", input);
+        this.model.save();
       },
 
       endEditByKey: function(e) {
