@@ -23,6 +23,31 @@ define(["app", "apps/teachers/list/list_view", "q"], function(CDSCeunes, View, Q
 
             });
 
+            listPanel.on("teacher:new", function() {
+              console.log("teacher new");
+              require(["apps/teachers/new/new_view", "entities/department", "entities/teacher"], function(NewView) {
+                var teacher = CDSCeunes.request("teacher:entity:new");
+                Q.all(CDSCeunes.request("department:entities")).then(function(departments) {
+
+                  var newView = new NewView.Teacher({
+                    model: teacher,
+                    departments: departments
+                  });
+
+
+                  CDSCeunes.regions.dialog.show(newView);
+
+                  newView.on("teacher:form:submit", function(data) {
+                    if (teacher.save(data)) {
+                      teachers.add(teacher);
+                      CDSCeunes.startSubApp("TeachersApp");
+                    }
+                  });
+
+                });
+              });
+            });
+
             CDSCeunes.regions.main.show(listLayout);
           });
         });

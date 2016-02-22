@@ -6,7 +6,13 @@ define(["app", "q", "apps/config/storage/localstorage"], function(CDSCeunes, Q) 
       defaults: {
         name: "",
         login: "",
-        admissionDate: new Date()
+        available: true
+      },
+
+      initialize: function() {
+        this.bind("change", function() {
+          this.save();
+        });
       }
     });
 
@@ -51,7 +57,6 @@ define(["app", "q", "apps/config/storage/localstorage"], function(CDSCeunes, Q) 
     });
 
     CDSCeunes.reqres.setHandler("teacher:entities", function() {
-      console.log("Fetching");
       return API.getTeachersEntities();
     });
 

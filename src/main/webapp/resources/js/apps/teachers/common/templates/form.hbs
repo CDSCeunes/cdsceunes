@@ -1,0 +1,69 @@
+<form class="teacher-form" id="teacher-form">
+  <div class="row">
+    <div class="small-3 columns">
+      <label for="name" class="text-right middle"><strong>Nome</strong></label>
+    </div>
+    <div class="small-6 columns end">
+      <input type="text" placeholder="Nome" name="name">
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-3 columns">
+      <label for="login" class="text-right middle">
+        <strong>Login</strong>
+      </label>
+    </div>
+    <div class="small-6 columns end">
+      <input type="text" placeholder="Login" name="login">
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-3 columns">
+      <label for="department" class="text-right middle"><strong>Departamento</strong></label>
+    </div>
+    <div class="small-6 columns end">
+      <select form="teacher-form" name="department[id]" required>
+        {{#each departments}}
+          <option value="{{id}}">{{name}}</option>
+        {{/each}}
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-3 columns">
+      <label for="admissionDate" class="text-right middle"><strong>Data de admissão</strong></label>
+    </div>
+    <div class="small-6 columns end">
+      <input type="date" name="admissionDate" class="datepicker">
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-3 columns">
+      <label for="returnFromLastRemoval" class="text-right middle"><strong>Retorno do Afastamento</strong></label>
+    </div>
+    <div class="small-6 columns end">
+      <input type="date" name="returnFromLastRemoval" class="datepicker">
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-3 columns">
+      <label for="returnFromCapacitation" class="text-right middle"><strong>Retorno da Capacitação</strong></label>
+    </div>
+    <div class="small-6 columns end">
+      <input type="date" class="datepicker" name="returnFromCapacitation">
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-3 columns">
+      <label for="available" class="text-right middle"><strong>Disponível</strong></label>
+    </div>
+    <div class="small-6 columns end">
+      <input type="checkbox" name="available" value="true" checked>
+    </div>
+  </div>
+  <div class="row">
+    <div class="medium-offset-5 small-3 columns">
+      <button class="small hollow button js-submit-teacher">Enviar</button>
+    </div>
+  </div>
+</form>

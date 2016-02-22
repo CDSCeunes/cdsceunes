@@ -6,6 +6,7 @@ requirejs.config({
     q: "vendor/q",
     "backbone.babysitter": "vendor/backbone.babysitter",
     "backbone.wreqr": "vendor/backbone.wreqr",
+    "backbone.syphon": "vendor/backbone.syphon",
     backbone: "vendor/backbone",
     handlebars: "vendor/handlebars.amd",
     jquery: "vendor/jquery-2.2.0",

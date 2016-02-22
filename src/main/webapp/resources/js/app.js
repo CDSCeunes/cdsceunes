@@ -1,11 +1,13 @@
-define(["marionette", "handlebars"], function(Marionette, Handlebars) {
+define(["marionette", "handlebars", "jquery-ui", "backbone.syphon"], function(Marionette, Handlebars) {
 	var CDSCeunes = new Marionette.Application();
 
   Marionette.TemplateCache.prototype.compileTemplate = function(templateText) {
     return Handlebars.compile(templateText);
-  }
+  };
 
-  CDSCeunes.baseUrl = "http://localhost:8080/CDSCeunes/"
+  Backbone.Syphon.InputReaders.register('checkbox', function($el){
+    return $el.prop('checked') ? $el.val() : false;
+  });
 
 	CDSCeunes.navigate = function(route, options) {
 		options || (options = {});
@@ -40,11 +42,32 @@ define(["marionette", "handlebars"], function(Marionette, Handlebars) {
 			regions: {
 				header: "#header-container",
 				main: "#main-container",
+        dialog: "#dialog-container",
 				footer: "#footer-container"
 			}
 		});
 
 		CDSCeunes.regions = new RootContainer();
+    CDSCeunes.regions.dialog.onShow = function(view) {
+      console.log("dialog view");
+      var self = this;
+      var closeDialog = function() {
+        self.stopListening();
+        self.empty();
+        self.$el.dialog("destroy");
+      };
+
+      this.listenTo(view, "dialog:close", closeDialog);
+
+      this.$el.dialog({
+        modal: true,
+        title: view.title,
+        width: "auto",
+        close: function(e, ui) {
+          closeDialog();
+        }
+      });
+    };
 
 	});
 
