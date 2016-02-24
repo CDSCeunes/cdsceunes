@@ -7,6 +7,12 @@ define(["app", "q", "apps/config/storage/localstorage"], function(CDSCeunes, Q) 
         name: "",
         login: "",
         available: true
+      },
+
+      shouldBeShown: function(search) {
+        var name = this.get("name").toLowerCase();
+        var login = this.get("login").toLowerCase();
+        return (name.indexOf(search) > -1) || (login.indexOf(search) > -1);
       }
     });
 

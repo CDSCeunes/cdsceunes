@@ -24,6 +24,20 @@ define(["app",
 
       triggers: {
         "click button.js-new-teacher": "teacher:new"
+      },
+
+      events: {
+        "submit #filter-teacher": "filterTeachers",
+        "keypress .js-filter-teacher": "filterTeachers"
+      },
+
+      ui: {
+        "search": "input.js-filter-teacher"
+      },
+
+      filterTeachers: function(e) {
+        var search = this.$el.find(".js-filter-teacher").val() + e.key;
+        this.trigger("teacher:filter", search);
       }
     });
 
@@ -82,6 +96,14 @@ define(["app",
 
       fieldChanged: function() {
         this.render();
+      },
+
+      filter: function(search) {
+        if (this.model.shouldBeShown(search)) {
+          this.$el.show();
+        } else {
+          this.$el.hide();
+        }
       }
     });
 
@@ -89,7 +111,6 @@ define(["app",
       template: Handlebars.compile(listTpl),
       childView: View.Teacher,
       childViewContainer: "#list-item-teacher",
-
 
     });
 

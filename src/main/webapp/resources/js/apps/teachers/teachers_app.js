@@ -2,7 +2,7 @@ define(["app"], function(CDSCeunes) {
   CDSCeunes.module("Routers.TeachersApp", function(TeachersAppRouter, CDSCeunes, Backbone, Marionette, $, _) {
     TeachersAppRouter.Router = Marionette.AppRouter.extend({
       appRoutes: {
-        "teachers": "listTeachers",
+        //"teachers": "listTeachers",
         "teachers(/filter/criterion::criterion)": "listTeachers"
       }
     });
@@ -25,7 +25,7 @@ define(["app"], function(CDSCeunes) {
       API.listTeachers();
     });
 
-    CDSCeunes.on("contacts:filter", function(criterion) {
+    CDSCeunes.on("teachers:filter", function(criterion) {
       if (criterion) {
         CDSCeunes.navigate("teachers/filter/criterion:" + criterion);
       } else {

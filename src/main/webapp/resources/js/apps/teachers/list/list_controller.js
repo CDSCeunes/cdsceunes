@@ -8,20 +8,20 @@ define(["app", "apps/teachers/list/list_view", "q"], function(CDSCeunes, View, Q
 
           var teachersListView;
           Q.all(CDSCeunes.request("teacher:entities")).then(function(teachers) {
+
             teachersListView = new View.Teachers({
               collection: teachers,
             });
-            
-
-            if (criterion) {
-
-            }
 
             listLayout.on("show", function() {
               listLayout.panelRegion.show(listPanel);
               listLayout.teachersRegion.show(teachersListView);
 
             });
+
+            if (criterion) {
+              teachersListView.trigger("teacher:filter", criterion);
+            }
 
             listPanel.on("teacher:new", function() {
               require(["apps/teachers/new/new_view", "entities/department", "entities/teacher"], function(NewView) {
@@ -45,6 +45,17 @@ define(["app", "apps/teachers/list/list_view", "q"], function(CDSCeunes, View, Q
 
                 });
               });
+            });
+
+            listPanel.on("teacher:filter", function(search) {
+              teachersListView.trigger("teacher:filter", search);
+            });
+
+            teachersListView.on("teacher:filter", function(search) {
+              this.children.forEach(function(child) {
+                child.filter(search);
+              });
+              CDSCeunes.trigger("teachers:filter", search);
             });
 
             teachersListView.on("childview:teacher:edit", function(childview, args) {
@@ -72,6 +83,8 @@ define(["app", "apps/teachers/list/list_view", "q"], function(CDSCeunes, View, Q
             teachersListView.on("childview:teacher:delete", function(childview, args) {
               args.model.destroy();
             });
+
+
 
             CDSCeunes.regions.main.show(listLayout);
           });
