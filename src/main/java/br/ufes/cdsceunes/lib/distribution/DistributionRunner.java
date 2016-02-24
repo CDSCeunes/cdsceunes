@@ -78,34 +78,22 @@ public class DistributionRunner {
 
 	private static Scenario selectTeachers(List<Preferences> preferences) {
 		Scenario scenario = new Scenario();
-		int i = 0;
 
 		for (HelpTable table : tables) {
 			List<Integer> indexes = table.getIndexes();
-			Integer offset = i + table.getIndexOffset();
 			if (indexes.contains(2)) {
-				if (!distributionCheckout.containsKey(preferences.get(offset).getTeacher())
-						|| (distributionCheckout.containsKey(preferences.get(offset).getTeacher())
-								&& distributionCheckout.get(preferences.get(offset).getTeacher()) <= 3)) {
-					scenario.put(DistributionRunner.getDistribution(preferences, table, 2));
+				scenario.put(DistributionRunner.getDistribution(preferences, table, 2));
 
-				}
 			} else if (indexes.contains(1)) {
-				if (!distributionCheckout.containsKey(preferences.get(offset).getTeacher())
-						|| (distributionCheckout.containsKey(preferences.get(offset).getTeacher())
-								&& distributionCheckout.get(preferences.get(offset).getTeacher()) <= 3)) {
-					scenario.put(DistributionRunner.getDistribution(preferences, table, 1));
-
-				}
+				scenario.put(DistributionRunner.getDistribution(preferences, table, 1));
 			}
-			i++;
 		}
 
 		/*
 		 * Check if the map is being correctly built
 		 */
 		for (Map.Entry<String, Integer> entry : distributionCheckout.entrySet()) {
-			System.out.println(entry.getKey() + " : " + entry.getValue());
+			System.out.println("Name : " + entry.getKey() + "\tNumber of disciplines : " + entry.getValue());
 		}
 		System.out.println("***END OF THE PRINT***\n");
 		tables.clear();
@@ -119,28 +107,33 @@ public class DistributionRunner {
 		for (int i = 0; i < indexes.size(); i++) {
 			if (indexes.get(i) == preferenceValue) {
 				int displacement = i + table.getIndexOffset();
-				distribution.setDiscipline(preferences.get(displacement).getDiscipline());
-				distribution.setTeacher(preferences.get(displacement).getTeacher());
 
-				/*
-				 * The set teacher is saved in the map so the disciplines yet to
-				 * be processed are able to use the information as distribution
-				 * parameters.
-				 */
-				if (!distributionCheckout.containsKey(preferences.get(displacement).getTeacher().getName())) {
-					distributionCheckout.put(preferences.get(displacement).getTeacher().getName(), 1);
-				} else {
-					distributionCheckout.replace(preferences.get(displacement).getTeacher().getName(),
-							distributionCheckout.get(preferences.get(displacement).getTeacher().getName()) + 1);
+				if (!distributionCheckout.containsKey(preferences.get(displacement).getTeacher().getName())
+						|| (distributionCheckout.get(preferences.get(displacement).getTeacher().getName()) < 3)) {
+
+					distribution.setDiscipline(preferences.get(displacement).getDiscipline());
+					distribution.setTeacher(preferences.get(displacement).getTeacher());
+
+					/*
+					 * The set teacher is saved in the map so the disciplines
+					 * yet to be processed are able to use the information as
+					 * distribution parameters.
+					 */
+					if (!distributionCheckout.containsKey(preferences.get(displacement).getTeacher().getName())) {
+						distributionCheckout.put(preferences.get(displacement).getTeacher().getName(), 1);
+					} else {
+						distributionCheckout.replace(preferences.get(displacement).getTeacher().getName(),
+								distributionCheckout.get(preferences.get(displacement).getTeacher().getName()) + 1);
+					}
+
+					return distribution;
 				}
-
-				return distribution;
 			}
 		}
 
 		return distribution;
 	}
-	
+
 	public static void clearMap() {
 		distributionCheckout.clear();
 	}
