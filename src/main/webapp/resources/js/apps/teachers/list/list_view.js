@@ -36,8 +36,16 @@ define(["app",
       },
 
       filterTeachers: function(e) {
-        var search = this.$el.find(".js-filter-teacher").val() + e.key;
+        var search = this.ui.search.val();
+        if (((e.key >= "A" && e.key <= "Z") || (e.key >= "a" && e.key <= "z"))
+            && e.key.length === 1) {
+          search = search + e.key;
+        }
         this.trigger("teacher:filter", search);
+      },
+
+      onSetFilterCriterion: function(criterion){
+        this.ui.search.val(criterion);
       }
     });
 

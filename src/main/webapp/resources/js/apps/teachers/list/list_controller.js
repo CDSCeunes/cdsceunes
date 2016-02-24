@@ -2,15 +2,21 @@ define(["app", "apps/teachers/list/list_view", "q"], function(CDSCeunes, View, Q
   CDSCeunes.module("TeachersApp.List", function(List, CDSCeunes, Backbone, Marionette, $, _) {
     List.Controller = {
       listTeachers: function(criterion) {
-        require(["entities/teacher"], function() {
+        require(["entities/common", "entities/teacher"], function(FilteredCollection) {
           var listLayout = new View.Layout();
           var listPanel = new View.Panel();
 
           var teachersListView;
           Q.all(CDSCeunes.request("teacher:entities")).then(function(teachers) {
 
-            teachersListView = new View.Teachers({
+            var filteredTeachers = FilteredCollection({
               collection: teachers,
+              filter: function(criterion) {
+                return function(teacher) {
+                  return teacher.get("name").indexOf(criterion) > -1 ||
+                    teacher.get("login").indexOf(criterion) > -1;
+                };
+              }
             });
 
             listLayout.on("show", function() {
@@ -20,8 +26,15 @@ define(["app", "apps/teachers/list/list_view", "q"], function(CDSCeunes, View, Q
             });
 
             if (criterion) {
-              teachersListView.trigger("teacher:filter", criterion);
+              filteredTeachers.filter(criterion);
+              listPanel.once("show", function() {
+                listPanel.triggerMethod("set:filter:criterion", criterion);
+              });
             }
+
+            teachersListView = new View.Teachers({
+              collection: filteredTeachers
+            });
 
             listPanel.on("teacher:new", function() {
               require(["apps/teachers/new/new_view", "entities/department", "entities/teacher"], function(NewView) {
@@ -49,13 +62,11 @@ define(["app", "apps/teachers/list/list_view", "q"], function(CDSCeunes, View, Q
 
             listPanel.on("teacher:filter", function(search) {
               teachersListView.trigger("teacher:filter", search);
+              CDSCeunes.trigger("teachers:filter", search);
             });
 
             teachersListView.on("teacher:filter", function(search) {
-              this.children.forEach(function(child) {
-                child.filter(search);
-              });
-              CDSCeunes.trigger("teachers:filter", search);
+              filteredTeachers.filter(search);
             });
 
             teachersListView.on("childview:teacher:edit", function(childview, args) {

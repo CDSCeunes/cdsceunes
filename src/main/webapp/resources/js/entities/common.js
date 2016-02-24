@@ -1,11 +1,11 @@
 define(["app"], function(CDSCeunes) {
   CDSCeunes.module("Entities", function(Entities, CDSCeunes, Backbone, Marionette, $, _) {
-    Entities.Common = function(options) {
+    Entities.FilteredCollection = function(options) {
       var original = options.collection;
       var filtered = new original.constructor();
 
       filtered.add(original.models);
-      filtered.filterFunction = options.filterFunction;
+      filtered.filterFunction = options.filter;
 
       var applyFilter = function(filterCriterion, filterStrategy, collection) {
         var collection = collection || original;
