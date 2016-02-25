@@ -95,6 +95,10 @@ define(["app", "apps/teachers/list/list_view", "q"], function(CDSCeunes, View, Q
               args.model.destroy();
             });
 
+            teachersListView.on("childview:teacher:show", function(childview, args) {
+              CDSCeunes.trigger("teachers:show", args.model.get("id"));
+            });
+
 
 
             CDSCeunes.regions.main.show(listLayout);
