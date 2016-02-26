@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,20 +40,50 @@ public class DepartmentController extends AbstractController {
 		return new ResponseEntity<List<Department>>(departs, HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/form", name = "addDepartment")
-	public ModelAndView form(@ModelAttribute Department department) {
-		ModelAndView mad = new ModelAndView("department/form");
-		return mad;
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Department> updateDepartment(@PathVariable Long id, @RequestBody Department department) {
+		departments.update(department);
+		return new ResponseEntity<Department>(HttpStatus.NO_CONTENT);
 	}
 
-	@RequestMapping(method = RequestMethod.POST, name = "createDepartment", value = "save")
-	public ModelAndView save(@ModelAttribute("department") @Valid Department department, BindingResult binding,
-			RedirectAttributes redirectAttributes) {
-		if (binding.hasErrors()) {
-			return form(department);
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public ResponseEntity<Department> getDepById(@PathVariable Long id) {
+		Department d = departments.findById(id);
+		if (d != null) {
+			return new ResponseEntity<Department>(d, HttpStatus.OK);
 		}
-		departments.save(department);
-		redirectAttributes.addFlashAttribute("sucess", "Departamento cadastrado com sucesso!");
-		return new ModelAndView("redirect:");
+		return new ResponseEntity<Department>(HttpStatus.NO_CONTENT);
 	}
+
+	@RequestMapping(value = "", method = RequestMethod.POST)
+	public ResponseEntity<Department> save(@RequestBody Department dep) {
+		departments.save(dep);
+		return new ResponseEntity<Department>(dep, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public ResponseEntity<Department> delete(@PathVariable("id") Long id) {
+		Department dep = departments.findById(id);
+		if (dep != null) {
+			departments.delete(dep);
+			return new ResponseEntity<Department>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<Department>(HttpStatus.BAD_REQUEST);
+	}
+
+	/*
+	 * @RequestMapping(value = "/form", name = "addDepartment") public
+	 * ModelAndView form(@ModelAttribute Department department) { ModelAndView
+	 * mad = new ModelAndView("department/form"); return mad; }
+	 * 
+	 * @RequestMapping(method = RequestMethod.POST, name = "createDepartment",
+	 * value = "save") public ModelAndView
+	 * save(@ModelAttribute("department") @Valid Department department,
+	 * BindingResult binding, RedirectAttributes redirectAttributes) { if
+	 * (binding.hasErrors()) { return form(department); }
+	 * departments.save(department);
+	 * redirectAttributes.addFlashAttribute("sucess",
+	 * "Departamento cadastrado com sucesso!"); return new
+	 * ModelAndView("redirect:"); }
+	 */
 }

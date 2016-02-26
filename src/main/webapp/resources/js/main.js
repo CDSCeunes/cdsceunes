@@ -41,6 +41,6 @@ requirejs.config({
   }
 });
 
-require(["app", "apps/login/login_app", "apps/teachers/teachers_app"], function(CDSCeunes){
+require(["app", "apps/login/login_app", "apps/teachers/teachers_app", "apps/departments/departments_app"], function(CDSCeunes){
   CDSCeunes.start();
 });
