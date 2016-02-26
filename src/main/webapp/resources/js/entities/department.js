@@ -1,4 +1,4 @@
-define(["app", "q", "apps/config/storage/localstorage"], function(CDSCeunes, Q) {
+define(["app", "q"], function(CDSCeunes, Q) {
   CDSCeunes.module("Entities", function(Entities, CDSCeunes, Backbone, Marionette, $, _) {
     Entities.Department = Backbone.Model.extend({
       urlRoot: "departments",
@@ -16,15 +16,15 @@ define(["app", "q", "apps/config/storage/localstorage"], function(CDSCeunes, Q) 
       }
     });
 
-    Entities.configureStorage("CDSCeunes.Entities.Department", Entities.Department);
+    //Entities.configureStorage("CDSCeunes.Entities.Department", Entities.Department);
     
-    Entities.DepartmentCollection = Backbone.Collection.extend({
+    Entities.DepartmentsCollection = Backbone.Collection.extend({
       model: Entities.Department,
       url: "departments",
       comparator: "name"
     });
 
-    Entities.configureStorage("CDSCeunes.Entities.DepartmentsCollection", Entities.DepartmentsCollection);
+    //Entities.configureStorage("CDSCeunes.Entities.DepartmentsCollection", Entities.DepartmentsCollection);
     
     var API = {
       getDepartmentsEntity: function(departmentId) {

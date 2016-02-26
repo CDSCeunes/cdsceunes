@@ -14,9 +14,8 @@ define([ "app" ], function(CDSCeunes) {
 		}
 
 		var API = {
-			listTeachers : function(criterion) {
-				require([ "apps/departments/list/list_controller" ], function(
-						ListController) {
+			listDepartments : function(criterion) {
+				require([ "apps/departments/list/list_controller" ], function(ListController) {
 					executeAction(ListController.listDepartments, criterion)
 				});
 			}
@@ -27,8 +26,7 @@ define([ "app" ], function(CDSCeunes) {
 			API.list();
 		});
 
-		CDSCeunes.on("contacts:filter",
-				function(criterion) {
+		CDSCeunes.on("contacts:filter", function(criterion) {
 					if (criterion) {
 						CDSCeunes.navigate("departments/filter/criterion:"
 								+ criterion);
@@ -43,6 +41,8 @@ define([ "app" ], function(CDSCeunes) {
 				controller : API
 			});
 		});
+
 	});
+
 	return CDSCeunes.DepartmentsAppRouter;
 });
