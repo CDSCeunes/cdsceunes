@@ -7,12 +7,11 @@ define(["app", "apps/departments/list/list_view", "q"], function(CDSCeunes, View
           var listPanel = new View.Panel();
 
           var departmentsListView;
-          console.log("Lol");
           Q.all(CDSCeunes.request("department:entities")).then(function(departments) {
             departmentsListView = new View.Departments({
-              collection: departments
+              collection: departments,
             });
-            
+
 
             if (criterion) {
 
@@ -33,12 +32,10 @@ define(["app", "apps/departments/list/list_view", "q"], function(CDSCeunes, View
                     model: department
                   });
 
-
                   CDSCeunes.regions.dialog.show(newView);
-
                   newView.on("department:form:submit", function(data) {
-                    if (teacher.save(data)) {
-                      teachers.add(department);
+                    if (department.save(data)) {
+                      departments.add(department);
                       newView.trigger("dialog:close");
                     }
                   });
@@ -47,7 +44,7 @@ define(["app", "apps/departments/list/list_view", "q"], function(CDSCeunes, View
               });
             });
 
-            departmentListView.on("childview:department:edit", function(childview, args) {
+            departmentsListView.on("childview:department:edit", function(childview, args) {
               require(["apps/departments/edit/edit_view"], function(EditView) {
                 var model = args.model;
                 Q.all(CDSCeunes.request("department:entities")).then(function(departments) {
@@ -68,7 +65,7 @@ define(["app", "apps/departments/list/list_view", "q"], function(CDSCeunes, View
               });
             });
 
-            teachersListView.on("childview:department:delete", function(childview, args) {
+            departmentsListView.on("childview:department:delete", function(childview, args) {
               args.model.destroy();
             });
 

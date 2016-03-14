@@ -23,7 +23,7 @@ define([ "app" ], function(CDSCeunes) {
 
 		CDSCeunes.on("departments:list", function() {
 			CDSCeunes.navigate("departments");
-			API.list();
+			API.listDepartments();
 		});
 
 		CDSCeunes.on("contacts:filter", function(criterion) {
@@ -36,7 +36,8 @@ define([ "app" ], function(CDSCeunes) {
 				})
 
 		CDSCeunes.Routers.on("start", function() {
-			console.log("Departments router");
+			console.log("Departmentzzz router");
+			console.log("BOSTAAAAAAAAAAAAAAAAAA");
 			new DepartmentsAppRouter.Router({
 				controller : API
 			});

@@ -6,7 +6,7 @@ define(["app",
         "text!apps/departments/list/templates/list_item.hbs"],
           function(CDSCeunes, Handlebars, layoutTpl, panelTpl, listTpl, listItemTpl) {
   CDSCeunes.module("DepartmentsApp.List.View", function(View, CDSCeunes, Backbone, Marionette, $, _) {
-    
+
     var LockEdit = false;
 
     View.Layout = Marionette.LayoutView.extend({
@@ -27,7 +27,7 @@ define(["app",
       }
     });
 
-    View.Teacher = Marionette.ItemView.extend({
+    View.Department = Marionette.ItemView.extend({
       className: "row",
       template: Handlebars.compile(listItemTpl),
 
@@ -85,7 +85,7 @@ define(["app",
       }
     });
 
-    View.Teachers = Marionette.CompositeView.extend({
+    View.Departments = Marionette.CompositeView.extend({
       template: Handlebars.compile(listTpl),
       childView: View.Department,
       childViewContainer: "#list-item-department",

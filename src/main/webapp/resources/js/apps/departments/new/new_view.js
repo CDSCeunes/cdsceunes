@@ -1,6 +1,6 @@
 define(["app", "apps/departments/common/views"], function(CDSCeunes, CommonViews) {
-  CDSCeunes.module("TeachersApp.New.View", function(View, CDSCeunes, Backbone, Marionette, $, _) {
-    View.Teacher = CommonViews.Form.extend({
+  CDSCeunes.module("DepartmentsApp.New.View", function(View, CDSCeunes, Backbone, Marionette, $, _) {
+    View.Department = CommonViews.Form.extend({
       title: "Novo Departamento",
 
       onRender: function() {

@@ -32,7 +32,7 @@ public class DepartmentController extends AbstractController {
 	private DepartmentDAO departments;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public ResponseEntity<List<Department>> list() {
+	public ResponseEntity<List<Department>> listAllDepartments() {
 		List<Department> departs = departments.list();
 		if (departs.isEmpty()) {
 			return new ResponseEntity<List<Department>>(HttpStatus.NO_CONTENT);
@@ -75,7 +75,7 @@ public class DepartmentController extends AbstractController {
 	 * @RequestMapping(value = "/form", name = "addDepartment") public
 	 * ModelAndView form(@ModelAttribute Department department) { ModelAndView
 	 * mad = new ModelAndView("department/form"); return mad; }
-	 * 
+	 *
 	 * @RequestMapping(method = RequestMethod.POST, name = "createDepartment",
 	 * value = "save") public ModelAndView
 	 * save(@ModelAttribute("department") @Valid Department department,
