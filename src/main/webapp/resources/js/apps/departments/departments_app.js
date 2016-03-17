@@ -36,8 +36,7 @@ define([ "app" ], function(CDSCeunes) {
 				})
 
 		CDSCeunes.Routers.on("start", function() {
-			console.log("Departmentzzz router");
-			console.log("BOSTAAAAAAAAAAAAAAAAAA");
+			console.log("Departments router");
 			new DepartmentsAppRouter.Router({
 				controller : API
 			});

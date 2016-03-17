@@ -5,8 +5,8 @@ define(["app", "apps/departments/list/list_view", "q"], function(CDSCeunes, View
         require(["entities/department"], function() {
           var listLayout = new View.Layout();
           var listPanel = new View.Panel();
-
           var departmentsListView;
+          
           Q.all(CDSCeunes.request("department:entities")).then(function(departments) {
             departmentsListView = new View.Departments({
               collection: departments,

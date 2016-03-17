@@ -34,7 +34,7 @@ define(["app"], function(CDSCeunes) {
     })
 
     CDSCeunes.Routers.on("start", function() {
-      console.log("Teacher routerzzzzzzzzzzzz");
+      console.log("Teachers router");
       new TeachersAppRouter.Router({
         controller: API
       });
