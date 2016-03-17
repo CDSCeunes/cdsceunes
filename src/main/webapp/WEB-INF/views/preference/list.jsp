@@ -28,9 +28,6 @@
 			</tr>
 		</c:forEach>
 	</table>
-	<footer>
-		<a href="${spring:mvcUrl("addPreferences").build()}"> <spring:message
-				code="preference.list.footer" /></a>
-	</footer>
+
 </body>
 </html>
