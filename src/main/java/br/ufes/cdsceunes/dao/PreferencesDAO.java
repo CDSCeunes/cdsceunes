@@ -8,12 +8,12 @@ import br.ufes.cdsceunes.model.Preferences;
 
 @Repository
 public class PreferencesDAO extends AbstractDAO<Preferences, Long> {
-	
+
 	@Override
 	public Preferences findById(Long id) {
 		return manager.find(Preferences.class, id);
 	}
-	
+
 	@Override
 	public void save(Preferences pref) {
 		manager.persist(pref);
@@ -27,6 +27,6 @@ public class PreferencesDAO extends AbstractDAO<Preferences, Long> {
 	@Override
 	public void delete(Preferences object) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

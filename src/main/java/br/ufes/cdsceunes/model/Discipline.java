@@ -14,7 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(name = "discipline")
 public class Discipline extends AbstractModel {
 
 	@Id
@@ -25,8 +25,8 @@ public class Discipline extends AbstractModel {
 
 	private String course;
 
-	@ElementCollection(fetch=FetchType.EAGER)
-	@CollectionTable(name = "semesters", joinColumns = @JoinColumn(name = "discipline_id") )
+	@ElementCollection(fetch = FetchType.EAGER)
+	@CollectionTable(name = "semesters", joinColumns = @JoinColumn(name = "discipline_id"))
 	@Column(name = "semester")
 	private List<String> semesters;
 
@@ -41,6 +41,7 @@ public class Discipline extends AbstractModel {
 	public Long getId() {
 		return id;
 	}
+
 	public int getTeoricLoad() {
 		return teoricLoad;
 	}
@@ -65,7 +66,7 @@ public class Discipline extends AbstractModel {
 		this.labLoad = labLoad;
 	}
 
-	@CollectionTable(name = "semesters", joinColumns = @JoinColumn(name = "discipline_id") )
+	@CollectionTable(name = "semesters", joinColumns = @JoinColumn(name = "discipline_id"))
 	public List<String> getSemesters() {
 		return semesters;
 	}

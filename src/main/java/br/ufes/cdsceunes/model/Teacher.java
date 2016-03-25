@@ -1,25 +1,15 @@
 package br.ufes.cdsceunes.model;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
-import javax.persistence.CollectionTable;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapKeyColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import br.ufes.cdsceunes.model.Discipline;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.validator.constraints.NotBlank;
@@ -28,7 +18,7 @@ import org.joda.time.LocalDate;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table
+@Table(name = "teacher")
 public class Teacher extends AbstractModel {
 
 	@Id
@@ -39,7 +29,7 @@ public class Teacher extends AbstractModel {
 	@NotBlank
 	private String login;
 
-	@ColumnDefault(value="true")
+	@ColumnDefault(value = "true")
 	private Boolean available;
 
 	// @Temporal(value = TemporalType.DATE)
@@ -59,7 +49,6 @@ public class Teacher extends AbstractModel {
 	@OneToMany(mappedBy = "teacher")
 	private List<Preferences> preferences;
 
-	
 	@ManyToOne
 	private Department department;
 
@@ -144,7 +133,7 @@ public class Teacher extends AbstractModel {
 	public List<Preferences> getPreferences() {
 		return preferences;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}

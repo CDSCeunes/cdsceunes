@@ -59,6 +59,7 @@ public class PreferencesController extends AbstractController {
 			return new ResponseEntity<List<Preferences>>(HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<List<Preferences>>(prefs, HttpStatus.OK);
+		
 	}
 
 	@RequestMapping(value = "/form", name = "addPreferences")

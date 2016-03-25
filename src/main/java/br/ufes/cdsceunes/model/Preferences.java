@@ -10,23 +10,32 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import br.ufes.cdsceunes.util.PreferencesSerializer;
+
 @Entity
-@Table
+@Table(name="preferences")
+@JsonSerialize(using = PreferencesSerializer.class)
 public class Preferences extends AbstractModel {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
+
 	@Enumerated
 	private Preference value;
-	
+
 	@ManyToOne(fetch=FetchType.EAGER)
 	private Teacher teacher;
-	
-	@OneToOne(fetch=FetchType.EAGER)
+
+	@OneToOne
 	private Discipline discipline;
 
+	public Long getId() {
+		return id;
+	}
+	
 	public Preference getValue() {
 		return value;
 	}
@@ -50,7 +59,5 @@ public class Preferences extends AbstractModel {
 	public void setDiscipline(Discipline discipline) {
 		this.discipline = discipline;
 	}
-	
-	
 
 }
