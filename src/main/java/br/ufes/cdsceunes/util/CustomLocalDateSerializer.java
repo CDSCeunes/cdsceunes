@@ -13,7 +13,7 @@ import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
 public class CustomLocalDateSerializer extends StdSerializer<LocalDate> {
 	
-	private final static DateTimeFormatter DATE_FORMAT = DateTimeFormat.forPattern("yyy-MM-dd");
+	private final static DateTimeFormatter DATE_FORMAT = DateTimeFormat.forPattern("yyyy-MM-dd");
 
 	@Override
 	public void serialize(LocalDate date, JsonGenerator jgen, SerializerProvider sProvider) throws IOException {

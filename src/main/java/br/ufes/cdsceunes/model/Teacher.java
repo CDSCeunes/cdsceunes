@@ -15,10 +15,15 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.validator.constraints.NotBlank;
 import org.joda.time.LocalDate;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import br.ufes.cdsceunes.util.TeacherSerializer;
 
 @Entity
 @Table(name = "teacher")
+@JsonSerialize(using = TeacherSerializer.class)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Teacher extends AbstractModel {
 
 	@Id
@@ -41,11 +46,9 @@ public class Teacher extends AbstractModel {
 	// @Temporal(value = TemporalType.DATE)
 	private LocalDate returnFromCapacitacion;
 
-	@JsonIgnore
 	@OneToMany(mappedBy = "teacher")
 	private List<Position> positions;
 
-	@JsonIgnore
 	@OneToMany(mappedBy = "teacher")
 	private List<Preferences> preferences;
 
@@ -98,7 +101,7 @@ public class Teacher extends AbstractModel {
 		this.returnFromCapacitacion = returnFromCapacitacion;
 	}
 
-	public boolean isAvailable() {
+	public Boolean isAvailable() {
 		return available;
 	}
 

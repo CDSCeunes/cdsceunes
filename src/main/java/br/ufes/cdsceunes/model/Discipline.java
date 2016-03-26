@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -30,11 +31,14 @@ public class Discipline extends AbstractModel {
 	@Column(name = "semester")
 	private List<String> semesters;
 
-	private int teoricLoad;
+	private Integer teoricLoad;
 
-	private int exerciseLoad;
+	private Integer exerciseLoad;
 
-	private int labLoad;
+	private Integer labLoad;
+
+	@OneToMany(mappedBy = "discipline")
+	private List<Preferences> preferences;
 
 	/* Getters and Setters */
 
@@ -89,6 +93,14 @@ public class Discipline extends AbstractModel {
 
 	public void setCourse(String course) {
 		this.course = course;
+	}
+
+	public void setPreferences(List<Preferences> prefs) {
+		this.preferences = prefs;
+	}
+
+	public List<Preferences> getPreferences() {
+		return preferences;
 	}
 
 }

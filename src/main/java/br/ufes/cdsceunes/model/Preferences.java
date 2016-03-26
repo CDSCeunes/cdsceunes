@@ -29,7 +29,7 @@ public class Preferences extends AbstractModel {
 	@ManyToOne(fetch=FetchType.EAGER)
 	private Teacher teacher;
 
-	@OneToOne
+	@ManyToOne
 	private Discipline discipline;
 
 	public Long getId() {
