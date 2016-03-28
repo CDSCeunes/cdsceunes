@@ -3,10 +3,12 @@ package br.ufes.cdsceunes.model;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -21,7 +23,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import br.ufes.cdsceunes.util.TeacherSerializer;
 
 @Entity
-@Table(name = "teacher")
+@Table(name = "teacher",indexes=@Index(columnList="login"))
 @JsonSerialize(using = TeacherSerializer.class)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Teacher extends AbstractModel {
@@ -32,6 +34,7 @@ public class Teacher extends AbstractModel {
 	@NotBlank
 	private String name;
 	@NotBlank
+	@Column(length=50)
 	private String login;
 
 	@ColumnDefault(value = "true")
