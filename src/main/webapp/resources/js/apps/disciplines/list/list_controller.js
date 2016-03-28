@@ -25,7 +25,7 @@ define(["app", "apps/disciplines/list/list_view", "q"], function(CDSCeunes, View
               require(["apps/disciplines/new/new_view", "entities/discipline"], function(NewView) {
                 var discipline = CDSCeunes.request("discipline:entity:new");
                 Q.all(CDSCeunes.request("discipline:entities")).then(function(disciplines) {
-                  var new_view =  new NewView.Discipline({
+                  var newView = new NewView.Discipline({
                     model: discipline
                   });
 

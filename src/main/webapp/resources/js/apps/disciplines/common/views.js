@@ -1,7 +1,7 @@
 define(["app", "handlebars", "text!apps/disciplines/common/templates/form.hbs", "backbone.syphon", "jquery-ui"],
   function(CDSCeunes, Handlebars, formTpl) {
     CDSCeunes.module("DisciplinesApp.Common.Views", function(Views, CDSCeunes, Backbone, Marionette, $, _) {
-      Views.form = Marionette.ItemView.extend({
+      Views.Form = Marionette.ItemView.extend({
         template: Handlebars.compile(formTpl),
 
         ui: {
@@ -9,8 +9,8 @@ define(["app", "handlebars", "text!apps/disciplines/common/templates/form.hbs", 
         },
 
         events: {
-          "click @ui.submitData" : "submitData"
-        }
+          "click @ui.submitData": "submitData"
+        },
 
         submitData: function(e) {
           e.preventDefault();
@@ -20,4 +20,4 @@ define(["app", "handlebars", "text!apps/disciplines/common/templates/form.hbs", 
       });
     });
     return CDSCeunes.DisciplinesApp.Common.Views;
-});
+  });

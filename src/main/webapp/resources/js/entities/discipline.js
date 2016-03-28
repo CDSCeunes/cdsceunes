@@ -53,10 +53,10 @@ define(["app","q"], function(CDSCeunes, Q) {
     CDSCeunes.reqres.setHandler("discipline:entity", function(id) {
       return API.getDisciplineEntity(id);
     });
-    CDSCeunes.reqres.setHandler("discipline:entities", function(id) {
-      return API.getDisciplinesEntities(id);
+    CDSCeunes.reqres.setHandler("discipline:entities", function() {
+      return API.getDisciplinesEntities();
     });
-    CDSCeunes.reqres.setHandler("discipline:entity:new", function(id) {
+    CDSCeunes.reqres.setHandler("discipline:entity:new", function() {
       return new Entities.Discipline();
     });
 

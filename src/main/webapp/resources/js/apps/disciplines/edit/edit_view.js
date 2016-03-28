@@ -4,7 +4,7 @@ define(["app", "apps/disciplines/common/views"], function(CDSCeunes, CommonViews
       title: "Editar disciplina",
       onRender: function() {
         this.$(".js-submit-discipline").text("Atualizar");
-      },
+      }
 
     });
   });

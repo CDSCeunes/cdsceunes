@@ -1,9 +1,9 @@
-define([ "app" ], function(CDSCeunes) {
+define(["app"], function(CDSCeunes) {
   CDSCeunes.module("Routers.DisciplinesApp", function(DisciplinesAppRouter, CDSCeunes, Backbone, Marionette, $, _) {
     DisciplinesAppRouter.Router = Marionette.AppRouter.extend({
-      appRoutes : {
+      appRoutes: {
         "disciplines": "listDisciplines",
-        "disciplines(/filter/criterion::criterion)" : "listDisciplines"
+        "disciplines(/filter/criterion::criterion)": "listDisciplines"
       }
     });
 
@@ -14,7 +14,7 @@ define([ "app" ], function(CDSCeunes) {
 
     var API = {
       listDisciplines: function(criterion) {
-        require([ "apps/disciplines/list/list_controller" ], function(ListController) {
+        require(["apps/disciplines/list/list_controller"], function(ListController) {
           executeAction(ListController.listDisciplines, criterion)
         });
       }
@@ -26,7 +26,7 @@ define([ "app" ], function(CDSCeunes) {
     });
 
     CDSCeunes.on("contacts:filter", function(criterion) {
-      if(criterion) {
+      if (criterion) {
         CDSCeunes.navigate("disciplines/filter/criterion:" + criterion);
       } else {
         CDSCeunes.navigate("disciplines");
@@ -36,7 +36,7 @@ define([ "app" ], function(CDSCeunes) {
     CDSCeunes.Routers.on("start", function() {
       console.log("Disciplines router");
       new DisciplinesAppRouter.Router({
-        controller : API
+        controller: API
       });
     });
 
