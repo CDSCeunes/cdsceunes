@@ -2,10 +2,9 @@ define(["app",
         "handlebars",
         "text!apps/preferences/list/templates/layout.hbs",
         "text!apps/preferences/list/templates/panel.hbs",
-        "text!apps/preferences/list/templates/discipline_layout.hbs",
-        "text!apps/preferences/list/templates/discipline_view.hbs",
-        "text!apps/preferences/list/templates/discipline_item.hbs"],
-  function(CDSCeunes, Handlebars, layoutTpl, panelTpl, disciplineLayoutTpl, disciplineViewTpl, disciplineItemTpl) {
+        "text!apps/preferences/list/templates/preferences_rows.hbs",
+        "text!apps/preferences/list/templates/preferences_item.hbs"],
+  function(CDSCeunes, Handlebars, layoutTpl, panelTpl, rowsTpl, itemTpl) {
   CDSCeunes.module("PreferencesApp.View", function(View, CDSCeunes, Backbone, Marionette, $, _) {
     
     View.Layout = Marionette.LayoutView.extend({
@@ -21,19 +20,15 @@ define(["app",
       template: Handlebars.compile(panelTpl)
     });
 
-    View.DisciplinesContainer = Marionette.CompositeView.extend({
-      template: Handlebars.compile(disciplineLayoutTpl),
-      childView: View.Discipline,
-      childViewContainer: "#disciplines-container"
+    View.Row = Marionette.ItemView.extend({
+      template: Handlebars.compile(itemTpl),
+      className: "row"
     });
 
-    View.Discipline = Marionette.CompositeView.extend({
-      template: Handlebars.compile(disciplineViewTpl),
-      childView: View.Preferences
-    });
-
-    View.Preferences = Marionette.ItemView.extend({
-      template: Handlebars.compile(disciplineItemTpl),
+    View.Rows = Marionette.CompositeView.extend({
+      template: Handlebars.compile(rowsTpl),
+      childView: View.Row,
+      childViewContainer: "#preferences-rows"
     });
   });
 

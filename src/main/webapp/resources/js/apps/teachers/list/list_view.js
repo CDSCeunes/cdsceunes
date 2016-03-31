@@ -118,8 +118,7 @@ define(["app",
     View.Teachers = Marionette.CompositeView.extend({
       template: Handlebars.compile(listTpl),
       childView: View.Teacher,
-      childViewContainer: "#list-item-teacher",
-
+      childViewContainer: "#list-item-teacher"
     });
 
   });

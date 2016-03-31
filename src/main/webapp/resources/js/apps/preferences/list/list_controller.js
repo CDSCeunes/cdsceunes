@@ -1,27 +1,32 @@
 define(["app", "apps/preferences/list/list_view", "q"], function(CDSCeunes, View, Q) {
   CDSCeunes.module("PreferencesApp.List", function(List, CDSCeunes, Backbone, Marionette, $, _) {
+    
     List.Controller = {
-     listPreferences: function() {
+     listPreferences: function(criterion) {
         var layoutView = new View.Layout();
         var panelView = new View.Panel();
-        var disciplinesLayoutView;
+        var rowsView;
         require(["entities/preferences"], function() {
-          Q.all(CDSCeunes.request("preferences:entities"), function(preferences) {
-            disciplinesLayoutView = new View.DisciplinesContainer({
+          Q.all(CDSCeunes.request("preference:entities")).then(function(preferences) {
+            
+            rowsView = new View.Rows({
               collection: preferences
             });
-          });
 
-          layoutView.on("show", function() {
-            layoutView.main.show(disciplinesLayoutView);
+            console.log("imprima");
+
+            layoutView.on("show", function() {
+              console.log("inside");
+              layoutView.main.show(rowsView);
+              layoutView.panel.show(panelView);
+            });
+
+            CDSCeunes.regions.main.show(layoutView);
           });
         });
-      
-
-      CDSCeunes.regions.main.show(layoutView);
       }
     };
-  });
 
+  });
   return CDSCeunes.PreferencesApp.List.Controller;
 });

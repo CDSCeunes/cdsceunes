@@ -6,7 +6,8 @@ define(["app", "q"], function(CDSCeunes, Q) {
 
     Entities.PreferencesCollection = Backbone.Collection.extend({
       url: "preferences",
-      model: Entities.Preferences
+      model: Entities.Preference,
+      comparator: "teacher.name"
     });
 
 

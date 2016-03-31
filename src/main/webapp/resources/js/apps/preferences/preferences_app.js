@@ -13,6 +13,7 @@ define(["app"], function(CDSCeunes) {
 
     var API = {
       listPreferences: function() {
+        console.log("executando");
         require(["apps/preferences/list/list_controller"], function(ListController) {
           executeAction(ListController.listPreferences, undefined);
         });
