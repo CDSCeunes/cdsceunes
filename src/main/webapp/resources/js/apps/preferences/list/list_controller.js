@@ -13,10 +13,7 @@ define(["app", "apps/preferences/list/list_view", "q"], function(CDSCeunes, View
               collection: preferences
             });
 
-            console.log("imprima");
-
             layoutView.on("show", function() {
-              console.log("inside");
               layoutView.main.show(rowsView);
               layoutView.panel.show(panelView);
             });
