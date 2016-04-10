@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table
 public class Position extends AbstractModel {
@@ -23,6 +25,7 @@ public class Position extends AbstractModel {
 	
 	private double currentWorkload;
 	
+	@JsonIgnore
 	@ManyToOne
 	private Commission commission;
 	

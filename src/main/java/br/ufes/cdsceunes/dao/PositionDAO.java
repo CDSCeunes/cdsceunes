@@ -25,9 +25,12 @@ public class PositionDAO extends AbstractDAO<Position, Long> {
 	}
 
 	@Override
-	public void delete(Position object) {
-		// TODO Auto-generated method stub
-		
+	public void delete(Position position) {
+		manager.remove(position);
+	}
+	
+	public Position update(Position position) {
+		return manager.merge(position);
 	}
 
 }
