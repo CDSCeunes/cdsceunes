@@ -1,8 +1,10 @@
 package br.ufes.cdsceunes.lib.distribution;
 
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import br.ufes.cdsceunes.model.DistributionResult;
@@ -13,26 +15,21 @@ public class DistributionRunner {
 
 	private static HelpTable table;
 	private static List<HelpTable> tables = new LinkedList<HelpTable>();
+	private static Map<String, Integer> distributionCheckout = new HashMap<String, Integer>();
 
 	public static Scenario generateDistribution(List<Preferences> preferences) {
-		/*
-		 * Sort preferences list by the Discipline name
-		 */
-		/*
-		 * TODO tentar ordenar pelo DAO
-		 */
-		Comparator<Preferences> byDiscipline = (p1, p2) -> p1.getDiscipline().getName().compareTo(p2.getDiscipline().getName());
-		Comparator<Preferences> byName = (p1, p2) -> p1.getTeacher().getName().compareTo(p2.getTeacher().getName());
-	
-		preferences.sort(byDiscipline.thenComparing(byName));
-		
-		/*System.out.println("Inicia impressao: ");
-		for (Preferences p : preferences) {
-			System.out.println(p.getTeacher().getName() + " -> " + p.getDiscipline().getName() + " -> " + p.getValue());
-		}*/
 
-		///preferences.sort((Preferences p1, Preferences p2) -> p1.getDiscipline().getName()
-		//		.compareTo(p2.getDiscipline().getName()));
+		/*
+		 * The preferences are sorted by a two-factor procedure that organizes
+		 * the list first by the discipline name, and second by the teachers'
+		 * name. Therefore we obtain a list that can be easily processed
+		 * linearly, discipline by discipline.
+		 */
+		Comparator<Preferences> byDiscipline = (p1, p2) -> p1.getDiscipline().getName()
+				.compareTo(p2.getDiscipline().getName());
+		Comparator<Preferences> byName = (p1, p2) -> p1.getTeacher().getName().compareTo(p2.getTeacher().getName());
+
+		preferences.sort(byDiscipline.thenComparing(byName));
 
 		/*
 		 * Since our preferences list is sorted by discipline, we need to save
@@ -43,6 +40,10 @@ public class DistributionRunner {
 		 */
 		String lastDisciplineName = new String(preferences.get(0).getDiscipline().getName());
 
+		/*
+		 * The offset is used to keep track of the current list position when
+		 * the transition between the disciplines occur.
+		 */
 		int offset = 0;
 
 		for (Preferences p : preferences) {
@@ -50,6 +51,11 @@ public class DistributionRunner {
 			List<HelpTable> existance = tables.stream()
 					.filter((h) -> h.getDisciplineName().equals(p.getDiscipline().getName()))
 					.collect(Collectors.toList());
+			/*
+			 * Checks the possibility that the current discipline has not
+			 * already been evaluated. Therefore, the 'existance' size would be
+			 * equal zero.
+			 */
 			if (existance.size() == 0) {
 				table = new HelpTable(p.getDiscipline().getName());
 				tables.add(table);
@@ -59,15 +65,6 @@ public class DistributionRunner {
 				table = existance.get(0);
 			}
 
-			/*if (!p.getDiscipline().getName().equals(lastDisciplineName)) {
-				table.setIndexOffset(offset);
-				tables.add(table);
-				offset = preferences.indexOf(p);
-				lastDisciplineName = p.getDiscipline().getName();
-				table.setSumOfAllPreferences(0);
-				table.getIndexes().clear();
-				table.setNumberOfOccurences(0);
-			}*/
 			table.increaseSum(p.getValue().ordinal());
 			table.getIndexes().add(p.getValue().ordinal());
 			if (p.getValue().ordinal() != 0) {
@@ -75,13 +72,7 @@ public class DistributionRunner {
 			}
 			offset++;
 		}
-		// Print table
-		/*System.out.println("Imprimindo tabelas:");
-		for (HelpTable table: tables) {
-			System.out.println(table.getDisciplineName() + " -> " + table.getNumberOfOccurences());
-		}*/
-		
-		// return DistributionRunner.chooseTeacher(preferences);
+
 		return DistributionRunner.selectTeachers(preferences);
 	}
 
@@ -92,10 +83,19 @@ public class DistributionRunner {
 			List<Integer> indexes = table.getIndexes();
 			if (indexes.contains(2)) {
 				scenario.put(DistributionRunner.getDistribution(preferences, table, 2));
+
 			} else if (indexes.contains(1)) {
 				scenario.put(DistributionRunner.getDistribution(preferences, table, 1));
 			}
 		}
+
+		/*
+		 * Check if the map is being correctly built
+		 */
+		for (Map.Entry<String, Integer> entry : distributionCheckout.entrySet()) {
+			System.out.println("Name : " + entry.getKey() + "\tNumber of disciplines : " + entry.getValue());
+		}
+		System.out.println("***END OF THE PRINT***\n");
 		tables.clear();
 		return scenario;
 	}
@@ -107,35 +107,35 @@ public class DistributionRunner {
 		for (int i = 0; i < indexes.size(); i++) {
 			if (indexes.get(i) == preferenceValue) {
 				int displacement = i + table.getIndexOffset();
-				distribution.setDiscipline(preferences.get(displacement).getDiscipline());
-				distribution.setTeacher(preferences.get(displacement).getTeacher());
-				return distribution;
+
+				if (!distributionCheckout.containsKey(preferences.get(displacement).getTeacher().getName())
+						|| (distributionCheckout.get(preferences.get(displacement).getTeacher().getName()) < 3)) {
+
+					distribution.setDiscipline(preferences.get(displacement).getDiscipline());
+					distribution.setTeacher(preferences.get(displacement).getTeacher());
+
+					/*
+					 * The set teacher is saved in the map so the disciplines
+					 * yet to be processed are able to use the information as
+					 * distribution parameters.
+					 */
+					if (!distributionCheckout.containsKey(preferences.get(displacement).getTeacher().getName())) {
+						distributionCheckout.put(preferences.get(displacement).getTeacher().getName(), 1);
+					} else {
+						distributionCheckout.replace(preferences.get(displacement).getTeacher().getName(),
+								distributionCheckout.get(preferences.get(displacement).getTeacher().getName()) + 1);
+					}
+
+					return distribution;
+				}
 			}
 		}
 
 		return distribution;
 	}
-	/*
-	 * private static Scenario chooseTeacher(List<Preferences> preferences) {
-	 * int occurrencePriority = 1; int teacherSelectedFlag = 0; int loop =
-	 * tables.size(); Scenario distribution = new Scenario(); while (loop > 0) {
-	 * for (HelpTable h : tables) { if (h.getNumberOfOccurences() ==
-	 * occurrencePriority) { if (h.getNumberOfOccurences() == 1) { for (int i =
-	 * 0; i < h.getIndexes().size(); i++) { if (h.getIndexes().get(i) != 0) {
-	 * int displacement = i + h.getIndexOffset(); distribution.put(new
-	 * DistributionResult(preferences.get(displacement).getDiscipline(),
-	 * preferences.get(displacement).getTeacher())); } } } else { for (int i =
-	 * 0; i < h.getIndexes().size(); i++) { if (h.getIndexes().get(i) == 2) {
-	 * distribution.put(new DistributionResult(preferences.get(i +
-	 * h.getIndexOffset()).getDiscipline(), preferences.get(i +
-	 * h.getIndexOffset()).getTeacher())); teacherSelectedFlag = 1; } } if
-	 * (teacherSelectedFlag == 0) { for (int i = 0; i < h.getIndexes().size();
-	 * i++) { if (h.getIndexes().get(i) == 1) {
-	 * 
-	 * distribution.put(new DistributionResult(preferences.get(i +
-	 * h.getIndexOffset()).getDiscipline(), preferences.get(i +
-	 * h.getIndexOffset()).getTeacher())); teacherSelectedFlag = 1; } } }
-	 * teacherSelectedFlag = 0; } } } occurrencePriority++; loop--; } return
-	 * distribution; }
-	 */
+
+	public static void clearMap() {
+		distributionCheckout.clear();
+	}
+
 }

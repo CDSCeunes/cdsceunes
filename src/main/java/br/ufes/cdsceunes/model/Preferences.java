@@ -2,6 +2,7 @@ package br.ufes.cdsceunes.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,10 +21,10 @@ public class Preferences extends AbstractModel {
 	@Enumerated
 	private Preference value;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.EAGER)
 	private Teacher teacher;
 	
-	@OneToOne
+	@OneToOne(fetch=FetchType.EAGER)
 	private Discipline discipline;
 
 	public Preference getValue() {
