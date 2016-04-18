@@ -17,7 +17,10 @@ define(["app",
     });
 
     View.Panel = Marionette.ItemView.extend({
-      template: Handlebars.compile(panelTpl)
+      template: Handlebars.compile(panelTpl),
+      triggers: {
+        "click .js-new-preference": "preference:new"
+      }
     });
 
     View.Row = Marionette.ItemView.extend({

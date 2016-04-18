@@ -18,6 +18,10 @@ define(["app", "apps/preferences/list/list_view", "q"], function(CDSCeunes, View
               layoutView.panel.show(panelView);
             });
 
+            panelView.on("preference:new", function() {
+              
+            });
+
             CDSCeunes.regions.main.show(layoutView);
           });
         });
