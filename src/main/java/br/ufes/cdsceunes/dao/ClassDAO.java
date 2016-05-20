@@ -23,4 +23,10 @@ public class ClassDAO extends AbstractDAO<OfferedClass, Long> {
 	public List<OfferedClass> list() {
 		return manager.createQuery("select o from OfferedClass o", OfferedClass.class).getResultList();
 	}
+
+	@Override
+	public void delete(OfferedClass object) {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -25,4 +25,10 @@ public class CommissionDAO extends AbstractDAO<Commission, Long> {
 		return manager.createQuery(jpql, Commission.class).getResultList();
 	}
 
+	@Override
+	public void delete(Commission object) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

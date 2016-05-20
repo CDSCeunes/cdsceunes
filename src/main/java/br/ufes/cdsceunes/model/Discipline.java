@@ -6,14 +6,16 @@ import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(name = "discipline")
 public class Discipline extends AbstractModel {
 
 	@Id
@@ -24,22 +26,26 @@ public class Discipline extends AbstractModel {
 
 	private String course;
 
-	@ElementCollection
-	@CollectionTable(name = "semesters", joinColumns = @JoinColumn(name = "discipline_id") )
+	@ElementCollection(fetch = FetchType.EAGER)
+	@CollectionTable(name = "semesters", joinColumns = @JoinColumn(name = "discipline_id"))
 	@Column(name = "semester")
 	private List<String> semesters;
 
-	private int teoricLoad;
+	private Integer teoricLoad;
 
-	private int exerciseLoad;
+	private Integer exerciseLoad;
 
-	private int labLoad;
+	private Integer labLoad;
+
+	@OneToMany(mappedBy = "discipline")
+	private List<Preferences> preferences;
 
 	/* Getters and Setters */
 
 	public Long getId() {
 		return id;
 	}
+
 	public int getTeoricLoad() {
 		return teoricLoad;
 	}
@@ -64,7 +70,7 @@ public class Discipline extends AbstractModel {
 		this.labLoad = labLoad;
 	}
 
-	@CollectionTable(name = "semesters", joinColumns = @JoinColumn(name = "discipline_id") )
+	@CollectionTable(name = "semesters", joinColumns = @JoinColumn(name = "discipline_id"))
 	public List<String> getSemesters() {
 		return semesters;
 	}
@@ -89,9 +95,12 @@ public class Discipline extends AbstractModel {
 		this.course = course;
 	}
 
-	
-	@Override
-	public String toString() {
-		return name;
+	public void setPreferences(List<Preferences> prefs) {
+		this.preferences = prefs;
 	}
+
+	public List<Preferences> getPreferences() {
+		return preferences;
+	}
+
 }

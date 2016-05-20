@@ -24,4 +24,10 @@ public class PositionDAO extends AbstractDAO<Position, Long> {
 		return manager.createQuery("select p from Position p", Position.class).getResultList();
 	}
 
+	@Override
+	public void delete(Position object) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

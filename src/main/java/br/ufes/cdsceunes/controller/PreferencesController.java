@@ -8,6 +8,8 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -31,6 +34,7 @@ import br.ufes.cdsceunes.model.Preference;
 @Controller
 @Transactional
 @RequestMapping("/preferences")
+@RestController
 public class PreferencesController extends AbstractController {
 	
 	@Autowired
@@ -48,11 +52,14 @@ public class PreferencesController extends AbstractController {
 		binder.registerCustomEditor(Teacher.class, new TeacherEditor(teachers));
 	}
 	
-	@RequestMapping("/")
-	public ModelAndView list() {
-		ModelAndView mad = new ModelAndView("preference/list");
-		mad.addObject("preferences",preferences.list());
-		return mad;
+	@RequestMapping("")
+	public ResponseEntity<List<Preferences>> list() {
+		List<Preferences> prefs = preferences.list();
+		if (prefs.isEmpty()) {
+			return new ResponseEntity<List<Preferences>>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<Preferences>>(prefs, HttpStatus.OK);
+		
 	}
 
 	@RequestMapping(value = "/form", name = "addPreferences")

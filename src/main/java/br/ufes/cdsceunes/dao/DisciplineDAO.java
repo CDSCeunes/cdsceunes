@@ -24,4 +24,10 @@ public class DisciplineDAO extends AbstractDAO<Discipline, Long> {
 		return manager.createQuery("from Discipline as d left join fetch d.semesters", Discipline.class).getResultList();
 	}
 
+	@Override
+	public void delete(Discipline object) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

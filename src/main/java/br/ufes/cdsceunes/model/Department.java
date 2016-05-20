@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
-@Table
+@Table(name = "department")
 public class Department extends AbstractModel {
 
 	@Id
