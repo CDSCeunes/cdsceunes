@@ -15,25 +15,16 @@ define(["app", "q"], function(CDSCeunes, Q) {
       }
     });
 
-    Entities.DepartmentCollection = Backbone.Collection.extend({
-      model: Entities.Department,
+    Entities.DepartmentsCollection = Backbone.Collection.extend({
       url: "departments",
+      model: Entities.Department,
       comparator: "name"
     });
 
+
     var API = {
-      getDepartments: function() {
-        var departments = new Entities.DepartmentCollection();
-        return Q.promise(function(resolve) {
-          departments.fetch({
-            success: function(data) {
-              resolve(data);
-            }
-          });
-        });
-      },
-      getDepartmentEntity: function(id) {
-        var department = new Entities.Department({id: id});
+      getDepartmentEntity: function(departmentId) {
+        var department = new Entities.Department({ id: departmentId });
         return Q.promise(function(resolve) {
           department.fetch({
             success: function(data) {
@@ -41,6 +32,16 @@ define(["app", "q"], function(CDSCeunes, Q) {
             },
             error: function(data) {
               resolve(undefined);
+            }
+          });
+        });
+      },
+      getDepartmentsEntities: function() {
+        var departments = new Entities.DepartmentsCollection();
+        return Q.promise(function(resolve) {
+          departments.fetch({
+            success: function(data) {
+              resolve(data);
             }
           });
         });
@@ -52,7 +53,7 @@ define(["app", "q"], function(CDSCeunes, Q) {
     });
 
     CDSCeunes.reqres.setHandler("department:entities", function() {
-      return API.getDepartments();
+      return API.getDepartmentsEntities();
     });
 
     CDSCeunes.reqres.setHandler("department:entity:new", function(id) {

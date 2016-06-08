@@ -25,9 +25,13 @@ public class DepartmentDAO extends AbstractDAO<Department, Long> {
 	}
 
 	@Override
-	public void delete(Department object) {
-		// TODO Auto-generated method stub
+	public void delete(Department dep) {
+		manager.remove(dep);
 		
+	}
+	
+	public Department update(Department dep) {
+		return manager.merge(dep);
 	}
 
 }

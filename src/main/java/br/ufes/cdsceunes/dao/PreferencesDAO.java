@@ -25,8 +25,12 @@ public class PreferencesDAO extends AbstractDAO<Preferences, Long> {
 	}
 
 	@Override
-	public void delete(Preferences object) {
-		// TODO Auto-generated method stub
+	public void delete(Preferences preference) {
+		manager.remove(preference);
 
+	}
+
+	public Preferences update(Preferences preference) {
+		return manager.merge(preference);
 	}
 }
