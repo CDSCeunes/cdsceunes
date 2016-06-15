@@ -19,11 +19,11 @@ public final class HashSecurity {
 		return hashSecurity;
 	}
 	
-	private String generateHash(String password) {
+	public String generateHash(String password) {
 		return encryptor.encryptPassword(password);
 	}
 	
-	private boolean checkPassword(String password, String encrypted) {
+	public boolean checkPassword(String password, String encrypted) {
 		return encryptor.checkPassword(password, encrypted);
 	}
 }
