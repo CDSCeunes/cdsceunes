@@ -20,22 +20,20 @@ import org.joda.time.LocalDate;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import br.ufes.cdsceunes.util.TeacherSerializer;
+import br.ufes.cdsceunes.util.serialiazers.TeacherSerializer;
 
 @Entity
-@Table(name = "teacher",indexes=@Index(columnList="login"))
+@Table(name = "teacher", indexes = @Index(columnList = "login"))
 @JsonSerialize(using = TeacherSerializer.class)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class Teacher extends AbstractModel {
+public class Teacher extends User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@NotBlank
 	private String name;
-	@NotBlank
-	@Column(length=50)
-	private String login;
+
 
 	@ColumnDefault(value = "true")
 	private Boolean available;
@@ -57,6 +55,7 @@ public class Teacher extends AbstractModel {
 
 	@ManyToOne
 	private Department department;
+
 
 	public Teacher() {
 		preferences = new LinkedList<>();
@@ -143,10 +142,22 @@ public class Teacher extends AbstractModel {
 	public Long getId() {
 		return id;
 	}
-	
+
 	@Override
 	public String toString() {
 		return name;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		if (role == Role.SECRETARY) {
+			this.role = Role.TEACHER;
+		} else {
+			this.role = role;
+		}
 	}
 
 }

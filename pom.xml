@@ -168,6 +168,14 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!-- Security -->
+		<dependency>
+			<groupId>org.jasypt</groupId>
+			<artifactId>jasypt</artifactId>
+			<version>1.9.2</version>
+		</dependency>
+
+
 	</dependencies>
 	<build>
 		<finalName>CDSCeunes</finalName>
