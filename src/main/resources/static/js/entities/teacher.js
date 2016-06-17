@@ -1,7 +1,7 @@
 define(["app", "q", "apps/config/storage/localstorage"], function(CDSCeunes, Q) {
   CDSCeunes.module("Entities", function(Entities, CDSCeunes, Backbone, Marionette, $, _) {
     Entities.Teacher = Backbone.Model.extend({
-      urlRoot: "teachers",
+      urlRoot: "/api/v1/teachers",
 
       defaults: {
         name: "",
@@ -19,7 +19,7 @@ define(["app", "q", "apps/config/storage/localstorage"], function(CDSCeunes, Q) 
     Entities.configureStorage("CDSCeunes.Entities.Teacher", Entities.Teacher);
 
     Entities.TeachersCollection = Backbone.Collection.extend({
-      url: "teachers",
+      url: "/api/v1/teachers",
       model: Entities.Teacher,
       comparator: "name"
     });

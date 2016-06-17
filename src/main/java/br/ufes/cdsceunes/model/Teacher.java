@@ -2,8 +2,6 @@ package br.ufes.cdsceunes.model;
 
 import java.util.LinkedList;
 import java.util.List;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,11 +10,9 @@ import javax.persistence.Index;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.validator.constraints.NotBlank;
 import org.joda.time.LocalDate;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -33,7 +29,6 @@ public class Teacher extends User {
 	private Long id;
 	@NotBlank
 	private String name;
-
 
 	@ColumnDefault(value = "true")
 	private Boolean available;
@@ -55,7 +50,6 @@ public class Teacher extends User {
 
 	@ManyToOne
 	private Department department;
-
 
 	public Teacher() {
 		preferences = new LinkedList<>();

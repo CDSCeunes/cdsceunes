@@ -1,5 +1,5 @@
 requirejs.config({
-  baseUrl: "resources/js",
+  baseUrl: "js/",
   paths: {
     lodash: "vendor/lodash",
     underscore: "vendor/underscore",

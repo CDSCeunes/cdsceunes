@@ -1,7 +1,7 @@
 define(["app", "q"], function(CDSCeunes, Q) {
   CDSCeunes.module("Entities", function(Entities, CDSCeunes, Backbone, Marionette, $, _) {
     Entities.Department = Backbone.Model.extend({
-      urlRoot: "departments",
+      urlRoot: "/api/v1/departments",
 
       defaults: {
         name: "",
@@ -16,7 +16,7 @@ define(["app", "q"], function(CDSCeunes, Q) {
     });
 
     Entities.DepartmentsCollection = Backbone.Collection.extend({
-      url: "departments",
+      url: "/api/v1/departments",
       model: Entities.Department,
       comparator: "name"
     });

@@ -9,7 +9,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 
 import br.ufes.cdsceunes.model.Discipline;
 
-public class DisciplineSerializer extends JsonSerializer<Discipline>{
+public class DisciplineSerializer extends JsonSerializer<Discipline> {
 
 	@Override
 	public void serialize(Discipline disc, JsonGenerator jgen, SerializerProvider provider)
@@ -18,8 +18,9 @@ public class DisciplineSerializer extends JsonSerializer<Discipline>{
 		jgen.writeNumberField("id", disc.getId());
 		jgen.writeStringField("name", disc.getName());
 		jgen.writeStringField("course", disc.getCourse());
-		jgen.writeNumberField("teoricLoad", disc.getTeoricLoad());
-		jgen.writeNumberField("exerciseLoad", disc.getExerciseLoad());
+		provider.defaultSerializeField("teoricLoad", disc.getTeoricLoad(),jgen);
+		provider.defaultSerializeField("exerciseLoad", disc.getExerciseLoad(), jgen);
+		provider.defaultSerializeField("labLoad", disc.getLabLoad(), jgen);
 		jgen.writeEndObject();
 		
 	}

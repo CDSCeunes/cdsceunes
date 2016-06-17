@@ -1,11 +1,11 @@
 define(["app", "q"], function(CDSCeunes, Q) {
   CDSCeunes.module("Entities", function(Entities, CDSCeunes, Backbone, Marionette, $, _) {
     Entities.Preference = Backbone.Model.extend({
-      urlRoot: "preferences"
+      urlRoot: "/api/v1/preferences"
     });
 
     Entities.PreferencesCollection = Backbone.Collection.extend({
-      url: "preferences",
+      url: "/api/v1/preferences",
       model: Entities.Preference,
       comparator: function(pref1, pref2) {
         var disc1 = pref1.get("discipline").name;
