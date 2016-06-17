@@ -1,15 +1,17 @@
 package br.ufes.cdsceunes.util.security;
 
-import org.jasypt.util.password.StrongPasswordEncryptor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public final class HashSecurity {
 	
 	private static HashSecurity hashSecurity;
+	private static final int SALT = 12;
 	
-	private StrongPasswordEncryptor encryptor;
+	private BCryptPasswordEncoder encoder;
+	
 	
 	private HashSecurity() {
-		encryptor = new StrongPasswordEncryptor();
+		encoder = new BCryptPasswordEncoder(SALT);
 	}
 	
 	public static HashSecurity getInstance() {
@@ -20,10 +22,10 @@ public final class HashSecurity {
 	}
 	
 	public String generateHash(String password) {
-		return encryptor.encryptPassword(password);
+		return encoder.encode(password);
 	}
 	
 	public boolean checkPassword(String password, String encrypted) {
-		return encryptor.checkPassword(password, encrypted);
+		return encoder.matches(password, encrypted);
 	}
 }

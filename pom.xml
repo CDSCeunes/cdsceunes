@@ -26,6 +26,8 @@
 		<!-- Spring -->
 		<spring-framework.version>4.2.4.RELEASE</spring-framework.version>
 
+		<spring-framework-security.version>4.1.0.RELEASE</spring-framework-security.version>
+
 		<!-- Hibernate / JPA -->
 		<hibernate.version>4.3.11.Final</hibernate.version>
 
@@ -170,10 +172,22 @@
 
 		<!-- Security -->
 		<dependency>
-			<groupId>org.jasypt</groupId>
-			<artifactId>jasypt</artifactId>
-			<version>1.9.2</version>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring-framework-security.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring-framework-security.version}</version>
+		</dependency>
+			<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-crypto</artifactId>
+			<version>${spring-framework-security.version}</version>
+		</dependency>
+
+
 
 
 	</dependencies>
