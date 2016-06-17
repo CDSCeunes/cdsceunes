@@ -14,8 +14,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import br.ufes.cdsceunes.util.serialiazers.DisciplineSerializer;
+import br.ufes.cdsceunes.util.serialiazers.TeacherSerializer;
+
 @Entity
 @Table(name = "discipline")
+@JsonSerialize(using = DisciplineSerializer.class)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Discipline extends AbstractModel {
 
 	@Id

@@ -3,10 +3,7 @@ package br.ufes.cdsceunes.model;
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.validator.constraints.NotBlank;
-
-import br.ufes.cdsceunes.util.security.HashSecurity;
 
 @MappedSuperclass
 public abstract class User extends AbstractModel {
