@@ -36,12 +36,16 @@ define(["app", "apps/teachers/list/list_view", "q"], function(CDSCeunes, View, Q
               collection: filteredTeachers
             });
 
-            listPanel.on("teacher:new", function() {
+            listPanel.on("teacher:new", function(header, token) {
+              console.log(header);
+              console.log(token);
               require(["apps/teachers/new/new_view", "entities/department", "entities/teacher"], function(NewView) {
                 var teacher = CDSCeunes.request("teacher:entity:new");
                 Q.all(CDSCeunes.request("department:entities")).then(function(departments) {
 
                   var newView = new NewView.Teacher({
+                    header1: header,
+                    token1: token,
                     model: teacher,
                     departments: departments
                   });

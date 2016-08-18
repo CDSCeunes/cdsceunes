@@ -5,7 +5,7 @@ define(["app",
         "jquery-ui"],
       function(CDSCeunes, Handlebars, formTpl) {
   CDSCeunes.module("TeachersApp.Common.Views", function(Views, CDSCeunes, Backbone, Marionette, $, _) {
-    Views.Form = Marionette.ItemView.extend({
+    Views.Form = Marionette.LayoutView.extend({
       template: Handlebars.compile(formTpl),
 
       ui: {
@@ -35,6 +35,7 @@ define(["app",
       submitData: function(e) {
         e.preventDefault();
         var data = Backbone.Syphon.serialize(this);
+        console.log(data);
         this.trigger("teacher:form:submit", data);
       }
     });

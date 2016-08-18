@@ -6,7 +6,7 @@ define(["app",
         "text!apps/teachers/list/templates/list_item.hbs"],
           function(CDSCeunes, Handlebars, layoutTpl, panelTpl, listTpl, listItemTpl) {
   CDSCeunes.module("TeachersApp.List.View", function(View, CDSCeunes, Backbone, Marionette, $, _) {
-    
+
     var LockEdit = false;
 
     View.Layout = Marionette.LayoutView.extend({
@@ -23,16 +23,22 @@ define(["app",
       template: Handlebars.compile(panelTpl),
 
       triggers: {
-        "click button.js-new-teacher": "teacher:new"
+        //"click button.js-new-teacher": "teacher:new"
       },
 
       events: {
         "submit #filter-teacher": "filterTeachers",
-        "keypress .js-filter-teacher": "filterTeachers"
+        "keypress .js-filter-teacher": "filterTeachers",
+        "click button.js-new-teacher": "newTeacher"
       },
 
       ui: {
         "search": "input.js-filter-teacher"
+      },
+
+      newTeacher: function(e) {
+        this.triggerMethod("teacher:new", $("meta[name=_csrf_header]").attr('content'),
+          $("meta[name=_csrf]").attr('content'));
       },
 
       filterTeachers: function(e) {
