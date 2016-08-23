@@ -3,30 +3,27 @@ package br.ufes.cdsceunes.model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="secretary")
-public class Secretary extends User {
+public class Secretary extends AbstractModel {
 	
 	@Id
 	@GeneratedValue
 	private Long id;
 	
 	private String name;
-		
+
+	@OneToOne
+	private UserDetails details;
+	
 	public Secretary() {
 		
-	}
+	} 
 
-	@Override
-	void setRole(Role role) {
-		if (role != Role.SECRETARY) {
-			this.role = Role.SECRETARY;
-		}
-		this.role = role;
-	}
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -43,6 +40,9 @@ public class Secretary extends User {
 		this.name = name;
 	}
 	
+	public UserDetails getUserDetails() {
+		return details;
+	}
 	
 
 }

@@ -8,12 +8,12 @@ define(["app", "apps/login/index/index_view", "q"], function(CDSCeunes, View, Q)
 
         loginView.on("login:auth", function(user, pass) {
           require(["entities/user"], function() {
-            var user = CDSCeunes.request()
+            //var user = CDSCeunes.request()
             Q.all(CDSCeunes.request("user:auth:new", user, pass)).then(function() {
 
             });
           });
-          console.log("trigger");
+          console.log("triggers");
           console.log(user);
           console.log(pass);
 

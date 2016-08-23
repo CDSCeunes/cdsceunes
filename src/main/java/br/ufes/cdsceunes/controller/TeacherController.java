@@ -21,6 +21,7 @@ public class TeacherController extends AbstractController {
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public List<Teacher> listAll() {
+		System.out.println("testing");
 		return repository.findAll();
 	}
 

@@ -18,7 +18,7 @@ public class TeacherSerializer extends JsonSerializer<Teacher> {
 		jgen.writeStartObject();
 		jgen.writeNumberField("id", teacher.getId());
 		jgen.writeStringField("name", teacher.getName());
-		jgen.writeStringField("login", teacher.getLogin());
+		jgen.writeStringField("login", teacher.getDetails().getLogin());
 		provider.defaultSerializeField("available", teacher.isAvailable(), jgen);
 		provider.defaultSerializeField("admissionDate", teacher.getAdmissionDate(), jgen);
 		provider.defaultSerializeField("returnFromLastRemoval", teacher.getReturnFromLastRemoval(), jgen);

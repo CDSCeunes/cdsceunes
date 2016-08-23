@@ -6,6 +6,9 @@ define(["app", "q"], function(CDSCeunes, Q) {
       defaults: {
         login: "",
         password: ""
+      },
+      login: function() {
+        
       }
     });
 

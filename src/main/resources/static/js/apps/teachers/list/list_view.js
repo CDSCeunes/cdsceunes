@@ -37,8 +37,7 @@ define(["app",
       },
 
       newTeacher: function(e) {
-        this.triggerMethod("teacher:new", $("meta[name=_csrf_header]").attr('content'),
-          $("meta[name=_csrf]").attr('content'));
+        this.triggerMethod("teacher:new");
       },
 
       filterTeachers: function(e) {

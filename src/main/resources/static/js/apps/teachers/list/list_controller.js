@@ -36,15 +36,17 @@ define(["app", "apps/teachers/list/list_view", "q"], function(CDSCeunes, View, Q
               collection: filteredTeachers
             });
 
-            listPanel.on("teacher:new", function(header, token) {
+            listPanel.on("teacher:new", function() {
               console.log(header);
               console.log(token);
+              console.log($("meta[name=_csrf_header]").attr("content"));
               require(["apps/teachers/new/new_view", "entities/department", "entities/teacher"], function(NewView) {
                 var teacher = CDSCeunes.request("teacher:entity:new");
                 Q.all(CDSCeunes.request("department:entities")).then(function(departments) {
-
+                  var h = new Backbone.Model({ name: header });
+                  console.log(h);
                   var newView = new NewView.Teacher({
-                    header1: header,
+                    header: h.toJSON(),
                     token1: token,
                     model: teacher,
                     departments: departments

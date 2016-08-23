@@ -76,7 +76,7 @@ define(["marionette", "handlebars", "jquery-ui", "backbone.syphon"], function(Ma
 
   CDSCeunes.on("start", function() {
     if (Backbone.history) {
-      Backbone.history.start();
+      Backbone.history.start({ pushState: true });
 
       if (CDSCeunes.getCurrentRoute() === "") {
         /*require(["apps/login/index/index_view"], function(View) {
