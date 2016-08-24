@@ -7,18 +7,32 @@ define(["app", "apps/login/index/index_view", "q"], function(CDSCeunes, View, Q)
         loginView.on("childview:login:home", function() {});
 
         loginView.on("login:auth", function(user, pass) {
-          require(["entities/user"], function() {
-            //var user = CDSCeunes.request()
-            Q.all(CDSCeunes.request("user:auth:new", user, pass)).then(function() {
-
+          console.log("testessss");
+          $.ajax({
+            type: "POST",
+            url: "/login",
+            contentType: "application/x-www-form-urlencoded",
+            data: {
+              username: user,
+              password: pass
+            }
+          }).done(function(res, status, xhr) {
+            console.log(res);
+            console.log(status);
+            console.log(xhr.getResponseHeader("X-AUTH-TOKEN"));
+            window.token = xhr.getResponseHeader("X-AUTH-TOKEN");
+            $.ajaxSetup({
+              headers: {
+                "X-AUTH-TOKEN": window.token
+              }
             });
+            CDSCeunes.trigger("teachers:list");
           });
+
           console.log("triggers");
           console.log(user);
           console.log(pass);
-
         });
-
         CDSCeunes.regions.main.show(loginView);
       }
     }

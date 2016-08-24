@@ -26,7 +26,7 @@ public class TokenHandler {
 	public String createTokenForUser(User user) {
 
 		final long iat = System.currentTimeMillis() / 1000l;
-		final long exp = iat + (1L * 10L);
+		final long exp = iat + (60L * 120L);
 		Map<String, Object> claims = new HashMap<>();
 		claims.put("iat", iat);
 		claims.put("exp", exp);
