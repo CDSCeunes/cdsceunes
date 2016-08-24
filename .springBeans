@@ -7,6 +7,10 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
+<<<<<<< HEAD
+=======
+		<config>java:br.ufes.cdsceunes.Application</config>
+>>>>>>> profile-igor
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

@@ -24,7 +24,7 @@ public class TeacherValidator implements Validator {
 		if (teacher.getName() == null) {
 			errors.rejectValue("name", "field.required");
 		}
-		if (teacher.getLogin() == null) {
+		if (teacher.getDetails().getLogin() == null) {
 			errors.rejectValue("login", "field.required");
 		}
 	}

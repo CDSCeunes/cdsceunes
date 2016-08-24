@@ -7,8 +7,6 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 @Entity
 @Table(name = "position")
 public class Position extends AbstractModel {
@@ -30,6 +28,10 @@ public class Position extends AbstractModel {
 
 	@ManyToOne
 	private Teacher teacher;
+	
+	public Long getId() {
+		return id;
+	}
 
 	/* Getters and Setters */
 	public String getName() {

@@ -3,14 +3,13 @@ package br.ufes.cdsceunes.model;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Index;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.ColumnDefault;
@@ -20,10 +19,10 @@ import org.joda.time.LocalDate;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import br.ufes.cdsceunes.util.TeacherSerializer;
+import br.ufes.cdsceunes.util.serialiazers.TeacherSerializer;
 
 @Entity
-@Table(name = "teacher",indexes=@Index(columnList="login"))
+@Table(name = "teacher")
 @JsonSerialize(using = TeacherSerializer.class)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Teacher extends AbstractModel {
@@ -31,14 +30,15 @@ public class Teacher extends AbstractModel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@NotBlank
 	private String name;
-	@NotBlank
-	@Column(length=50)
-	private String login;
 
 	@ColumnDefault(value = "true")
 	private Boolean available;
+	
+	@OneToOne
+	private UserDetails details;
 
 	// @Temporal(value = TemporalType.DATE)
 	private LocalDate admissionDate;
@@ -72,13 +72,6 @@ public class Teacher extends AbstractModel {
 		this.name = name;
 	}
 
-	public String getLogin() {
-		return login;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
-	}
 
 	public LocalDate getAdmissionDate() {
 		return admissionDate;
@@ -143,10 +136,14 @@ public class Teacher extends AbstractModel {
 	public Long getId() {
 		return id;
 	}
-	
+
 	@Override
 	public String toString() {
 		return name;
+	}
+	
+	public UserDetails getDetails() {
+		return details;
 	}
 
 }

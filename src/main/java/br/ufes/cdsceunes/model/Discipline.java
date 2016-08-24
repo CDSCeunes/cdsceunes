@@ -14,8 +14,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import br.ufes.cdsceunes.util.serialiazers.DisciplineSerializer;
+
 @Entity
 @Table(name = "discipline")
+@JsonSerialize(using = DisciplineSerializer.class)
+@JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Discipline extends AbstractModel {
 
 	@Id
@@ -46,7 +53,7 @@ public class Discipline extends AbstractModel {
 		return id;
 	}
 
-	public int getTeoricLoad() {
+	public Integer getTeoricLoad() {
 		return teoricLoad;
 	}
 
@@ -54,7 +61,7 @@ public class Discipline extends AbstractModel {
 		this.teoricLoad = teoricLoad;
 	}
 
-	public int getExerciseLoad() {
+	public Integer getExerciseLoad() {
 		return exerciseLoad;
 	}
 
@@ -62,7 +69,7 @@ public class Discipline extends AbstractModel {
 		this.exerciseLoad = exerciseLoad;
 	}
 
-	public int getLabLoad() {
+	public Integer getLabLoad() {
 		return labLoad;
 	}
 
