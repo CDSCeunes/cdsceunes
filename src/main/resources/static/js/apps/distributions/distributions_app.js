@@ -5,6 +5,7 @@ define([ "app" ], function(CDSCeunes) {
         appRoutes: {
           "distributions": "listDistributions",
           "distributions(/filter/criterion::criterion)" : "listDistributions"
+          "distributions": "newDistribution"
         }
       });
 
@@ -15,8 +16,13 @@ define([ "app" ], function(CDSCeunes) {
 
       var API = {
         listDistributions: function(criterion) {
-          require(["apps/distrinutions/list/list_controller"], function(ListController) {
+          require(["apps/distributions/list/list_controller"], function(ListController) {
             executeAction(ListController.listDistributions, criterion)
+          });
+        }
+        newDistribution: function() {
+          require(["apps/distributions/new/new_controller"], function(NewController) {
+            executeAction(NewController.newDistribution)
           });
         }
       };
@@ -32,6 +38,11 @@ define([ "app" ], function(CDSCeunes) {
         } else {
           CDSCeunes.navigate("distributions");
         }
+      })
+
+      CDSCeunes.on("distributions:new", function() {
+        CDSCeunes.navigate("distributions/new");
+        API.newDistribution();
       })
 
       CDSCeunes.Routers.on("start", function() {

@@ -21,26 +21,6 @@ define(["app", "apps/distributions/list/list_view", "q"], function(CDSCeunes, Vi
               listLayout.distributionsRegion.show(distributionsListView);
             });
 
-            listPanel.on("distribution:new", function() {
-              require(["apps/distributions/new/new_view", "entities/distribution"], function(NewView) {
-                var distribution = CDSCeunes.request("distribution:entity:new");
-                Q.all(CDSCeunes.request("distribution:entities")).then(function(distributions) {
-                  var newView = new NewView.Distribution({
-                    model: distribution
-                  });
-
-                  CDSCeunes.regions.dialog.show(newView);
-
-                  newView.on("distribution:form:submit", function(data) {
-                    if (distribution.save(data)) {
-                      distributions.add(distribution);
-                      newView.trigger("dialog:close");
-                    }
-                  });
-
-                });
-              });
-            });
             distributionsListView.on("childview:distribution:edit", function(childview, args) {
               require(["apps/distributions/edit/edit_view"], function(EditView) {
                 var model = args.model;
