@@ -1,15 +1,21 @@
 define(["app","q"], function(CDSCeunes, Q) {
   CDSCeunes.module("Entities", function(Entities, CDSCeunes, Backbone, Marionette, $, _) {
     Entities.Distribution = Backbone.Model.extend({
-      urlRoot: "/api/v1/distributions",
+      urlRoot: "/api/v1/scenarios",
 
       defaults: {
 
       },
+
+      initialize: function() {
+        this.bind("change", function() {
+          this.save();
+        });
+      }
     });
 
     Entities.DistributionCollection = Backbone.Collection.extend({
-      url: "/api/v1/distributions",
+      url: "/api/v1/scenarios",
       model: Entities.Distribution
     });
 
@@ -28,7 +34,7 @@ define(["app","q"], function(CDSCeunes, Q) {
         });
       },
       getDistributionsEntities: function() {
-        var distributions = new Entities.DistributionCollection();
+        var distributions = new Entities.DistributionsCollection();
         return Q.promise(function(resolve) {
           distributions.fetch({
             success: function(data) {

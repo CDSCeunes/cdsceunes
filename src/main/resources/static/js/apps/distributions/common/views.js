@@ -12,9 +12,18 @@ define(["app", "handlebars", "text!apps/distributions/common/templates/form.hbs"
           "click @ui.submitData": "submitData"
         },
 
+        serializeData: function() {
+          return {
+            model: this.model.toJSON(),
+            teachers: this.options.teachers.toJSON(),
+            disciplines: this.option.disciplines.toJSON()
+          };
+        },
+
         submitData: function(e) {
           e.preventDefault();
           var data = Backbone.Syphon.serialize(this);
+          console.log(data);
           this.trigger("distribution:form:submit", data);
         }
       });

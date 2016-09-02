@@ -17,13 +17,23 @@ define(["app", "handlebars", "text!apps/distributions/list/templates/layout.hbs"
         template: Handlebars.compile(panelTpl),
 
         triggers: {
-          "click button.js-new-distribution": "distribution:new"
+          //"click button.js-new-distribution": "distribution:new"
         }
       });
 
       View.Distribution = Marionette.ItemView.extend({
         className: "row",
         template: Handlebars.compile(listItemTpl),
+        triggers: {
+          "click a.js-edit-distribution": "distribution:edit",
+          "click a.js-show-distribution": "distribution:show",
+          "click button.js-delete-distribution": "distribution:delete"
+        },
+
+        modelEvents: {
+          "change": "fieldChanged"
+        },
+
       });
 
       View.Distributions = Marionette.CompositeView.extend({

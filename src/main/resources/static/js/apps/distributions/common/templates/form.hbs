@@ -1,0 +1,33 @@
+<form>
+  <div class="row">
+    <div class="small-5 columns">
+      <label for="teacher" class="text-right middle"><strong>Professor</strong></label>
+    </div>
+    <div class="small-7 columns end">
+      <select form="distribution-form" name="teacher[id]" required>
+        {{#each teachers}}
+          <option value="{{id}}">{{name}}</option>
+        {{/each}}
+      </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="small-5 columns">
+      <label for="discipline" class="text-right middle"><strong>Disciplina</strong></label>
+    </div>
+    <div class="small-7 columns end">
+      <select form="distribution-form" name="discipline[id]" required>
+        {{#each disciplines}}
+          <option value="{{id}}">{{name}}</option>
+        {{/each}}
+      </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="medium-offset-5 small-5 columns">
+      <button class="small hollow button js-submit-discipline">Enviar</button>
+    </div>
+  </div>
+</form>

@@ -10,12 +10,12 @@ define(["app"], function(CDSCeunes) {
     var executeAction = function(action, arg) {
       CDSCeunes.startSubApp("DisciplineApp");
       action(arg);
-    }
+    };
 
     var API = {
       listDisciplines: function(criterion) {
         require(["apps/disciplines/list/list_controller"], function(ListController) {
-          executeAction(ListController.listDisciplines, criterion)
+          executeAction(ListController.listDisciplines, criterion);
         });
       }
     };
@@ -31,7 +31,7 @@ define(["app"], function(CDSCeunes) {
       } else {
         CDSCeunes.navigate("disciplines");
       }
-    })
+    });
 
     CDSCeunes.Routers.on("start", function() {
       console.log("Disciplines router");
