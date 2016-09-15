@@ -1,25 +1,10 @@
-define(["app", "handlebars", "text!apps/distributions/list/templates/layout.hbs", "text!apps/distributions/list/templates/panel.hbs",
-  "text!apps/distributions/list/templates/list.hbs", "text!apps/distributions/list/templates/list_item.hbs"],
+define(["app",
+        "handlebars",
+        "text!apps/distributions/list/templates/list.hbs",
+        "text!apps/distributions/list/templates/list_item.hbs"],
   function(CDSCeunes, Handlebars, layoutTpl, panelTpl, listTpl, listItemTpl) {
     CDSCeunes.module("DistributionsApp.List.View", function(View, CDSCeunes, Backbone, Marionette, $, _) {
       var LockEdit = false;
-
-      View.Layout = Marionette.LayoutView.extend({
-        template: Handlebars.compile(layoutTpl),
-
-        regions: {
-          panelRegion: "#panel-region",
-          distributionsRegion: "#distributions-region"
-        }
-      });
-
-      View.Panel = Marionette.ItemView.extend({
-        template: Handlebars.compile(panelTpl),
-
-        triggers: {
-          //"click button.js-new-distribution": "distribution:new"
-        }
-      });
 
       View.Distribution = Marionette.ItemView.extend({
         className: "row",
@@ -42,5 +27,6 @@ define(["app", "handlebars", "text!apps/distributions/list/templates/layout.hbs"
         childViewContainer: "#list-item-distribution",
       });
   });
+            console.log("-1");
   return CDSCeunes.DistributionsApp.List.View;
 });

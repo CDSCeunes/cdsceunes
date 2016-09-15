@@ -4,6 +4,7 @@ define(["app"], function(CDSCeunes) {
       DistributionsAppRouter.Router = Marionette.AppRouter.extend({
         appRoutes: {
           "distributions": "listDistributions",
+          "distributions/:id": "showScenario",
           "distributions(/filter/criterion::criterion)" : "listDistributions",
           "distributions/new": "newDistribution"
         }
@@ -24,6 +25,11 @@ define(["app"], function(CDSCeunes) {
         newDistribution: function() {
           require(["apps/distributions/new/new_controller"], function(NewController) {
             executeAction(NewController.newDistribution);
+          });
+        },
+        showScenario: function(id) {
+          require(["apps/distributions/show/show_controller"], function(ShowController) {
+            executeAction(ShowController.showDistribution);
           });
         }
       };

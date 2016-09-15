@@ -34,7 +34,7 @@ define(["app","q"], function(CDSCeunes, Q) {
         });
       },
       getDistributionsEntities: function() {
-        var distributions = new Entities.DistributionsCollection();
+        var distributions = new Entities.DistributionCollection();
         return Q.promise(function(resolve) {
           distributions.fetch({
             success: function(data) {

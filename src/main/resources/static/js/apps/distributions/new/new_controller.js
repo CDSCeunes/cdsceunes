@@ -1,6 +1,6 @@
 define(["app", "apps/distributions/new/new_view", "q"], function(CDSCeunes, View, Q) {
-  CDSCeunes.module("DistributionsApp.List", function(NewDistribution, CDSCeunes, Backbone, Marionette, $, _) {
-    NewDistribution.new = {
+  CDSCeunes.module("DistributionsApp.NewDistribution", function(NewDistribution, CDSCeunes, Backbone, Marionette, $, _) {
+    NewDistribution.Controller = {
       newDistribution: function() {
         require(["entities/common", "entities/teacher", "entities/discipline", "entities/distribution"], function() {
           var listLayout = new View.Layout();
@@ -41,8 +41,7 @@ define(["app", "apps/distributions/new/new_view", "q"], function(CDSCeunes, View
                   });
                 });
               });
-
-          });))
+          }));
         });
       }
     };
