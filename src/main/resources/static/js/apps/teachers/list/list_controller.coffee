@@ -1,13 +1,13 @@
 define [
-  'app'
-  'apps/teachers/list/list_view'
+  'cs!app'
+  'cs!apps/teachers/list/list_view'
   'q'
 ], (CDSCeunes, View, Q) ->
   CDSCeunes.module 'TeachersApp.List', (List, CDSCeunes, Backbone, Marionette, $, _) ->
     List.Controller = listTeachers: (criterion) ->
       require [
-        'entities/common'
-        'entities/teacher'
+        'cs!entities/common'
+        'cs!entities/teacher'
       ], (FilteredCollection) ->
         listLayout = new (View.Layout)
         listPanel = new (View.Panel)
@@ -34,9 +34,9 @@ define [
             console.log token
             console.log $('meta[name=_csrf_header]').attr('content')
             require [
-              'apps/teachers/new/new_view'
-              'entities/department'
-              'entities/teacher'
+              'cs!apps/teachers/new/new_view'
+              'cs!entities/department'
+              'cs!entities/teacher'
             ], (NewView) ->
               teacher = CDSCeunes.request('teacher:entity:new')
               Q.all(CDSCeunes.request('department:entities')).then (departments) ->
@@ -65,8 +65,8 @@ define [
             return
           teachersListView.on 'childview:teacher:edit', (childview, args) ->
             require [
-              'apps/teachers/edit/edit_view'
-              'entities/department'
+              'cs!apps/teachers/edit/edit_view'
+              'cs!entities/department'
             ], (EditView) ->
               model = args.model
               Q.all(CDSCeunes.request('department:entities')).then (departments) ->

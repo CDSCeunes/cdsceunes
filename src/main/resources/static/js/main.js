@@ -15,7 +15,9 @@ requirejs.config({
     localstorage: "vendor/backbone.localStorage",
     marionette: "vendor/backbone.marionette",
     text: "vendor/text",
-    foundation: "vendor/foundation.min"
+    foundation: "vendor/foundation.min",
+    "coffee-script": "vendor/coffee-script",
+    cs: "vendor/cs"
   },
 
   shim: {
@@ -42,20 +44,20 @@ requirejs.config({
   packages: [
     {
       name: 'cs',
-      location: 'require-cs',
+      location: '.',
       main: 'vendor/cs'
     },
     {
       name: 'coffee-script',
-      location: 'coffeescript',
+      location: '.',
       main: 'vendor/coffee-script'
     }
   ]
 });
 
 
-require(["app", "apps/login/login_app", "apps/teachers/teachers_app", "apps/preferences/preferences_app",
-  "apps/departments/departments_app", "apps/disciplines/disciplines_app",
-  "apps/positions/positions_app", "apps/distributions/distributions_app"], function(CDSCeunes){
+require(["cs!app", "cs!apps/login/login_app", "cs!apps/teachers/teachers_app", "cs!apps/preferences/preferences_app",
+  "cs!apps/departments/departments_app", "cs!apps/disciplines/disciplines_app",
+  "cs!apps/positions/positions_app", "cs!apps/distributions/distributions_app"], function(CDSCeunes){
     CDSCeunes.start();
 });

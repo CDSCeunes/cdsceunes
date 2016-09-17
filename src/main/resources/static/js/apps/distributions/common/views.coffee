@@ -1,5 +1,5 @@
 define [
-  'app'
+  'cs!app'
   'handlebars'
   'text!apps/distributions/common/templates/form.hbs'
   'text!apps/distributions/common/templates/layout.hbs'

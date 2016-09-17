@@ -1,6 +1,6 @@
 define [
-  'app'
-  'apps/disciplines/common/views'
+  'cs!app'
+  'cs!apps/disciplines/common/views'
 ], (CDSCeunes, CommonViews) ->
   CDSCeunes.module 'DisciplinesApp.New.View', (View, CDSCeunes, Backbone, Marionette, $, _) ->
     View.Discipline = CommonViews.Form.extend(

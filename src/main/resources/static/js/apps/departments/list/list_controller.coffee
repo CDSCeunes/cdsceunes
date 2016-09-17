@@ -1,11 +1,11 @@
 define [
-  'app'
-  'apps/departments/list/list_view'
+  'cs!app'
+  'cs!apps/departments/list/list_view'
   'q'
 ], (CDSCeunes, View, Q) ->
   CDSCeunes.module 'DepartmentsApp.List', (List, CDSCeunes, Backbone, Marionette, $, _) ->
     List.Controller = listDepartments: (criterion) ->
-      require [ 'entities/department' ], ->
+      require [ 'cs!entities/department' ], ->
         listLayout = new (View.Layout)
         listPanel = new (View.Panel)
         departmentsListView = undefined
@@ -19,8 +19,8 @@ define [
             return
           listPanel.on 'department:new', ->
             require [
-              'apps/departments/new/new_view'
-              'entities/department'
+              'cs!apps/departments/new/new_view'
+              'cs!entities/department'
             ], (NewView) ->
               department = CDSCeunes.request('department:entity:new')
               Q.all(CDSCeunes.request('department:entities')).then (departments) ->
@@ -35,7 +35,7 @@ define [
               return
             return
           departmentsListView.on 'childview:department:edit', (childview, args) ->
-            require [ 'apps/departments/edit/edit_view' ], (EditView) ->
+            require [ 'cs!apps/departments/edit/edit_view' ], (EditView) ->
               model = args.model
               Q.all(CDSCeunes.request('department:entities')).then (departments) ->
                 editView = new (EditView.Department)(model: model)

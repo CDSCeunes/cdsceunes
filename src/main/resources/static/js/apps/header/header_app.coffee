@@ -1,6 +1,6 @@
 define [
-  'app'
-  'apps/header/list/list_controller'
+  'cs!app'
+  'cs!apps/header/list/list_controller'
 ], (CDSCeunes, HeaderController) ->
   CDSCeunes.module 'HeaderApp', (Header, CDSCeunes, Backbone, Marionette, $, _) ->
     API = listHeader: ->

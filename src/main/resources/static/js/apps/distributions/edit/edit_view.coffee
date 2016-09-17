@@ -1,6 +1,6 @@
 define [
-  'app'
-  'apps/distributions/common/views'
+  'cs!app'
+  'cs!apps/distributions/common/views'
 ], (CDSCeunes, CommonViews) ->
   CDSCeunes.module 'DistributionsApp.Edit.View', (View, CDSCeunes, Backbone, Marionette, $, _) ->
     View.Distribution = CommonViews.Form.extend(

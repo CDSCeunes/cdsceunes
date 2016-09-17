@@ -1,4 +1,4 @@
-define [ 'app' ], (CDSCeunes) ->
+define [ 'cs!app' ], (CDSCeunes) ->
   CDSCeunes.module 'Routers.TeachersApp', (TeachersAppRouter, CDSCeunes, Backbone, Marionette, $, _) ->
     TeachersAppRouter.Router = Marionette.AppRouter.extend(appRoutes: 'teachers(/filter/criterion::criterion)': 'listTeachers')
 
@@ -8,7 +8,7 @@ define [ 'app' ], (CDSCeunes) ->
       return
 
     API = listTeachers: (criterion) ->
-      require [ 'apps/teachers/list/list_controller' ], (ListController) ->
+      require [ 'cs!apps/teachers/list/list_controller' ], (ListController) ->
         executeAction ListController.listTeachers, criterion
         return
       return

@@ -1,6 +1,6 @@
 define [
-  'app'
-  'apps/teachers/common/views'
+  'cs!app'
+  'cs!apps/teachers/common/views'
 ], (CDSCeunes, CommonViews) ->
   CDSCeunes.module 'TeachersApp.Edit.View', (View, CDSCeunes, Backbone, Marionette, $, _) ->
     View.Teacher = CommonViews.Form.extend(

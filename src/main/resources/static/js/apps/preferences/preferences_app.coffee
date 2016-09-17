@@ -1,4 +1,4 @@
-define [ 'app' ], (CDSCeunes) ->
+define [ 'cs!app' ], (CDSCeunes) ->
   CDSCeunes.module 'Routers.PreferencesApp', (PreferencesAppRouter, CDSCeunes, Backbone, Marionette, $, _) ->
     PreferencesAppRouter.Router = Marionette.AppRouter.extend(appRoutes: 'preferences': 'listPreferences')
 
@@ -8,7 +8,7 @@ define [ 'app' ], (CDSCeunes) ->
       return
 
     API = listPreferences: ->
-      require [ 'apps/preferences/list/list_controller' ], (ListController) ->
+      require [ 'cs!apps/preferences/list/list_controller' ], (ListController) ->
         executeAction ListController.listPreferences, undefined
         return
       return

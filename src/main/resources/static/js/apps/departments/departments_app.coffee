@@ -1,4 +1,4 @@
-define [ 'app' ], (CDSCeunes) ->
+define [ 'cs!app' ], (CDSCeunes) ->
   CDSCeunes.module 'Routers.DepartmentsApp', (DepartmentsAppRouter, CDSCeunes, Backbone, Marionette, $, _) ->
     DepartmentsAppRouter.Router = Marionette.AppRouter.extend(appRoutes:
       'departments': 'listDepartments'
@@ -10,7 +10,7 @@ define [ 'app' ], (CDSCeunes) ->
       return
 
     API = listDepartments: (criterion) ->
-      require [ 'apps/departments/list/list_controller' ], (ListController) ->
+      require [ 'cs!apps/departments/list/list_controller' ], (ListController) ->
         executeAction ListController.listDepartments, criterion
         return
       return

@@ -1,4 +1,4 @@
-define [ 'app' ], (CDSCeunes) ->
+define [ 'cs!app' ], (CDSCeunes) ->
   CDSCeunes.module 'Routers.DistributionsApp', (DistributionsAppRouter, CDSCeunes, Backbone, Marionette, $, _) ->
     DistributionsAppRouter.Router = Marionette.AppRouter.extend(appRoutes:
       'distributions': 'listDistributions'
@@ -11,19 +11,19 @@ define [ 'app' ], (CDSCeunes) ->
       action arg
       return
 
-    API = 
+    API =
       listDistributions: (criterion) ->
-        require [ 'apps/distributions/list/list_controller' ], (ListController) ->
+        require [ 'cs!apps/distributions/list/list_controller' ], (ListController) ->
           executeAction ListController.listDistributions, criterion
           return
         return
       newDistribution: ->
-        require [ 'apps/distributions/new/new_controller' ], (NewController) ->
+        require [ 'cs!apps/distributions/new/new_controller' ], (NewController) ->
           executeAction NewController.newDistribution
           return
         return
       showScenario: (id) ->
-        require [ 'apps/distributions/show/show_controller' ], (ShowController) ->
+        require [ 'cs!apps/distributions/show/show_controller' ], (ShowController) ->
           executeAction ShowController.showDistribution
           return
         return

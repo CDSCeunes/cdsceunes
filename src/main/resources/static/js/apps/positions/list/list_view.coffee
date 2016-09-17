@@ -1,5 +1,5 @@
 define [
-  'app'
+  'cs!app'
   'handlebars'
   'text!apps/positions/list/templates/layout.hbs'
   'text!apps/positions/list/templates/panel.hbs'

@@ -1,6 +1,6 @@
 define [
-  'app'
-  'apps/disciplines/list/list_view'
+  'cs!app'
+  'cs!apps/disciplines/list/list_view'
   'q'
 ], (CDSCeunes, View, Q) ->
   CDSCeunes.module 'DisciplinesApp.List', (List, CDSCeunes, Backbone, Marionette, $, _) ->
@@ -19,8 +19,8 @@ define [
             return
           listPanel.on 'discipline:new', ->
             require [
-              'apps/disciplines/new/new_view'
-              'entities/discipline'
+              'cs!apps/disciplines/new/new_view'
+              'cs!entities/discipline'
             ], (NewView) ->
               discipline = CDSCeunes.request('discipline:entity:new')
               Q.all(CDSCeunes.request('discipline:entities')).then (disciplines) ->
@@ -35,7 +35,7 @@ define [
               return
             return
           disciplinesListView.on 'childview:discipline:edit', (childview, args) ->
-            require [ 'apps/disciplines/edit/edit_view' ], (EditView) ->
+            require [ 'cs!apps/disciplines/edit/edit_view' ], (EditView) ->
               model = args.model
               Q.all(CDSCeunes.request('discipline:entities')).then (disciplines) ->
                 editView = new (EditView.Discipline)(model: model)

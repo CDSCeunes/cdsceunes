@@ -1,4 +1,4 @@
-define [ 'app' ], (CDSCeunes) ->
+define [ 'cs!app' ], (CDSCeunes) ->
   CDSCeunes.module 'Routers.PositionsApp', (PositionsAppRouter, CDSCeunes, Backbone, Marionette, $, _) ->
     PositionsAppRouter.Router = Marionette.AppRouter.extend(appRoutes:
       'positions': 'listPositions'
@@ -10,7 +10,7 @@ define [ 'app' ], (CDSCeunes) ->
       return
 
     API = listPositions: (criterion) ->
-      require [ 'apps/positions/list/list_controller' ], (ListController) ->
+      require [ 'cs!apps/positions/list/list_controller' ], (ListController) ->
         executeAction ListController.listPositions, criterion
         return
       return

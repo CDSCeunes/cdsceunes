@@ -1,7 +1,7 @@
 define [
-  'app'
-  'apps/distributions/common/views'
-  'apps/distributions/list/list_view'
+  'cs!app'
+  'cs!apps/distributions/common/views'
+  'cs!apps/distributions/list/list_view'
   'q'
 ], (CDSCeunes, CommonView, View, Q) ->
   CDSCeunes.module 'DistributionsApp.List', (List, CDSCeunes, Backbone, Marionette, $, _) ->
@@ -24,7 +24,7 @@ define [
             console.log '4'
             return
           distributionsListView.on 'childview:distribution:edit', (childview, args) ->
-            require [ 'apps/distributions/edit/edit_view' ], (EditView) ->
+            require [ 'cs!apps/distributions/edit/edit_view' ], (EditView) ->
               model = args.model
               Q.all(CDSCeunes.request('distribution:entities')).then (distributions) ->
                 editView = new (EditView.Distribution)(model: model)

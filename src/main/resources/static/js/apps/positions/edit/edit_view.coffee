@@ -1,6 +1,6 @@
 define [
-  'app'
-  'apps/positions/common/views'
+  'cs!app'
+  'cs!apps/positions/common/views'
 ], (CDSCeunes, CommonViews) ->
   CDSCeunes.module 'PositionsApp.Edit.View', (View, CDSCeunes, Backbone, Marionette, $, _) ->
     View.Positions = CommonViews.Form.extend(

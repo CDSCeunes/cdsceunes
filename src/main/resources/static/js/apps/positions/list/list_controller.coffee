@@ -1,11 +1,11 @@
 define [
-  'app'
-  'apps/positions/list/list_view'
+  'cs!app'
+  'cs!apps/positions/list/list_view'
   'q'
 ], (CDSCeunes, View, Q) ->
   CDSCeunes.module 'PositionsApp.List', (List, CDSCeunes, Backbone, Marionette, $, _) ->
     List.Controller = listPositions: (criterion) ->
-      require [ 'entities/position' ], ->
+      require [ 'cs!entities/position' ], ->
         listLayout = new (View.Layout)
         listPanel = new (View.Panel)
         positionsListView = undefined
@@ -19,8 +19,8 @@ define [
             return
           listPanel.on 'position:new', ->
             require [
-              'apps/positions/new/new_view'
-              'entities/position'
+              'cs!apps/positions/new/new_view'
+              'cs!entities/position'
             ], (NewView) ->
               position = CDSCeunes.request('position:entity:new')
               Q.all(CDSCeunes.request('position:entities')).then (positions) ->
@@ -35,7 +35,7 @@ define [
               return
             return
           positionsListView.on 'childview:position:edit', (childview, args) ->
-            require [ 'apps/positions/edit/edit_view' ], (EditView) ->
+            require [ 'cs!apps/positions/edit/edit_view' ], (EditView) ->
               model = args.model
               Q.all(CDSCeunes.request('position:entities')).then (positions) ->
                 editView = new (EditView.Position)(model: model)

@@ -1,4 +1,4 @@
-define [ 'app' ], (CDSCeunes) ->
+define [ 'cs!app' ], (CDSCeunes) ->
   CDSCeunes.module 'Routers.DisciplinesApp', (DisciplinesAppRouter, CDSCeunes, Backbone, Marionette, $, _) ->
     DisciplinesAppRouter.Router = Marionette.AppRouter.extend(appRoutes:
       'disciplines': 'listDisciplines'
@@ -10,7 +10,7 @@ define [ 'app' ], (CDSCeunes) ->
       return
 
     API = listDisciplines: (criterion) ->
-      require [ 'apps/disciplines/list/list_controller' ], (ListController) ->
+      require [ 'cs!apps/disciplines/list/list_controller' ], (ListController) ->
         executeAction ListController.listDisciplines, criterion
         return
       return

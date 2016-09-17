@@ -1,15 +1,15 @@
 define [
-  'app'
-  'apps/distributions/new/new_view'
+  'cs!app'
+  'cs!apps/distributions/new/new_view'
   'q'
 ], (CDSCeunes, View, Q) ->
   CDSCeunes.module 'DistributionsApp.NewDistribution', (NewDistribution, CDSCeunes, Backbone, Marionette, $, _) ->
     NewDistribution.Controller = newDistribution: ->
       require [
-        'entities/common'
-        'entities/teacher'
-        'entities/discipline'
-        'entities/distribution'
+        'cs!entities/common'
+        'cs!entities/teacher'
+        'cs!entities/discipline'
+        'cs!entities/distribution'
       ], ->
         listLayout = new (View.Layout)
         listPanel = new (View.Panel)
@@ -20,10 +20,10 @@ define [
           disciplinesListView = new (View.Disciplines)(collection: discipline)
           listPanel.on 'distribution', ->
             require [
-              'apps/distributions/new/new_view'
-              'entities/distribution'
-              'entities/teacher'
-              'entities/discipline'
+              'cs!apps/distributions/new/new_view'
+              'cs!entities/distribution'
+              'cs!entities/teacher'
+              'cs!entities/discipline'
             ], (NewView) ->
               distribution = CDSCeunes.request('distribution:entity:new')
               Q.all(CDSCeunes.request('teacher:entities', 'discipline:entities')).then (teachers, disciplines) ->

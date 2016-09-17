@@ -1,6 +1,6 @@
 define [
-  'app'
-  'apps/preferences/list/list_view'
+  'cs!app'
+  'cs!apps/preferences/list/list_view'
   'q'
 ], (CDSCeunes, View, Q) ->
   CDSCeunes.module 'PreferencesApp.List', (List, CDSCeunes, Backbone, Marionette, $, _) ->

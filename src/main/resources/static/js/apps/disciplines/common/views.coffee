@@ -1,5 +1,5 @@
 define [
-  'app'
+  'cs!app'
   'handlebars'
   'text!apps/disciplines/common/templates/form.hbs'
   'backbone.syphon'
