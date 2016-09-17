@@ -38,7 +38,19 @@ requirejs.config({
     foundation: {
       dep: ["jquery"]
     }
-  }
+  },
+  packages: [
+    {
+      name: 'cs',
+      location: 'require-cs',
+      main: 'vendor/cs'
+    },
+    {
+      name: 'coffee-script',
+      location: 'coffeescript',
+      main: 'vendor/coffee-script'
+    }
+  ]
 });
 
 
