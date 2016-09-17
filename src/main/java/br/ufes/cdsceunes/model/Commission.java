@@ -1,8 +1,9 @@
 package br.ufes.cdsceunes.model;
 
-import org.joda.time.LocalDate;
+import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,6 +25,7 @@ public class Commission extends AbstractModel {
 
 	private int maxNumber;
 
+	@Column(columnDefinition="DATE")
 	private LocalDate creationDate;
 
 	private String scope;

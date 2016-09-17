@@ -1,8 +1,10 @@
 package br.ufes.cdsceunes.model;
 
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,7 +16,6 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.validator.constraints.NotBlank;
-import org.joda.time.LocalDate;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -39,14 +40,20 @@ public class Teacher extends AbstractModel {
 	
 	@OneToOne
 	private UserDetails details;
+	
+	@OneToMany(mappedBy="teacher")
+	private List<OfferedClass> classes;
 
 	// @Temporal(value = TemporalType.DATE)
+	@Column(columnDefinition="DATE")
 	private LocalDate admissionDate;
 
 	// @Temporal(value = TemporalType.DATE)
+	@Column(columnDefinition="DATE")
 	private LocalDate returnFromLastRemoval;
 
 	// @Temporal(value = TemporalType.DATE)
+	@Column(columnDefinition="DATE")
 	private LocalDate returnFromCapacitacion;
 
 	@OneToMany(mappedBy = "teacher")
