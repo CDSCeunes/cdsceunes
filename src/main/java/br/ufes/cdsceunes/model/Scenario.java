@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -19,10 +21,14 @@ public class Scenario extends AbstractModel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private String semester;
+	@ManyToOne
+	private Semester semester;
 
 	@OneToMany(mappedBy = "scenario")
 	private List<DistributionResult> distribution;
+	
+	@ManyToMany(mappedBy="scenarios")
+	private List<Semester> semesters;
 
 	@Column(nullable=false)
 	boolean activated;
@@ -53,11 +59,11 @@ public class Scenario extends AbstractModel {
 		return activated;
 	}
 
-	public String getSemester() {
+	public Semester getSemester() {
 		return semester;
 	}
 
-	public void setSemester(String semester) {
+	public void setSemester(Semester semester) {
 		this.semester = semester;
 	}
 

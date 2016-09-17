@@ -2,15 +2,10 @@ package br.ufes.cdsceunes.model;
 
 import java.util.List;
 
-import javax.persistence.CollectionTable;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -33,10 +28,8 @@ public class Discipline extends AbstractModel {
 
 	private String course;
 
-	@ElementCollection(fetch = FetchType.EAGER)
-	@CollectionTable(name = "semesters", joinColumns = @JoinColumn(name = "discipline_id"))
-	@Column(name = "semester")
-	private List<String> semesters;
+	@OneToMany(mappedBy="discipline")
+	private List<OfferedClass> classes;
 
 	private Integer teoricLoad;
 
@@ -47,44 +40,9 @@ public class Discipline extends AbstractModel {
 	@OneToMany(mappedBy = "discipline")
 	private List<Preferences> preferences;
 
+	
+
 	/* Getters and Setters */
-
-	public Long getId() {
-		return id;
-	}
-
-	public Integer getTeoricLoad() {
-		return teoricLoad;
-	}
-
-	public void setTeoricLoad(int teoricLoad) {
-		this.teoricLoad = teoricLoad;
-	}
-
-	public Integer getExerciseLoad() {
-		return exerciseLoad;
-	}
-
-	public void setExerciseLoad(int exerciseLoad) {
-		this.exerciseLoad = exerciseLoad;
-	}
-
-	public Integer getLabLoad() {
-		return labLoad;
-	}
-
-	public void setLabLoad(int labLoad) {
-		this.labLoad = labLoad;
-	}
-
-	@CollectionTable(name = "semesters", joinColumns = @JoinColumn(name = "discipline_id"))
-	public List<String> getSemesters() {
-		return semesters;
-	}
-
-	public void setSemesters(List<String> semesters) {
-		this.semesters = semesters;
-	}
 
 	public String getName() {
 		return name;
@@ -102,12 +60,49 @@ public class Discipline extends AbstractModel {
 		this.course = course;
 	}
 
-	public void setPreferences(List<Preferences> prefs) {
-		this.preferences = prefs;
+	public List<OfferedClass> getClasses() {
+		return classes;
+	}
+
+	public void setClasses(List<OfferedClass> classes) {
+		this.classes = classes;
+	}
+
+	public Integer getTeoricLoad() {
+		return teoricLoad;
+	}
+
+	public void setTeoricLoad(Integer teoricLoad) {
+		this.teoricLoad = teoricLoad;
+	}
+
+	public Integer getExerciseLoad() {
+		return exerciseLoad;
+	}
+
+	public void setExerciseLoad(Integer exerciseLoad) {
+		this.exerciseLoad = exerciseLoad;
+	}
+
+	public Integer getLabLoad() {
+		return labLoad;
+	}
+
+	public void setLabLoad(Integer labLoad) {
+		this.labLoad = labLoad;
 	}
 
 	public List<Preferences> getPreferences() {
 		return preferences;
 	}
+
+	public void setPreferences(List<Preferences> preferences) {
+		this.preferences = preferences;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
 
 }

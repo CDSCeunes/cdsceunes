@@ -5,7 +5,7 @@ define [
 ], (CDSCeunes, View, Q) ->
   CDSCeunes.module 'DisciplinesApp.List', (List, CDSCeunes, Backbone, Marionette, $, _) ->
     List.Controller = listDisciplines: (criterion) ->
-      require [ 'entities/discipline' ], ->
+      require [ 'cs!entities/discipline' ], ->
         listLayout = new (View.Layout)
         listPanel = new (View.Panel)
         disciplinesListView = undefined
