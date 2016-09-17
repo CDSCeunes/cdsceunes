@@ -9,6 +9,7 @@ define [
         listLayout = new (View.Layout)
         listPanel = new (View.Panel)
         disciplinesListView = undefined
+        
         Q.all(CDSCeunes.request('discipline:entities')).then (disciplines) ->
           disciplinesListView = new (View.Disciplines)(collection: disciplines)
           if criterion

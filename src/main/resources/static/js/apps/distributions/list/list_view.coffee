@@ -3,7 +3,7 @@ define [
   'handlebars'
   'text!apps/distributions/list/templates/list.hbs'
   'text!apps/distributions/list/templates/list_item.hbs'
-], (CDSCeunes, Handlebars, layoutTpl, panelTpl, listTpl, listItemTpl) ->
+], (CDSCeunes, Handlebars, listTpl, listItemTpl) ->
   CDSCeunes.module 'DistributionsApp.List.View', (View, CDSCeunes, Backbone, Marionette, $, _) ->
     LockEdit = false
     View.Distribution = Marionette.ItemView.extend(
@@ -19,5 +19,4 @@ define [
       childView: View.Distribution
       childViewContainer: '#list-item-distribution')
     return
-  console.log '-1'
   CDSCeunes.DistributionsApp.List.View
