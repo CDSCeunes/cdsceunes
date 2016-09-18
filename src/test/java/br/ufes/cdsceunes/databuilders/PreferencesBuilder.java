@@ -9,7 +9,7 @@ public class PreferencesBuilder {
 	
 	public static Preferences createPreferences(Teacher t, Discipline d, Preference pf) {
 		Preferences p = new Preferences();
-		p.setDiscipline(d);
+		p.setOfferedClass(OfferedClassBuilder.createOffer(d));
 		p.setTeacher(t);
 		p.setValue(pf);
 		return p;

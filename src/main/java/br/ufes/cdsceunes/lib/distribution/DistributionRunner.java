@@ -25,8 +25,8 @@ public class DistributionRunner {
 		 * name. Therefore we obtain a list that can be easily processed
 		 * linearly, discipline by discipline.
 		 */
-		Comparator<Preferences> byDiscipline = (p1, p2) -> p1.getDiscipline().getName()
-				.compareTo(p2.getDiscipline().getName());
+		Comparator<Preferences> byDiscipline = (p1, p2) -> p1.getOfferedClass().getDiscipline().getName()
+				.compareTo(p2.getOfferedClass().getDiscipline().getName());
 		Comparator<Preferences> byName = (p1, p2) -> p1.getTeacher().getName().compareTo(p2.getTeacher().getName());
 
 		preferences.sort(byDiscipline.thenComparing(byName));
@@ -38,7 +38,7 @@ public class DistributionRunner {
 		 * the number of occurrences will be obtained in order to generate the
 		 * teacher's distribution.
 		 */
-		String lastDisciplineName = new String(preferences.get(0).getDiscipline().getName());
+		String lastDisciplineName = new String(preferences.get(0).getOfferedClass().getDiscipline().getName());
 
 		/*
 		 * The offset is used to keep track of the current list position when
@@ -49,7 +49,7 @@ public class DistributionRunner {
 		for (Preferences p : preferences) {
 			HelpTable table;
 			List<HelpTable> existance = tables.stream()
-					.filter((h) -> h.getDisciplineName().equals(p.getDiscipline().getName()))
+					.filter((h) -> h.getDisciplineName().equals(p.getOfferedClass().getDiscipline().getName()))
 					.collect(Collectors.toList());
 			/*
 			 * Checks the possibility that the current discipline has not
@@ -57,7 +57,7 @@ public class DistributionRunner {
 			 * equal zero.
 			 */
 			if (existance.size() == 0) {
-				table = new HelpTable(p.getDiscipline().getName());
+				table = new HelpTable(p.getOfferedClass().getDiscipline().getName());
 				tables.add(table);
 				table.setIndexOffset(offset);
 				offset = preferences.indexOf(p);
@@ -111,7 +111,7 @@ public class DistributionRunner {
 				if (!distributionCheckout.containsKey(preferences.get(displacement).getTeacher().getName())
 						|| (distributionCheckout.get(preferences.get(displacement).getTeacher().getName()) < 3)) {
 
-					distribution.setDiscipline(preferences.get(displacement).getDiscipline());
+					distribution.setDiscipline(preferences.get(displacement).getOfferedClass().getDiscipline());
 					distribution.setTeacher(preferences.get(displacement).getTeacher());
 
 					/*

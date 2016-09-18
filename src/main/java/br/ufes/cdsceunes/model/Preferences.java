@@ -29,7 +29,7 @@ public class Preferences extends AbstractModel {
 	private Teacher teacher;
 
 	@ManyToOne
-	private Discipline discipline;
+	private OfferedClass offeredClass;
 
 	public Long getId() {
 		return id;
@@ -51,12 +51,12 @@ public class Preferences extends AbstractModel {
 		this.teacher = teacher;
 	}
 
-	public Discipline getDiscipline() {
-		return discipline;
+	public OfferedClass getOfferedClass() {
+		return offeredClass;
 	}
 
-	public void setDiscipline(Discipline discipline) {
-		this.discipline = discipline;
+	public void setOfferedClass(OfferedClass offer) {
+		this.offeredClass = offer;
 	}
 
 }
