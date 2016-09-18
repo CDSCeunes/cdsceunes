@@ -1,10 +1,30 @@
 define [
   'marionette'
   'handlebars'
+  'jquery'
   'jquery-ui'
   'backbone.syphon'
-], (Marionette, Handlebars) ->
+], (Marionette, Handlebars, $) ->
   CDSCeunes = new (Marionette.Application)
+
+  API_Token =
+    setToken: (token) ->
+      localStorage.setItem 'token', token
+      return
+    verifyTokenExistance: ->
+      token = localStorage.getItem 'token'
+      return token != null
+    configureRequest: (token) ->
+      if token == undefined
+        token = localStorage.getItem 'token'
+        console.log token
+        if token == null
+          CDSCeunes.trigger 'login:home'
+          return
+      else
+        @setToken token
+      $.ajaxSetup headers: 'X-AUTH-TOKEN': token
+      return
 
   Marionette.TemplateCache::compileTemplate = (templateText) ->
     Handlebars.compile templateText
@@ -30,6 +50,9 @@ define [
     if currentApp
       currentApp.start args
     return
+
+  CDSCeunes.configureRequest = (token) ->
+    API_Token.configureRequest(token)
 
   CDSCeunes.on 'before:start', ->
     RootContainer = Marionette.LayoutView.extend(
@@ -65,16 +88,12 @@ define [
       return
 
     return
+
+
   CDSCeunes.on 'start', ->
     if Backbone.history
       Backbone.history.start()
       if CDSCeunes.getCurrentRoute() == ''
-
-        ###require(["apps/login/index/index_view"], function(View) {
-          CDSCeunes.regions.main.show(new View.Layout());
-        });
-        ###
-
         CDSCeunes.trigger 'login:home'
     return
   CDSCeunes

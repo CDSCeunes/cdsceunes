@@ -20,7 +20,8 @@ define [
           console.log status
           console.log xhr.getResponseHeader('X-AUTH-TOKEN')
           window.token = xhr.getResponseHeader('X-AUTH-TOKEN')
-          $.ajaxSetup headers: 'X-AUTH-TOKEN': window.token
+          #$.ajaxSetup headers: 'X-AUTH-TOKEN': window.token
+          CDSCeunes.configureRequest(xhr.getResponseHeader('X-AUTH-TOKEN'))
           CDSCeunes.trigger 'teachers:list'
           return
         console.log 'triggers'

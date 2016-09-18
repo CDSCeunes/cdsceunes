@@ -25,6 +25,8 @@ define [ 'cs!app' ], (CDSCeunes) ->
     CDSCeunes.Routers.on 'start', ->
       console.log 'Teachers router'
       new (TeachersAppRouter.Router)(controller: API)
+      console.log 'hue3'
+      CDSCeunes.configureRequest(undefined)
       return
     return
   CDSCeunes.TeachersAppRouter
