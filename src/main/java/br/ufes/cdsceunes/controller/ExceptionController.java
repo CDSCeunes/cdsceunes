@@ -9,7 +9,7 @@ import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.http.HttpStatus;
 
 @Controller
-public class ExceptionController extends AbstractController {
+public class ExceptionController {
 
 	@ResponseStatus(value = HttpStatus.UNAUTHORIZED, reason = "jwt token expired")
 	@ExceptionHandler(ExpiredJwtException.class)

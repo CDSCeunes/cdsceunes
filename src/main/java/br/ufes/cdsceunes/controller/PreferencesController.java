@@ -1,7 +1,5 @@
 package br.ufes.cdsceunes.controller;
 
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,20 +7,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
 import br.ufes.cdsceunes.model.Preferences;
 import br.ufes.cdsceunes.repository.PreferencesRepository;
 
 @RequestMapping("/api/v1/preferences")
 @RestController
-public class PreferencesController extends AbstractController {
+public class PreferencesController extends AbstractController<Preferences, PreferencesRepository> {
 
-	@Autowired
-	private PreferencesRepository repository;
-
-	@RequestMapping(value = "", method = RequestMethod.GET)
-	public List<Preferences> listAllPreferences() {
-		return repository.findAll();
-	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Preferences> updatePreference(@PathVariable Long id, @RequestBody Preferences preference) {

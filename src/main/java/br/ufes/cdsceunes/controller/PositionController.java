@@ -1,7 +1,5 @@
 package br.ufes.cdsceunes.controller;
 
-import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,20 +7,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
 import br.ufes.cdsceunes.model.Position;
 import br.ufes.cdsceunes.repository.PositionRepository;
 
 @RequestMapping("/api/v1/positions")
 @RestController
-public class PositionController extends AbstractController {
-
-	@Autowired
-	private PositionRepository repository;
-
-	@RequestMapping(value = "", method = RequestMethod.GET)
-	public List<Position> listAll() {
-		return repository.findAll();
-	}
+public class PositionController extends AbstractController<Position, PositionRepository> {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Position> updatePosition(@PathVariable Long id, @RequestBody Position position) {
