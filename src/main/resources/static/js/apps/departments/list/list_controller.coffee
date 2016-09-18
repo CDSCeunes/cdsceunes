@@ -9,14 +9,17 @@ define [
         listLayout = new (View.Layout)
         listPanel = new (View.Panel)
         departmentsListView = undefined
+
         Q.all(CDSCeunes.request('department:entities')).then (departments) ->
           departmentsListView = new (View.Departments)(collection: departments)
+
           if criterion
           else
           listLayout.on 'show', ->
             listLayout.panelRegion.show listPanel
             listLayout.departmentsRegion.show departmentsListView
             return
+
           listPanel.on 'department:new', ->
             require [
               'cs!apps/departments/new/new_view'
@@ -34,6 +37,7 @@ define [
                 return
               return
             return
+
           departmentsListView.on 'childview:department:edit', (childview, args) ->
             require [ 'cs!apps/departments/edit/edit_view' ], (EditView) ->
               model = args.model
@@ -48,9 +52,11 @@ define [
                 return
               return
             return
+
           departmentsListView.on 'childview:department:delete', (childview, args) ->
             args.model.destroy()
             return
+
           CDSCeunes.regions.main.show listLayout
           return
         return

@@ -13,11 +13,16 @@ define [
 
         Q.all(CDSCeunes.request('distribution:entities')).then (distributions) ->
           distributionsListView = new (View.Distributions)(collection: distributions)
+
           if criterion
           else
           listLayout.on 'show', ->
             listLayout.panelRegion.show listPanel
             listLayout.distributionsRegion.show distributionsListView
+            return
+
+          listPanel.on 'distribution:new', ->
+            CDSCeunes.trigger 'distributions:new'
             return
 
           distributionsListView.on 'childview:distribution:edit', (childview, args) ->

@@ -30,6 +30,15 @@ define [
       regions:
         panelRegion: '#panel-region'
         distributionsRegion: '#distributions-region')
-    Views.Panel = Marionette.ItemView.extend(template: Handlebars.compile(panelTpl))
+
+    Views.Panel = Marionette.ItemView.extend(
+      template: Handlebars.compile(panelTpl)
+      events:
+        'click button.js-new-distribution': 'newDistribution'
+      newDistribution: (event) ->
+        event.preventDefault
+        @triggerMethod 'distribution:new'
+        return
+      )
     return
   CDSCeunes.DistributionsApp.Common.Views

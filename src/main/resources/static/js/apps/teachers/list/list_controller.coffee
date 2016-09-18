@@ -12,6 +12,7 @@ define [
         listLayout = new (View.Layout)
         listPanel = new (View.Panel)
         teachersListView = undefined
+
         Q.all(CDSCeunes.request('teacher:entities')).then (teachers) ->
           filteredTeachers = FilteredCollection(
             collection: teachers
@@ -19,6 +20,7 @@ define [
               (teacher) ->
                 teacher.get('name').indexOf(criterion) > -1 or teacher.get('login').indexOf(criterion) > -1
           )
+
           listLayout.on 'show', ->
             listLayout.panelRegion.show listPanel
             listLayout.teachersRegion.show teachersListView
@@ -28,7 +30,9 @@ define [
             listPanel.once 'show', ->
               listPanel.triggerMethod 'set:filter:criterion', criterion
               return
+
           teachersListView = new (View.Teachers)(collection: filteredTeachers)
+
           listPanel.on 'teacher:new', ->
             console.log header
             console.log token

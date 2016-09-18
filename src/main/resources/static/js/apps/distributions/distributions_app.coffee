@@ -19,6 +19,7 @@ define [ 'cs!app' ], (CDSCeunes) ->
         return
       newDistribution: ->
         require [ 'cs!apps/distributions/new/new_controller' ], (NewController) ->
+          console.log 'nova distribuição-kun'
           executeAction NewController.newDistribution
           return
         return
@@ -27,23 +28,28 @@ define [ 'cs!app' ], (CDSCeunes) ->
           executeAction ShowController.showDistribution
           return
         return
+
     CDSCeunes.on 'distributions:list', ->
       CDSCeunes.navigate 'distributions'
       API.listDistributions()
       return
+
     CDSCeunes.on 'distributions:filter', (criterion) ->
       if criterion
         CDSCeunes.navigate 'distributions/filter/criterion:' + criterion
       else
         CDSCeunes.navigate 'distributions'
       return
+
     CDSCeunes.on 'distributions:new', ->
       CDSCeunes.navigate 'distributions/new'
       API.newDistribution()
       return
+
     CDSCeunes.Routers.on 'start', ->
       console.log 'Distributions router'
       new (DistributionsAppRouter.Router)(controller: API)
       return
+
     return
   CDSCeunes.DistributionsAppRouter

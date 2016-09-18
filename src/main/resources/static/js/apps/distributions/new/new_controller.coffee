@@ -1,47 +1,39 @@
 define [
   'cs!app'
+  'cs!apps/distributions/common/views'
   'cs!apps/distributions/new/new_view'
   'q'
-], (CDSCeunes, View, Q) ->
+], (CDSCeunes, CommonView, View, Q) ->
   CDSCeunes.module 'DistributionsApp.NewDistribution', (NewDistribution, CDSCeunes, Backbone, Marionette, $, _) ->
     NewDistribution.Controller = newDistribution: ->
-      require [
-        'cs!entities/common'
-        'cs!entities/teacher'
-        'cs!entities/discipline'
-        'cs!entities/distribution'
-      ], ->
-        listLayout = new (View.Layout)
-        listPanel = new (View.Panel)
-        teachersListView = undefined
-        disciplinesListView = undefined
-        Q.all CDSCeunes.request('discipline:entities', 'teacher:entities', 'distribution:entities').then((distributions) ->
-          teachersListView = new (View.Teachers)(collection: teacher)
-          disciplinesListView = new (View.Disciplines)(collection: discipline)
-          listPanel.on 'distribution', ->
-            require [
-              'cs!apps/distributions/new/new_view'
-              'cs!entities/distribution'
-              'cs!entities/teacher'
-              'cs!entities/discipline'
-            ], (NewView) ->
-              distribution = CDSCeunes.request('distribution:entity:new')
-              Q.all(CDSCeunes.request('teacher:entities', 'discipline:entities')).then (teachers, disciplines) ->
-                newView = new (NewView.Distribution)(
-                  model: distribution
-                  teachers: teachers
-                  disciplines: disciplines)
-                CDSCeunes.regions.dialog.show newView
-                newView.on 'distribution:form:submit', (data) ->
-                  if distribution.save(data)
-                    distributions.add distribution
-                    newView.trigger 'dialog:close'
-                  return
-                return
+      require ['cs!entities/preferences'], ->
+        listLayout = new (CommonView.Layout)
+        listPanel = new (CommonView.Panel)
+        preferencesListView = undefined
+
+        Q.all (CDSCeunes.request('preferences:entities'), CDSCeunes.request('offeredClass:entities')).then(preferences, offeredClass) ->
+          preferencesListView = new (View.Preferences)(collection: preferences)
+
+          listLayout.on 'show', ->
+            listLayout.panelRegion.show listPanel
+            listLayout.distributionsRegion.show preferencesListView
+
+            distribution = CDSCeunes.request('distribution:entity:new')
+
+            newView = new (NewView.Distribution)(
+              model: distribution
+              teachers: preferences.teacher
+              disciplines: preferences.discipline)
+
+            CDSCeunes.regions.dialog.show newView
+            newView.on 'distribution:form:submit', (data) ->
+              if distribution.save(data)
+                distributions.add distribution
               return
             return
+
+            CDSCeunes.regions.main.show listLayout
           return
-        )
         return
       return
     return
