@@ -27,8 +27,8 @@ public class PreferencesSerializer extends JsonSerializer<Preferences> {
 		// Discipline info
 
 		jgen.writeObjectFieldStart("discipline");
-		jgen.writeNumberField("id", prefs.getDiscipline().getId());
-		jgen.writeStringField("name", prefs.getDiscipline().getName());
+		jgen.writeNumberField("id", prefs.getOfferedClass().getDiscipline().getId());
+		jgen.writeStringField("name", prefs.getOfferedClass().getDiscipline().getName());
 		jgen.writeEndObject();
 
 		jgen.writeEndObject();

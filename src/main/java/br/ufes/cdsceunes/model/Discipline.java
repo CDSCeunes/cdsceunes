@@ -36,10 +36,6 @@ public class Discipline extends AbstractModel {
 	private Integer exerciseLoad;
 
 	private Integer labLoad;
-
-	@OneToMany(mappedBy = "discipline")
-	private List<Preferences> preferences;
-
 	
 
 	/* Getters and Setters */
@@ -90,14 +86,6 @@ public class Discipline extends AbstractModel {
 
 	public void setLabLoad(Integer labLoad) {
 		this.labLoad = labLoad;
-	}
-
-	public List<Preferences> getPreferences() {
-		return preferences;
-	}
-
-	public void setPreferences(List<Preferences> preferences) {
-		this.preferences = preferences;
 	}
 
 	public Long getId() {
