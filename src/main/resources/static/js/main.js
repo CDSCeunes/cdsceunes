@@ -17,7 +17,8 @@ requirejs.config({
     text: "vendor/text",
     foundation: "vendor/foundation.min",
     "coffee-script": "vendor/coffee-script",
-    cs: "vendor/cs"
+    cs: "vendor/cs",
+    lockr: "vendor/lockr"
   },
 
   shim: {
