@@ -3,6 +3,7 @@ define [
   'handlebars'
   'jquery'
   'jquery-ui'
+  'backbone'
   'backbone.syphon'
 ], (Marionette, Handlebars, $) ->
   CDSCeunes = new (Marionette.Application)
@@ -31,6 +32,8 @@ define [
 
   Backbone.Syphon.InputReaders.register 'checkbox', ($el) ->
     if $el.prop('checked') then true else false
+
+  Backbone.
 
   CDSCeunes.navigate = (route, options) ->
     options or (options = {})
