@@ -25,7 +25,7 @@ define [ 'cs!app' ], (CDSCeunes) ->
         return
       showScenario: (id) ->
         require [ 'cs!apps/distributions/show/show_controller' ], (ShowController) ->
-          executeAction ShowController.showDistribution
+          executeAction ShowController.showDistribution, id
           return
         return
 

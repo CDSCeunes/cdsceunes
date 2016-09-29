@@ -21,7 +21,7 @@ define [
             distribution = CDSCeunes.request('distribution:entity:new')
 
             newView = new (NewView.Distribution)(
-              model: distribution
+              model: distributionpp
               teachers: preferences.teacher
               disciplines: preferences.discipline)
 
@@ -34,7 +34,10 @@ define [
 
             CDSCeunes.regions.main.show listLayout
           return
+
         return
+
       return
+
     return
   CDSCeunes.DistributionsApp.NewDistribution.Controller

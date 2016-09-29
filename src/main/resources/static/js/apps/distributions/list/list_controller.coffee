@@ -6,7 +6,7 @@ define [
 ], (CDSCeunes, CommonView, View, Q) ->
   CDSCeunes.module 'DistributionsApp.List', (List, CDSCeunes, Backbone, Marionette, $, _) ->
     List.Controller = listDistributions: (criterion) ->
-      require [ 'entities/distribution' ], ->
+      require [ 'cs!entities/distribution' ], ->
         listLayout = new (CommonView.Layout)
         listPanel = new (CommonView.Panel)
         distributionsListView = undefined
