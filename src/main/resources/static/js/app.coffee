@@ -33,8 +33,6 @@ define [
   Backbone.Syphon.InputReaders.register 'checkbox', ($el) ->
     if $el.prop('checked') then true else false
 
-  Backbone.
-
   CDSCeunes.navigate = (route, options) ->
     options or (options = {})
     Backbone.history.navigate route, options
