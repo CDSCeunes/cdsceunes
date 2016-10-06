@@ -2,36 +2,24 @@ define [
   'marionette'
   'handlebars'
   'jquery'
+  'cs!utils/secure'
+  'cs!utils/error'
   'jquery-ui'
   'backbone'
   'backbone.syphon'
-], (Marionette, Handlebars, $) ->
+], (Marionette, Handlebars, $, Secure, Error) ->
   CDSCeunes = new (Marionette.Application)
-
-  API_Token =
-    setToken: (token) ->
-      localStorage.setItem 'token', token
-      return
-    verifyTokenExistance: ->
-      token = localStorage.getItem 'token'
-      return token != null
-    configureRequest: (token) ->
-      if token == undefined
-        token = localStorage.getItem 'token'
-        console.log token
-        if token == null
-          CDSCeunes.trigger 'login:home'
-          return
-      else
-        @setToken token
-      $.ajaxSetup headers: 'X-AUTH-TOKEN': token
-      return
 
   Marionette.TemplateCache::compileTemplate = (templateText) ->
     Handlebars.compile templateText
 
   Backbone.Syphon.InputReaders.register 'checkbox', ($el) ->
     if $el.prop('checked') then true else false
+
+  CDSCeunes.Secure = Secure(CDSCeunes)
+
+  Backbone.sync = Error(CDSCeunes)
+
 
   CDSCeunes.navigate = (route, options) ->
     options or (options = {})
@@ -50,10 +38,19 @@ define [
     CDSCeunes.currentApp = currentApp
     if currentApp
       currentApp.start args
+      CDSCeunes.Secure.configureRequest(undefined)
     return
 
+  CDSCeunes.deleteKey = ->
+    console.log "Removing token"
+    CDSCeunes.Secure.removeToken()
+    return
+
+
   CDSCeunes.configureRequest = (token) ->
-    API_Token.configureRequest(token)
+    #API_Token.configureRequest(token)
+    CDSCeunes.Secure.configureRequest(token)
+    return
 
   CDSCeunes.on 'before:start', ->
     RootContainer = Marionette.LayoutView.extend(
@@ -92,6 +89,8 @@ define [
 
 
   CDSCeunes.on 'start', ->
+    #CDSCeunes.Secure.removeToken
+    console.log "Application starting"
     if Backbone.history
       Backbone.history.start()
       if CDSCeunes.getCurrentRoute() == ''

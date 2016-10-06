@@ -8,25 +8,21 @@ define [
       loginView = new (View.Layout)
       loginView.on 'childview:login:home', ->
       loginView.on 'login:auth', (user, pass) ->
-        console.log 'testessss'
         $.ajax(
           type: 'POST'
           url: '/login'
-          contentType: 'application/x-www-form-urlencoded'
           data:
             username: user
-            password: pass).done (res, status, xhr) ->
-          console.log res
-          console.log status
-          console.log xhr.getResponseHeader('X-AUTH-TOKEN')
-          window.token = xhr.getResponseHeader('X-AUTH-TOKEN')
-          #$.ajaxSetup headers: 'X-AUTH-TOKEN': window.token
-          CDSCeunes.configureRequest(xhr.getResponseHeader('X-AUTH-TOKEN'))
-          CDSCeunes.trigger 'teachers:list'
-          return
-        console.log 'triggers'
-        console.log user
-        console.log pass
+            password: pass
+          success: (data, status, xhr) ->
+            CDSCeunes.configureRequest(xhr.getResponseHeader('X-AUTH-TOKEN'))
+            CDSCeunes.trigger 'teachers:list'
+            return
+          error: (xhr) ->
+            CDSCeunes.trigger 'login:home'
+            return
+        )
+
         return
       CDSCeunes.regions.main.show loginView
       return

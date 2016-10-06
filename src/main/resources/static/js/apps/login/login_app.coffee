@@ -15,6 +15,7 @@ define [ 'cs!app' ], (CDSCeunes) ->
         return
       return
     CDSCeunes.on 'login:home', ->
+      CDSCeunes.deleteKey()
       CDSCeunes.navigate 'login'
       API.loginHome()
       return
