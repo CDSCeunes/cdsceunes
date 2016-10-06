@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import br.ufes.cdsceunes.model.Semester;
 import br.ufes.cdsceunes.repository.SemesterRepository;
 
-@RequestMapping("/api/v1/semester")
+@RequestMapping("/api/v1/semesters")
 @RestController
 public class SemesterController extends AbstractController<Semester, SemesterRepository> {
 

@@ -1,10 +1,10 @@
 define [ 'cs!app' ], (CDSCeunes) ->
   CDSCeunes.module 'Routers.DistributionsApp', (DistributionsAppRouter, CDSCeunes, Backbone, Marionette, $, _) ->
-    DistributionsAppRouter.Router = Marionette.AppRouter.extend(appRoutes:
-      'distributions': 'listDistributions'
-      'distributions/:id': 'showScenario'
-      'distributions(/filter/criterion::criterion)': 'listDistributions'
-      'distributions/new': 'newDistribution')
+    DistributionsAppRouter.Router = Marionette.AppRouter.extend(
+      appRoutes:
+        'distributions': 'listDistributions'
+        'distributions/show/:year/:semester': 'showDistribution'
+    )
 
     executeAction = (action, arg) ->
       CDSCeunes.startSubApp 'DistributionApp'
@@ -19,13 +19,15 @@ define [ 'cs!app' ], (CDSCeunes) ->
         return
       newDistribution: ->
         require [ 'cs!apps/distributions/new/new_controller' ], (NewController) ->
-          console.log 'nova distribuição-kun'
           executeAction NewController.newDistribution
           return
         return
-      showScenario: (id) ->
+      showDistribution: (year, semester) ->
         require [ 'cs!apps/distributions/show/show_controller' ], (ShowController) ->
-          executeAction ShowController.showDistribution, id
+          args =
+            year: year
+            semester: semester
+          executeAction ShowController.showDistribution, args
           return
         return
 

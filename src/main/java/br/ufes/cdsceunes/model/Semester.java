@@ -8,10 +8,14 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import br.ufes.cdsceunes.util.model.SemesterPK;
+import br.ufes.cdsceunes.util.serialiazers.SemesterSerializer;
 
 @Entity
 @Table(name = "semester")
+@JsonSerialize(using = SemesterSerializer.class)
 public class Semester {
 	
 	@EmbeddedId
@@ -23,6 +27,13 @@ public class Semester {
 	@ManyToMany
 	private List<Scenario> scenarios;
 
+	public Semester() {
+		
+	}
+	
+	public Semester(String year, String semester) {
+		this.id = new SemesterPK(year, semester);
+	}
 	
 	public SemesterPK getId() {
 		return this.id;

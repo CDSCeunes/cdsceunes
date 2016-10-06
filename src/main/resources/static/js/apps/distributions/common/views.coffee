@@ -29,7 +29,7 @@ define [
       template: Handlebars.compile(layoutTpl)
       regions:
         panelRegion: '#panel-region'
-        distributionsRegion: '#distributions-region')
+        mainRegion: '#main-region')
 
     Views.Panel = Marionette.ItemView.extend(
       template: Handlebars.compile(panelTpl)

@@ -16,6 +16,22 @@ define [
   Backbone.Syphon.InputReaders.register 'checkbox', ($el) ->
     if $el.prop('checked') then true else false
 
+  Marionette.ItemView::mixinTemplateHelpers = (target) ->
+    self = this
+    templateHelpers = Marionette.getOption(self, 'templateHelpers')
+    result = {}
+    target = target or {}
+    if _.isFunction(templateHelpers)
+      templateHelpers = templateHelpers.call(self)
+      # This _.each block is what we're adding
+    _.each templateHelpers, (helper, index) ->
+      if _.isFunction(helper)
+        result[index] = helper.call(self)
+      else
+        result[index] = helper
+      return
+    _.extend target, result
+
   CDSCeunes.Secure = Secure(CDSCeunes)
 
   Backbone.sync = Error(CDSCeunes)

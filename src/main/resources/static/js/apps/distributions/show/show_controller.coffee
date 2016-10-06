@@ -1,31 +1,37 @@
 define [
   'cs!app'
   'cs!apps/distributions/common/views'
-  'cs!apps/distributions/common/show/list_view'
+  'cs!apps/distributions/show/show_views'
   'q'
 ], (CDSCeunes, CommonView, View, Q) ->
-  CDSCeunes.module 'DistributionsApp.ShowController', (Show, CDSCeunes, Backbone, Marionette, $, _) ->
-    Show.Controller = showDistribution: (id) ->
+  CDSCeunes.module 'DistributionsApp.Show', (Show, CDSCeunes, Backbone, Marionette, $, _) ->
+    Show.Controller = showDistribution: (args)->
+      year = args.year
+      semester = args.semester
 
-      require['cs!entities/distribution'], ->
-        listLayout = new (View.Layout)
-        listPanel = new (View.Panel)
-        distributionListView = undefined
+      layoutView = new (CommonView.Layout)
+      classes_views = undefined
 
-        Q.all(CDSCeunes.request('distribution:entity', id)).then(scenario) ->
-          distributionsListView = new (View.Distributions)
+      require [
+        "cs!entities/offered_class"
+      ], ->
+        Q.all( CDSCeunes.request("offered_class:entities") ).then (classes) ->
 
-          listLayout.on 'show', ->
-            listLayout.panelRegion.show listPanel
-            listLayout.distributionsRegion.show distributionListView
+          classes_views = new (View.Classes)(
+            collection: classes
+          )
+
+
+          layoutView.on 'show', ->
+            layoutView.regions.main.show(classes_views)
+            return
+
           return
-
-        CDSCeunes.regions.main.show listLayout
         return
 
       return
-
+      CDSCeunes.regions.main.show(layoutView)
     return
 
-  return
-CDSCeunes.DistributionsApp.Show.Controller
+
+  CDSCeunes.DistributionsApp.Show.Controller

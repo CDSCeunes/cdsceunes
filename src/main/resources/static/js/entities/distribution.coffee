@@ -4,7 +4,7 @@ define [
 ], (CDSCeunes, Q) ->
   CDSCeunes.module 'Entities', (Entities, CDSCeunes, Backbone, Marionette, $, _) ->
     Entities.Distribution = Backbone.Model.extend(
-      urlRoot: '/api/v1/scenarios'
+      urlRoot: '/api/v1/semesters'
       defaults: {}
       initialize: ->
         @bind 'change', ->
@@ -13,7 +13,7 @@ define [
         return
     )
     Entities.DistributionCollection = Backbone.Collection.extend(
-      url: '/api/v1/scenarios'
+      url: '/api/v1/semesters'
       model: Entities.Distribution)
     API =
       getDistributionEntity: (distributionId) ->

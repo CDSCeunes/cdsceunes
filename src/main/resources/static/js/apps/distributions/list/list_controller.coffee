@@ -6,43 +6,28 @@ define [
 ], (CDSCeunes, CommonView, View, Q) ->
   CDSCeunes.module 'DistributionsApp.List', (List, CDSCeunes, Backbone, Marionette, $, _) ->
     List.Controller = listDistributions: (criterion) ->
-      require [ 'cs!entities/distribution' ], ->
+      require [ 'cs!entities/semester' ], ->
         listLayout = new (CommonView.Layout)
         listPanel = new (CommonView.Panel)
         distributionsListView = undefined
 
-        Q.all(CDSCeunes.request('distribution:entities')).then (distributions) ->
-          distributionsListView = new (View.Distributions)(collection: distributions)
+        Q.all(CDSCeunes.request('semesters:entities')).then (semesters) ->
+          distributionsListView = new (View.Distributions)(collection: semesters)
 
           if criterion
           else
+
           listLayout.on 'show', ->
+            console.log "showme"
+            console.log distributionsListView
             listLayout.panelRegion.show listPanel
-            listLayout.distributionsRegion.show distributionsListView
+            console.log listLayout
+            listLayout.mainRegion.show distributionsListView
+            console.log 'error'
             return
 
-          listPanel.on 'distribution:new', ->
-            CDSCeunes.trigger 'distributions:new'
-            return
-
-          distributionsListView.on 'childview:distribution:edit', (childview, args) ->
-            require [ 'cs!apps/distributions/edit/edit_view' ], (EditView) ->
-              model = args.model
-              Q.all(CDSCeunes.request('distribution:entities')).then (distributions) ->
-                editView = new (EditView.Distribution)(model: model)
-                editView.on 'distribution:form:submit', (data) ->
-                  if model.save(data)
-                    childview.render()
-                    editView.trigger 'dialog:close'
-                  return
-                CDSCeunes.regions.dialog.show editView
-                return
-              return
-            return
-
-          distributionsListView.on 'childview:distribution:delete', (childview, args) ->
-            args.model.destroy()
-            return
+          distributionsListView.on 'create', ->
+            console.log 'born'
 
           CDSCeunes.regions.main.show listLayout
           return

@@ -4,40 +4,25 @@ define [
   'cs!apps/distributions/new/new_view'
   'q'
 ], (CDSCeunes, CommonView, View, Q) ->
-  CDSCeunes.module 'DistributionsApp.NewDistribution', (NewDistribution, CDSCeunes, Backbone, Marionette, $, _) ->
-    NewDistribution.Controller = newDistribution: ->
-      require ['cs!entities/preferences'], ->
-        listLayout = new (CommonView.Layout)
-        listPanel = new (CommonView.Panel)
-        preferencesListView = undefined
+  CDSCeunes.module 'DistributionsApp.New', (New, CDSCeunes, Backbone, Marionette, $, _) ->
+    New.Controller = newDistribution: ->
+      layoutView = new (CommonView.Layout)
+      panelView = new (LayoutView)
+      distributionsView = undefined
 
-        Q.all (CDSCeunes.request('preferences:entities'), CDSCeunes.request('offeredClass:entities')).then(preferences, offeredClass) ->
-          preferencesListView = new (View.Preferences)(collection: preferences)
+      require [
+        "entities/teacher"
+        "entities/offered_class"
+      ], ->
 
-          listLayout.on 'show', ->
-            listLayout.panelRegion.show listPanel
-            listLayout.distributionsRegion.show preferencesListView
-
-            distribution = CDSCeunes.request('distribution:entity:new')
-
-            newView = new (NewView.Distribution)(
-              model: distributionpp
-              teachers: preferences.teacher
-              disciplines: preferences.discipline)
-
-            CDSCeunes.regions.dialog.show newView
-            newView.on 'distribution:form:submit', (data) ->
-              if distribution.save(data)
-                distributions.add distribution
-              return
-            return
-
-            CDSCeunes.regions.main.show listLayout
+        layoutView.on 'show', ->
+          layoutView.regions.panel.show(panelView)
+          layoutView.regions.distributions.show(distributionsView)
           return
 
         return
 
+      CDSCeunes.regions.main.show(layoutView)
       return
-
     return
-  CDSCeunes.DistributionsApp.NewDistribution.Controller
+  CDSCeunes.DistributionsApp.New.Controller
