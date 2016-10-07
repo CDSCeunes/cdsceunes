@@ -43,9 +43,12 @@ define [ 'cs!app' ], (CDSCeunes) ->
         CDSCeunes.navigate 'distributions'
       return
 
-    CDSCeunes.on 'distributions:new', ->
-      CDSCeunes.navigate 'distributions/new'
-      API.newDistribution()
+    CDSCeunes.on 'distributions:show', (semester) ->
+      console.log semester
+      year = semester.year
+      sems = semester.semester
+      CDSCeunes.navigate "distributions/show/#{year}/#{sems}"
+      API.showDistribution(year,sems)
       return
 
     CDSCeunes.Routers.on 'start', ->

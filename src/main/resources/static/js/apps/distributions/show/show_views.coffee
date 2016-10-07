@@ -5,7 +5,7 @@ define [
   "text!apps/distributions/show/templates/item.hbs"
 ], (CDSCeunes, Handlebars, listLayoutTpl, itemTpl) ->
   CDSCeunes.module "DistributionsApp.Show.View", (View, CDSCeunes, Backbone, Marionette, $, _) ->
-    View.Class = Marionette.ItemView.extend(
+    View.ClassL = Marionette.ItemView.extend(
       template: Handlebars.compile(itemTpl)
       templateHelpers:
         checkTeacherExistance: (model) ->
@@ -19,7 +19,8 @@ define [
 
     View.Classes = Marionette.CollectionView.extend(
       template: Handlebars.compile(listLayoutTpl)
-      childView: View.Class
+      childView: View.ClassL
+      childViewContainer: "#list-item-distribution"
     )
 
 

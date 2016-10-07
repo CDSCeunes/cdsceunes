@@ -15,8 +15,6 @@ define [
         year2 = parseInt(s2.get('year'))
         semes1 = parseInt(s1.get('semester'))
         semes2 = parseInt(s2.get('semester'))
-        console.log "#{year1}/#{semes1}"
-        console.log "#{year2}/#{semes2}"
 
         if year1 == year2
           if semes1 > semes2

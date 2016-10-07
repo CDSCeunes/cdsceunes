@@ -9,8 +9,16 @@ define [
     View.Distribution = Marionette.ItemView.extend(
       className: 'row'
       template: Handlebars.compile(listItemTpl)
-      triggers:
-        'click a.js-show-distribution': 'distribution:show'
+      events:
+        'click a.js-show-distribution': 'distributionShow'
+      distributionShow: (e) ->
+        e.preventDefault()
+        args =
+          year: @model.get('year')
+          semester: @model.get('semester')
+        @trigger 'distribution:show', args
+        return
+
     )
 
     View.Distributions = Marionette.CollectionView.extend(

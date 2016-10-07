@@ -18,16 +18,14 @@ define [
           else
 
           listLayout.on 'show', ->
-            console.log "showme"
-            console.log distributionsListView
             listLayout.panelRegion.show listPanel
-            console.log listLayout
             listLayout.mainRegion.show distributionsListView
-            console.log 'error'
             return
 
-          distributionsListView.on 'create', ->
-            console.log 'born'
+          distributionsListView.on 'childview:distribution:show', (that, args) ->
+            CDSCeunes.trigger 'distributions:show', args
+            return
+
 
           CDSCeunes.regions.main.show listLayout
           return

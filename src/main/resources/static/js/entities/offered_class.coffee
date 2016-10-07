@@ -5,13 +5,6 @@ define [
   CDSCeunes.module 'Entities', (Entities, CDSCeunes, Backbone, Marionette, $, _) ->
     Entities.OfferedClass = Backbone.Model.extend(
       urlRoot: '/api/v1/classes'
-      defaults:
-        name: ''
-        course: ''
-        semesters: ''
-        teoricLoad: 0
-        exerciseLoad: 0
-        labLoad: 0
       initialize: ->
         @bind 'change', ->
           @save()
@@ -22,13 +15,19 @@ define [
     Entities.OfferedClassesCollection = Backbone.Collection.extend(
       url: '/api/v1/classes'
       model: Entities.OfferedClass
-      comparator: 'name')
+      comparator: 'name'
+      fetchBySemester: (args, opts) ->
+        opts = opts || {}
+        if opts.url == undefined
+          opts.url = "#{@url}/#{args.year}/#{args.semester}"
+        Backbone.Collection::fetch.call(this, opts)
+      )
 
     API =
       getClassEntity: (classId) ->
-        class = new (Entities.OfferedClass)(id: classId)
+        class_ = new (Entities.OfferedClass)(id: classId)
         Q.promise (resolve) ->
-          class.fetch
+          class_.fetch
             success: (data) ->
               resolve data
               return
@@ -37,19 +36,23 @@ define [
               return
           return
 
-      getClassEntities: ->
+      getClassesEntities: (args) ->
         classes = new (Entities.OfferedClassesCollection)
         Q.promise (resolve) ->
-          classes.fetch success: (data) ->
-            resolve data
-            return
+          classes.fetchBySemester args,
+            success: (data) ->
+              resolve data
+              return
+            error: (data) ->
+              resolve(undefined)
+              return
           return
 
-    CDSCeunes.reqres.setHandler 'offeredClass:entity', (id) ->
+    CDSCeunes.reqres.setHandler 'offered_class:entity', (id) ->
       API.getClassEntity id
-    CDSCeunes.reqres.setHandler 'offeredClass:entities', ->
-      API.getClassesEntities()
-    CDSCeunes.reqres.setHandler 'offeredClass:entity:new', ->
+    CDSCeunes.reqres.setHandler 'offered_class:entities', (args) ->
+      API.getClassesEntities(args)
+    CDSCeunes.reqres.setHandler 'offered_class:entity:new', ->
       new (Entities.OfferedClass)
   return
 return
