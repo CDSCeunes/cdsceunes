@@ -6,6 +6,7 @@ requirejs.config({
     "backbone.syphon": "vendor/backbone.syphon",
     backbone: "vendor/backbone",
     handlebars: "vendor/handlebars.amd",
+    nunjucks: "vendor/nunjucks",
     jquery: "vendor/jquery-2.2.0",
     "jquery-ui": "vendor/jquery-ui",
     json2: "vendor/json2",
@@ -56,7 +57,8 @@ requirejs.config({
 require([
   "cs!app",
   "cs!apps/routers/login_router",
-  "cs!apps/routers/teacher_router"
+  "cs!apps/routers/teacher_router",
+  "cs!apps/routers/distribution_router"
 ], function(CDSCeunes){
   CDSCeunes.start();
 });

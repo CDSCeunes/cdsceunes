@@ -1,8 +1,7 @@
 define [
   'cs!app'
   'backbone'
-  'q'
-], (CDSCeunes, Backbone, Q) ->
+], (CDSCeunes, Backbone) ->
   Entities = ->
     Teacher = Backbone.Model.extend(
       urlRoot: '/api/v1/teachers'

@@ -18,11 +18,6 @@ define [
         return
     )
 
-  CDSCeunes.on 'login:home', ->
-    CDSCeunes.navigate 'login'
-    instance.controller.login()
-    return
-
   CDSCeunes.on 'before:start', ->
     console.log 'Starting LoginRouter'
     new (Router.Login)

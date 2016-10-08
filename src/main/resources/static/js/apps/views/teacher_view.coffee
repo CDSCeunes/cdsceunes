@@ -1,26 +1,22 @@
 define [
   "cs!app"
   "marionette"
-  "text!apps/templates/teacher/layout.hbs"
-  "text!apps/templates/teacher/panel.hbs"
-  "text!apps/templates/teacher/teacher_item.hbs"
-  "text!apps/templates/teacher/teacher_list.hbs"
-], (CDSCeunes, Marionette, layoutTpl, panelTpl, teacherItemTpl, teacherListTpl) ->
+], (CDSCeunes, Marionette) ->
   View = ->
     Layout = Marionette.View.extend(
-      template: layoutTpl
+      template: 'teacher/layout.html'
       regions:
         panelRegion: '#panel-region'
         teachersRegion: '#teachers-region'
     )
 
     Panel = Marionette.View.extend(
-      template: panelTpl
+      template: 'teacher/panel.html'
       className: 'row'
     )
 
     TeacherItem = Marionette.View.extend(
-      template: teacherItemTpl
+      template: 'teacher/teacher_item.html'
       tagName: 'div'
       className: 'row'
     )
@@ -31,7 +27,7 @@ define [
     )
 
     TeacherList = Marionette.View.extend(
-      template: teacherListTpl
+      template: 'teacher/teacher_list.html'
       className: 'list-teacher'
       regions:
         body: '#list-teacher-items'

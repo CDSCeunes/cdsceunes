@@ -1,6 +1,6 @@
 define [
   'marionette'
-  'handlebars'
+  'nunjucks'
   'jquery'
   'cs!utils/secure'
   'cs!utils/error'
@@ -8,11 +8,17 @@ define [
   'jquery-ui'
   'backbone'
   'backbone.syphon'
-], (Marionette, Handlebars, $, Secure, Error, Radio) ->
+], (Marionette, nunjucks, $, Secure, Error, Radio) ->
   CDSCeunes = new (Marionette.Application)
 
-  Marionette.TemplateCache::compileTemplate = (templateText) ->
-    Handlebars.compile templateText
+  #Marionette.TemplateCache::compileTemplate = (templateText) ->
+  #  nunjucks.configure('apps/templates', autoescape: true)
+  #  nunjucks.render(templateText)
+
+  nunjucks.configure 'js/apps/templates', autoescape: true
+
+  Marionette.Renderer.render = (template, data) ->
+    nunjucks.render(template, data)
 
   Backbone.Syphon.InputReaders.register 'checkbox', ($el) ->
     if $el.prop('checked') then true else false
@@ -37,9 +43,9 @@ define [
 
   Backbone.sync = Error(CDSCeunes)
 
-  CDSCeunes.dataRequest = (trigger) ->
+  CDSCeunes.dataRequest = (trigger, args) ->
     console.log 'data req'
-    Radio.channel('data-request').request trigger
+    Radio.channel('data-request').request trigger, args
 
   CDSCeunes.oldRoute = ''
 

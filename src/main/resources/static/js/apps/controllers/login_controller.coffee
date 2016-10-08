@@ -3,7 +3,6 @@ define [
   'marionette'
   'cs!apps/views/login_view'
   'jquery'
-  'backbone.radio'
 ], (CDSCeunes, Marionette, View, $, Radio) ->
   Controller =
     Login: Marionette.Object.extend(
@@ -22,7 +21,7 @@ define [
               CDSCeunes.route 'teachers:list'
               return
             error: (xhr) ->
-              CDSCeunes.trigger 'login:home'
+              CDSCeunes.route 'login:home'
               return
           )
 

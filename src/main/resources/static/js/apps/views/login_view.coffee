@@ -1,11 +1,10 @@
 define [
   'cs!app'
   'marionette'
-  'text!apps/templates/login/layout.hbs'
-], (CDSCeunes, Marionette, layoutTpl) ->
+], (CDSCeunes, Marionette) ->
   View =
     Layout: Marionette.View.extend(
-      template: layoutTpl
+      template: 'login/layout.html'
       className: 'login-view'
       events: 'submit form': 'submit'
       submit: (e) ->
