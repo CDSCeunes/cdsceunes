@@ -1,6 +1,4 @@
-define [
-  "underscore"
-], (_) ->
+define [], ->
   Secure = (module) ->
     secure =
       token: localStorage.getItem 'token'
@@ -22,7 +20,7 @@ define [
           if token != undefined
             @setToken token
           else
-            module.trigger 'login:home'
+            module.route 'login:home'
             return
         else
           if token != undefined

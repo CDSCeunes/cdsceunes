@@ -1,11 +1,8 @@
 requirejs.config({
   baseUrl: "js/",
   paths: {
-    lodash: "vendor/lodash",
     underscore: "vendor/underscore",
-    q: "vendor/q",
-    "backbone.babysitter": "vendor/backbone.babysitter",
-    "backbone.wreqr": "vendor/backbone.wreqr",
+    "backbone.radio": "vendor/backbone.radio",
     "backbone.syphon": "vendor/backbone.syphon",
     backbone: "vendor/backbone",
     handlebars: "vendor/handlebars.amd",
@@ -18,19 +15,18 @@ requirejs.config({
     foundation: "vendor/foundation.min",
     "coffee-script": "vendor/coffee-script",
     cs: "vendor/cs",
-    lockr: "vendor/lockr"
   },
 
   shim: {
-    lodash: {
+    underscore: {
       exports: "_"
     },
     backbone: {
-      deps: ["jquery", "lodash", "json2"],
+      deps: ["jquery", "underscore", "json2"],
       exports: "Backbone"
     },
     marionette: {
-      deps: ["backbone"],
+      deps: ["backbone", "backbone.radio"],
       exports: "Marionette"
     },
     "jquery-ui": ["jquery"],
@@ -57,8 +53,10 @@ requirejs.config({
 });
 
 
-require(["cs!app", "cs!apps/login/login_app", "cs!apps/teachers/teachers_app", "cs!apps/preferences/preferences_app",
-  "cs!apps/departments/departments_app", "cs!apps/disciplines/disciplines_app",
-  "cs!apps/positions/positions_app", "cs!apps/distributions/distributions_app"], function(CDSCeunes){
-    CDSCeunes.start();
+require([
+  "cs!app",
+  "cs!apps/routers/login_router",
+  "cs!apps/routers/teacher_router"
+], function(CDSCeunes){
+  CDSCeunes.start();
 });

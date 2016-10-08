@@ -4,10 +4,11 @@ define [
   'jquery'
   'cs!utils/secure'
   'cs!utils/error'
+  'backbone.radio'
   'jquery-ui'
   'backbone'
   'backbone.syphon'
-], (Marionette, Handlebars, $, Secure, Error) ->
+], (Marionette, Handlebars, $, Secure, Error, Radio) ->
   CDSCeunes = new (Marionette.Application)
 
   Marionette.TemplateCache::compileTemplate = (templateText) ->
@@ -16,7 +17,7 @@ define [
   Backbone.Syphon.InputReaders.register 'checkbox', ($el) ->
     if $el.prop('checked') then true else false
 
-  Marionette.ItemView::mixinTemplateHelpers = (target) ->
+  Marionette.View::mixinTemplateHelpers = (target) ->
     self = this
     templateHelpers = Marionette.getOption(self, 'templateHelpers')
     result = {}
@@ -36,6 +37,19 @@ define [
 
   Backbone.sync = Error(CDSCeunes)
 
+  CDSCeunes.dataRequest = (trigger) ->
+    console.log 'data req'
+    Radio.channel('data-request').request trigger
+
+  CDSCeunes.oldRoute = ''
+
+  CDSCeunes.route = (trigger) ->
+    console.log 'triggering route'
+    if trigger != CDSCeunes.oldRoute
+      CDSCeunes.configureRequest(undefined)
+      console.log 'configuring'
+    Radio.channel('router-handler').trigger trigger
+    return
 
   CDSCeunes.navigate = (route, options) ->
     options or (options = {})
@@ -45,15 +59,15 @@ define [
   CDSCeunes.getCurrentRoute = ->
     Backbone.history.fragment
 
-  CDSCeunes.startSubApp = (appName, args) ->
-    currentApp = if appName then CDSCeunes.module(appName) else null
-    if CDSCeunes.currentApp == currentApp
+  CDSCeunes.startSubApp = (app, args) ->
+    currentApp = if app.name then app else null
+    if CDSCeunes.currentApp.name == currentApp.name
       return
-    if CDSCeunes.currentApp
-      CDSCeunes.currentApp.stop()
+    if CDSCeunes.currentApp.obj
+      CDSCeunes.currentApp.obj.stop()
     CDSCeunes.currentApp = currentApp
     if currentApp
-      currentApp.start args
+      currentApp.obj.start args
       CDSCeunes.Secure.configureRequest(undefined)
     return
 
@@ -69,7 +83,7 @@ define [
     return
 
   CDSCeunes.on 'before:start', ->
-    RootContainer = Marionette.LayoutView.extend(
+    RootContainer = Marionette.View.extend(
       el: '#app-container'
       regions:
         header: '#header-container'
@@ -78,7 +92,7 @@ define [
         footer: '#footer-container')
     CDSCeunes.regions = new RootContainer
 
-    CDSCeunes.regions.dialog.onShow = (view) ->
+    CDSCeunes.regions.getRegion('dialog').onShow = (view) ->
       self = this
 
       closeDialog = ->
@@ -109,7 +123,9 @@ define [
     console.log "Application starting"
     if Backbone.history
       Backbone.history.start()
+      console.log 'started'
       if CDSCeunes.getCurrentRoute() == ''
-        CDSCeunes.trigger 'login:home'
+
+        CDSCeunes.route 'login:home'
     return
   CDSCeunes
