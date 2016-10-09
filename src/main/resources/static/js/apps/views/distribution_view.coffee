@@ -4,11 +4,11 @@ define [
 ], (CDSCeunes, Marionette) ->
   View = ->
     Header = Marionette.View.extend(
-      template: 'distribution/header.html'
+      template: 'distribution/header'
     )
 
     DistributionItem = Marionette.View.extend(
-      template: 'distribution/distrib-item.html'
+      template: 'distribution/distrib-item'
       className: 'row'
       ui:
         button: 'a.distrib-select-teacher'
@@ -20,7 +20,7 @@ define [
     )
 
     DistributionListLayout = Marionette.View.extend(
-      template: 'distribution/distrib-list.html'
+      template: 'distribution/distrib-list'
       regions:
         body: '#distribution-list-items'
       onRender: ->
@@ -28,7 +28,7 @@ define [
     )
 
     Layout = Marionette.View.extend(
-      template: 'distribution/layout.html'
+      template: 'distribution/layout'
       regions:
         header: '#distribution-header'
         body: '#distribution-body'

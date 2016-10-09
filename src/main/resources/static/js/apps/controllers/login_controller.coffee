@@ -7,6 +7,7 @@ define [
   Controller =
     Login: Marionette.Object.extend(
       login: ->
+        CDSCeunes.deleteKey()
         loginView = new (View.Layout)
         loginView.on 'childview:login:home', ->
         loginView.on 'login:auth', (user, pass) ->

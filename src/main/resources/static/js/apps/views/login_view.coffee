@@ -4,7 +4,7 @@ define [
 ], (CDSCeunes, Marionette) ->
   View =
     Layout: Marionette.View.extend(
-      template: 'login/layout.html'
+      template: 'login/layout'
       className: 'login-view'
       events: 'submit form': 'submit'
       submit: (e) ->

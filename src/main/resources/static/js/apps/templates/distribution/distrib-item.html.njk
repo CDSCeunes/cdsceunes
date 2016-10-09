@@ -1,0 +1,13 @@
+{% macro button(teacher) %}
+  <div class="small-3 columns">
+    {% if teacher %}
+     {{ teacher.name }}
+    {% endif %}
+  </div>
+  <div class="small-3 columns">
+    <a href='#' class='button distrib-select-teacher'>Selecionar Professor</a>
+  </div>
+{% endmacro %}
+
+<div class="small-6 columns">{{ discipline.name }}</div>
+{{ button(teacher) }}

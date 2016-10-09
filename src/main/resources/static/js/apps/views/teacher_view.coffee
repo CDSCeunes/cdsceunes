@@ -4,19 +4,19 @@ define [
 ], (CDSCeunes, Marionette) ->
   View = ->
     Layout = Marionette.View.extend(
-      template: 'teacher/layout.html'
+      template: 'teacher/layout'
       regions:
         panelRegion: '#panel-region'
         teachersRegion: '#teachers-region'
     )
 
     Panel = Marionette.View.extend(
-      template: 'teacher/panel.html'
+      template: 'teacher/panel'
       className: 'row'
     )
 
     TeacherItem = Marionette.View.extend(
-      template: 'teacher/teacher_item.html'
+      template: 'teacher/teacher_item'
       tagName: 'div'
       className: 'row'
     )
@@ -27,7 +27,7 @@ define [
     )
 
     TeacherList = Marionette.View.extend(
-      template: 'teacher/teacher_list.html'
+      template: 'teacher/teacher_list'
       className: 'list-teacher'
       regions:
         body: '#list-teacher-items'

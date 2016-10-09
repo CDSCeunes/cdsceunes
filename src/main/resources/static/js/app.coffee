@@ -18,7 +18,7 @@ define [
   nunjucks.configure 'js/apps/templates', autoescape: true
 
   Marionette.Renderer.render = (template, data) ->
-    nunjucks.render(template, data)
+    nunjucks.render("#{template}.html.njk", data)
 
   Backbone.Syphon.InputReaders.register 'checkbox', ($el) ->
     if $el.prop('checked') then true else false
