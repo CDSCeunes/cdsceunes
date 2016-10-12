@@ -23,7 +23,10 @@ define [], ->
             @setToken token
           else
             console.log _token
-            module.route 'login:home'
+            @removeToken()
+            console.log "route is #{module.getCurrentRoute()}"
+            unless module.getCurrentRoute() in [undefined, '', 'login']
+              module.route 'login:home'
             return
         else
           if token != undefined

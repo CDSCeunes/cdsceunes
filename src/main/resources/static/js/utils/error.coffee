@@ -8,7 +8,7 @@ define [
       xhr.fail (jqXHR) ->
         status = jqXHR.status;
         if status == 401 || status == 500
-          CDSCeunes.trigger("login:home");
+          CDSCeunes.route 'login:home'
         return
       return xhr;
     return Backbone.sync
