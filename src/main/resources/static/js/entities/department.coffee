@@ -1,9 +1,9 @@
 define [
   'cs!app'
-  'q'
-], (CDSCeunes, Q) ->
-  CDSCeunes.module 'Entities', (Entities, CDSCeunes, Backbone, Marionette, $, _) ->
-    Entities.Department = Backbone.Model.extend(
+  'backbone'
+], (CDSCeunes, Backbone) ->
+  Entities = ->
+    model = Backbone.Model.extend(
       urlRoot: '/api/v1/departments'
       defaults:
         name: ''
@@ -14,34 +14,13 @@ define [
           return
         return
     )
-    Entities.DepartmentsCollection = Backbone.Collection.extend(
+
+    collection = Backbone.Collection.extend(
       url: '/api/v1/departments'
-      model: Entities.Department
-      comparator: 'name')
-    API =
-      getDepartmentEntity: (departmentId) ->
-        department = new (Entities.Department)(id: departmentId)
-        Q.promise (resolve) ->
-          department.fetch
-            success: (data) ->
-              resolve data
-              return
-            error: (data) ->
-              resolve undefined
-              return
-          return
-      getDepartmentsEntities: ->
-        departments = new (Entities.DepartmentsCollection)
-        Q.promise (resolve) ->
-          departments.fetch success: (data) ->
-            resolve data
-            return
-          return
-    CDSCeunes.reqres.setHandler 'department:entity', (id) ->
-      API.getDepartmentEntity id
-    CDSCeunes.reqres.setHandler 'department:entities', ->
-      API.getDepartmentsEntities()
-    CDSCeunes.reqres.setHandler 'department:entity:new', (id) ->
-      new (Entities.Department)
-    return
-  return
+      model: model
+      comparator: 'name'
+    )
+
+    Department: model, DepartmentsCollection: collection
+
+  Entities()

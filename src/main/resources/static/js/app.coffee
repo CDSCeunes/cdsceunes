@@ -15,7 +15,7 @@ define [
   #  nunjucks.configure('apps/templates', autoescape: true)
   #  nunjucks.render(templateText)
 
-  nunjucks.configure 'js/apps/templates', autoescape: true
+  nunjucks.configure 'js/apps/templates', autoescape: true, web: { useCache: true }
 
   Marionette.Renderer.render = (template, data) ->
     nunjucks.render("#{template}.html.njk", data)
@@ -47,13 +47,22 @@ define [
     console.log 'data req'
     Radio.channel('data-request').request trigger, args
 
-  CDSCeunes.oldRoute = ''
+  CDSCeunes.oldRoute = ( ->
+    route = ''
+    get = ->
+      route
+    set = (r) ->
+      route = r
+      return
+    get: get, set: set
+  )()
 
   CDSCeunes.route = (trigger) ->
-    console.log 'triggering route'
-    if trigger != CDSCeunes.oldRoute
+    console.log 'Triggering route'
+    if trigger != CDSCeunes.oldRoute.get()
+      console.log 'Configuring'
       CDSCeunes.configureRequest(undefined)
-      console.log 'configuring'
+    CDSCeunes.oldRoute.set trigger
     Radio.channel('router-handler').trigger trigger
     return
 
@@ -127,11 +136,11 @@ define [
   CDSCeunes.on 'start', ->
     #CDSCeunes.Secure.removeToken
     console.log "Application starting"
+    CDSCeunes.configureRequest(undefined)
     if Backbone.history
       Backbone.history.start()
       console.log 'started'
       if CDSCeunes.getCurrentRoute() == ''
-
         CDSCeunes.route 'login:home'
     return
   CDSCeunes

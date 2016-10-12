@@ -13,6 +13,39 @@ define [
     Panel = Marionette.View.extend(
       template: 'teacher/panel'
       className: 'row'
+      events:
+        'click button.js-new-teacher': 'newTeacher'
+      newTeacher: (e) ->
+        e.preventDefault()
+        console.log 'new teacher'
+        @triggerMethod 'teacher:new'
+        return
+    )
+
+    Form = Marionette.View.extend(
+      template: 'teacher/form'
+      ui:
+        'admissionDate': '.datepicker'
+        'submitData': '.js-submit-teacher'
+      title: 'Novo Professor'
+      serializeData: ->
+        {
+          model: @model.toJSON()
+          departments: @options.departments.toJSON()
+        }
+      onRender: ->
+        @ui.admissionDate.datepicker
+          dateFormat: 'yy-mm-dd'
+          defaultDate: 0
+          showAnim: 'drop'
+        @ui.submitData.text 'Enviar'
+        return
+      submitData: (e) ->
+        e.preventDefault()
+        data = Backbone.Syphon.serialize(this)
+        console.log data
+        @trigger 'teacher:form:submit', data
+        return
     )
 
     TeacherItem = Marionette.View.extend(
@@ -36,6 +69,6 @@ define [
         return
     )
 
-    Layout: Layout, Panel: Panel, TeachersList: TeacherList
+    Layout: Layout, Panel: Panel, TeachersList: TeacherList, Form: Form
 
   View()

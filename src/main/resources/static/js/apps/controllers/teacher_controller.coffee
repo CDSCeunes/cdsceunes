@@ -9,8 +9,8 @@ define [
       list: (criterion) ->
         require [
           'cs!entities/common'
-          'cs!entities/teacher'
           'cs!apps/radios/data/teacher_notify'
+          'cs!apps/radios/data/department_notify'
         ], (FilteredCollection) ->
           list_layout = new (View.Layout)
           list_panel = new (View.Panel)
@@ -31,6 +31,17 @@ define [
               list_layout.showChildView 'panelRegion', list_panel
               list_layout.showChildView 'teachersRegion', list_teachers
               return # end show
+
+            $.when(CDSCeunes.dataRequest 'department:entities').done (departments) ->
+              list_layout.on 'childview:teacher:new', ->
+                console.log 'trigger2'
+                CDSCeunes.regions.showChildView 'dialog', new (View.Form)(
+                  model: CDSCeunes.dataRequest 'teacher:entity:new'
+                  departments: departments
+                )
+                return
+
+              return
 
             CDSCeunes.regions.showChildView 'main', list_layout
             return # end promise

@@ -12,6 +12,7 @@ define [
         radioEvents:
           'login:home': 'routeLoginHome'
         routeLoginHome: ->
+          console.log 'Route here'
           CDSCeunes.navigate 'login'
           @router.controller.login()
           return
