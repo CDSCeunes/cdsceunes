@@ -44,7 +44,7 @@ define [
   Backbone.sync = Error(CDSCeunes)
 
   CDSCeunes.dataRequest = (trigger, args) ->
-    console.log 'data req'
+    console.log 'Data Request'
     Radio.channel('data-request').request trigger, args
 
   CDSCeunes.oldRoute = ( ->

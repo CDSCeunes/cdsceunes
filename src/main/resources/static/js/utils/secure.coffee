@@ -17,14 +17,11 @@ define [], ->
         return
       configureRequest = (token) ->
         @refreshToken()
-        console.log _token
         if _token == null
           if token != undefined
             @setToken token
           else
-            console.log _token
             @removeToken()
-            console.log "route is #{module.getCurrentRoute()}"
             unless module.getCurrentRoute() in [undefined, '', 'login']
               module.route 'login:home'
             return
