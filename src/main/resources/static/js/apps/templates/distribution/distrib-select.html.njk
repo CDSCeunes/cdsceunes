@@ -1,0 +1,14 @@
+<form class="form-teacher-selector">
+  <div class="field">
+    <label><span>Disciplina</span></label>
+    <span>{{ name.name }}</span>
+  </div>
+
+  <div class="field">
+    <label for="">Professores que se Disponibilizaram</label>
+    {% for m in model %}
+      <input type="radio" name="teacher" value="{{ m.teacher.id }}"/>{{ m.teacher.name }} <br />
+    {% endfor %}
+  </div>
+  <input type="submit" value="Salvar"/>
+</form>

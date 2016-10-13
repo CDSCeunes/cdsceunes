@@ -25,10 +25,10 @@ public class DepartmentController extends AbstractController<Department, Departm
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public Department getDepartmentById(@PathVariable Long id) {
 		return repository.findOne(id);
-	}
+	}*/
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public ResponseEntity<Department> save(@RequestBody Department dep) {

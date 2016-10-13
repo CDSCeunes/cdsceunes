@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,4 +29,15 @@ public class OfferedClassController extends AbstractController<OfferedClass, Off
 		}
 
 	}
+	
+	@RequestMapping(method = RequestMethod.PUT, path = "/{id}")
+	public ResponseEntity<OfferedClass> update(@PathVariable Long id, @RequestBody OfferedClass class_) {
+		OfferedClass found = repository.findOne(id);
+		if (found != null) {
+			OfferedClass c = repository.save(class_);
+			return new ResponseEntity<OfferedClass>(c, HttpStatus.OK);
+		}
+		return new ResponseEntity<OfferedClass>(HttpStatus.NOT_FOUND);
+	}
+
 }

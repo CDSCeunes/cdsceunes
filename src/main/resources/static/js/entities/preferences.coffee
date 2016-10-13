@@ -1,12 +1,14 @@
 define [
   'cs!app'
-  'q'
-], (CDSCeunes, Q) ->
-  CDSCeunes.module 'Entities', (Entities, CDSCeunes, Backbone, Marionette, $, _) ->
-    Entities.Preference = Backbone.Model.extend(urlRoot: '/api/v1/preferences')
-    Entities.PreferencesCollection = Backbone.Collection.extend(
+], (CDSCeunes) ->
+  Entities = ->
+    model = Backbone.Model.extend(
+      urlRoot: '/api/v1/preferences'
+    )
+
+    collection = Backbone.Collection.extend(
       url: '/api/v1/preferences'
-      model: Entities.Preference
+      model: model
       comparator: (pref1, pref2) ->
         disc1 = pref1.get('discipline').name
         disc2 = pref2.get('discipline').name
@@ -31,31 +33,13 @@ define [
             -1
           else
             1
+      fetchByClass: (args, opts) ->
+        opts ?= {}
+        if opts.url == undefined
+          opts.url = "#{@url}/class/#{args}"
+        Backbone.Collection::fetch.call(this, opts)
+
     )
-    API =
-      getPreferences: ->
-        preferences = new (Entities.PreferencesCollection)
-        Q.promise (resolve) ->
-          preferences.fetch success: (data) ->
-            resolve data
-            return
-          return
-      getPreference: (id) ->
-        preference = new (Entities.Preference)(id: id)
-        Q.promise (resolve) ->
-          preference.fetch
-            success: (data) ->
-              resolve data
-              return
-            error: (data) ->
-              resolve undefined
-              return
-          return
-    CDSCeunes.reqres.setHandler 'preference:entity', (id) ->
-      API.getPreference id
-    CDSCeunes.reqres.setHandler 'preference:entities', ->
-      API.getPreferences()
-    CDSCeunes.reqres.setHandler 'preference:entity:new', (id) ->
-      new (Entities.Preference)
-    return
-  return
+
+    Preferences: model, PreferencesCollection: collection
+  Entities()

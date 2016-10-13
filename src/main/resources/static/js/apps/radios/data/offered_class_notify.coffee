@@ -11,7 +11,7 @@ define [
         'offered_class:entity': 'getOfferedClassEntity'
         'offered_class:entities': 'getOfferedClassesEntities'
       getOfferedClassEntity: (id) ->
-        distribution = new (Entities.OfferedClass)(id: did)
+        distribution = new (Entities.OfferedClass)(id: id)
         defer = $.Deferred()
         distribution.fetch
           success: (data) ->

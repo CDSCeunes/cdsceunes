@@ -25,10 +25,10 @@ public class PositionController extends AbstractController<Position, PositionRep
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public Position getPositionById(@PathVariable Long id) {
 		return repository.findOne(id);
-	}
+	}*/
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public ResponseEntity<Position> save(@RequestBody Position position) {

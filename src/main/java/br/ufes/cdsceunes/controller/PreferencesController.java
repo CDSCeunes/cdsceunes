@@ -1,5 +1,7 @@
 package br.ufes.cdsceunes.controller;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,11 +28,6 @@ public class PreferencesController extends AbstractController<Preferences, Prefe
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public Preferences getUserById(@PathVariable Long id) {
-		return repository.findOne(id);
-	}
-
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public ResponseEntity<Preferences> save(@RequestBody Preferences preference) {
 		repository.save(preference);
@@ -45,5 +42,14 @@ public class PreferencesController extends AbstractController<Preferences, Prefe
 			return new ResponseEntity<Preferences>(HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<Preferences>(HttpStatus.BAD_REQUEST);
+	}
+	
+	@RequestMapping(value = "/class/{id}", method = RequestMethod.GET)
+	public ResponseEntity<List<Preferences>> findPreferencesByClasses(@PathVariable("id") Long id) {
+		List<Preferences> prefs = repository.findByClass(id);
+		if (prefs.isEmpty()) {
+			return new ResponseEntity<List<Preferences>>(prefs, HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<List<Preferences>>(prefs, HttpStatus.OK);
 	}
 }

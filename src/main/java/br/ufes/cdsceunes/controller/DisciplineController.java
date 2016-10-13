@@ -25,10 +25,10 @@ public class DisciplineController extends AbstractController<Discipline, Discipl
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public Discipline getDisciplineById(@PathVariable Long id) {
 		return repository.findOne(id);
-	}
+	}*/
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public ResponseEntity<Discipline> save(@RequestBody Discipline discipline) {

@@ -12,6 +12,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
 @Table(name = "offered_class")
@@ -33,6 +34,10 @@ public class OfferedClass extends AbstractModel {
 	@JsonIgnore
 	@OneToMany(mappedBy = "offeredClass", fetch = FetchType.LAZY)
 	private List<Preferences> preferences;
+	
+	public Long getId() {
+		return this.id;
+	}
 
 	public void setSemester(Semester semester) {
 		this.semester = semester;

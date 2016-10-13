@@ -16,11 +16,11 @@ import br.ufes.cdsceunes.repository.ScenarioRepository;
 public class ScenarioController extends AbstractController<Scenario, ScenarioRepository> {
 
 	
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public Scenario getScenarioId(@PathVariable Long id) {
 		return repository.findOne(id);
 	}
-	
+	*/
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public ResponseEntity<Scenario> save(@RequestBody Scenario scenario) {
 		repository.save(scenario);

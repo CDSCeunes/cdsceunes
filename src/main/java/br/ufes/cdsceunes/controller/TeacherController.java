@@ -25,14 +25,14 @@ public class TeacherController extends AbstractController<Teacher, TeacherReposi
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<Teacher> getUserById(@PathVariable Long id) {
 		Teacher teacher = repository.findOne(id);
 		if (teacher != null) {
 			return new ResponseEntity<Teacher>(teacher, HttpStatus.OK);
 		}
 		return new ResponseEntity<Teacher>(HttpStatus.NO_CONTENT);
-	}
+	}*/
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
 	public ResponseEntity<Teacher> save(@RequestBody Teacher teacher) {
