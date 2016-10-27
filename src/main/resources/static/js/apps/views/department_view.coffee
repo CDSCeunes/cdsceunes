@@ -15,7 +15,7 @@ define [
       className: 'row'
       events:
         'click button.js-new-department': 'newDepartment'
-      newTeacher: (e) ->
+      newDepartment: (e) ->
         e.preventDefault()
         console.log 'new department'
         @triggerMethod 'department:new'
@@ -26,7 +26,7 @@ define [
       template: 'department/form'
       ui:
         'admissionDate': '.datepicker'
-        'submitData': '.js-submit-teacher'
+        'submitData': '.js-submit-department'
       title: 'Novo Departamento'
       submitData: (e) ->
         e.preventDefault()
