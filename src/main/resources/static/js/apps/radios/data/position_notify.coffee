@@ -1,19 +1,19 @@
 define [
   'cs!app'
   'marionette'
-  'cs!entities/discipline'
+  'cs!entities/position'
   'jquery'
 ], (CDSCeunes, Marionette, Entities, $) ->
   Request =
-    Discipline: Marionette.Object.extend(
+    Position: Marionette.Object.extend(
       channelName: 'data-request'
       radioRequests:
-        'discipline:entity': 'getDisciplineEntity'
-        'discipline:entities': 'getDisciplineEntities'
-      getDisciplineEntities: ->
-        disc = new (Entities.DisciplinesCollection)
+        'position:entity': 'getPositionEntity'
+        'position:entities': 'getPositionEntities'
+      getPositionEntities: ->
+        pos = new (Entities.PositionsCollection)
         defer = $.Deferred()
-        disc.fetch
+        pos.fetch
           success: (data) ->
             defer.resolve data
             return
@@ -21,10 +21,10 @@ define [
             defer.resolve undefined
             return
         defer.promise()
-      getDisciplineEntity: (id) ->
-        disc = new (Entities.Discipline)(id: id)
+      getPositionEntity: (id) ->
+        pos = new (Entities.Position)(id: id)
         defer = $.Deferred()
-        disc.fetch
+        por.fetch
           success: (data) ->
             defer.resolve data
             return
@@ -34,4 +34,4 @@ define [
         defer.promise()
     )
 
-  new (Request.Discipline)
+  new (Request.Position)

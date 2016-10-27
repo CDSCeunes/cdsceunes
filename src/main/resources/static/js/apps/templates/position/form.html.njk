@@ -1,0 +1,45 @@
+<form>
+  <div class="row">
+    <div class="small-5 columns">
+      <label for="name" class="text-right middle"><strong>Nome</strong></label>
+    </div>
+    <div class="small-7 columns end">
+      <input type="text" placeholder="Nome" name="name" value="{{ model.name }}">
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-5 columns">
+      <label for="minWorkload" class="text-right middle">
+        <strong>Carga horária mínima</strong>
+      </label>
+    </div>
+    <div class="small-7 columns end">
+      <input type="text" placeholder="Carga mínima" name="minWorkload" value="{{ model.minWorkload }}">
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-5 columns">
+      <label for="maxWorkload" class="text-right middle">
+        <strong>Carga horária máxima</strong>
+      </label>
+    </div>
+    <div class="small-7 columns end">
+      <input type="text" placeholder="Carga máxima" name="maxWorkload" value="{{ model.maxWorkload }}">
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-5 columns">
+      <label for="currentWorkload" class="text-right middle">
+        <strong>Carga horária atual</strong>
+      </label>
+    </div>
+    <div class="small-7 columns end">
+      <input type="text" placeholder="Carga atual" name="currentWorkload" value="{{ model.currentWorkload }}">
+    </div>
+  </div>
+  <div class="row">
+    <div class="medium-offset-5 small-5 columns">
+      <button class="small hollow button js-submit-position">Enviar</button>
+    </div>
+  </div>
+</form>

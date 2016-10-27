@@ -24,9 +24,7 @@ define [
 
     Form = Marionette.View.extend(
       template: 'department/form'
-      ui:
-        'admissionDate': '.datepicker'
-        'submitData': '.js-submit-department'
+      ui: 'submitData': '.js-submit-department'
       title: 'Novo Departamento'
       submitData: (e) ->
         e.preventDefault()
