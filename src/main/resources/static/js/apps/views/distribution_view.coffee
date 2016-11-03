@@ -45,12 +45,25 @@ define [
 
     )
 
+    DistributionTeacherItem = Marionette.View.extend(
+      template: 'distribution/distrib-teacher-item'
+      className: 'distrib-teacher-item'
+    )
+
+    DistributionTeacherList = Marionette.CollectionView.extend(
+      id: 'distribution-teacher-items'
+      childView: DistributionTeacherItem
+    )
+
     DistributionListLayout = Marionette.View.extend(
       template: 'distribution/distrib-list'
       regions:
         body: '#distribution-list-items'
+        teachers: '#distribution-teacher-items'
       onRender: ->
         @showChildView 'body', new (DistributionList)(collection: @collection)
+        @showChildView 'teachers', new (DistributionTeacherList)(collection: @options.teachers)
+        return
     )
 
     Layout = Marionette.View.extend(

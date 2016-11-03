@@ -31,6 +31,22 @@ public class TeacherSerializer extends JsonSerializer<Teacher> {
 		jgen.writeStringField("name", department.getName());
 		jgen.writeStringField("center", department.getCenter());
 		jgen.writeEndObject();
+		
+		jgen.writeArrayFieldStart("classes");
+		teacher.getClasses().forEach(c -> {
+			try {
+				jgen.writeStartObject();
+				jgen.writeStringField("name", c.getDiscipline().getName());
+				jgen.writeObjectField("semester", c.getSemester());
+				jgen.writeEndObject();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		});
+		jgen.writeEndArray();
+			
+			
 
 		jgen.writeEndObject();
 

@@ -104,6 +104,10 @@ public class Teacher extends AbstractModel {
 		this.returnFromCapacitacion = returnFromCapacitacion;
 	}
 
+	public List<OfferedClass> getClasses() {
+		return classes;
+	}
+
 	public Boolean isAvailable() {
 		return available;
 	}

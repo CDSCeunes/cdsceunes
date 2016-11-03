@@ -15,10 +15,11 @@ define [
         require [
           'cs!apps/radios/data/offered_class_notify'
           'cs!apps/radios/data/preferences_notify'
+          'cs!apps/radios/data/teacher_notify'
         ], ->
-          $.when(CDSCeunes.dataRequest 'offered_class:entities', { year: year, semester: semester }).done (classes) ->
-            classesList = new (View.DistributionList)(collection: classes)
-
+          $.when(CDSCeunes.dataRequest('offered_class:entities', { year: year, semester: semester }),
+                 CDSCeunes.dataRequest('teacher:entities')).done (classes, teachers) ->
+            classesList = new (View.DistributionList)(collection: classes, teachers: teachers)
             layout.on 'render', ->
               layout.showChildView 'body', classesList
               return # end 'on:render'

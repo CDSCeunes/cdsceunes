@@ -13,3 +13,7 @@
   width: 18rem;
   height: 2rem;
 }
+
+.vertical-line-left {
+  border-left: thick solid #cacaca;
+}
