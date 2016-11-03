@@ -17,3 +17,12 @@
 .vertical-line-left {
   border-left: thick solid #cacaca;
 }
+
+
+.distrib-teacher-item {
+  border-bottom: 1px solid #cacaca;
+  padding-bottom: 1px;
+}
+.distrib-teacher-item:hover {
+  background-color: #cacaca;
+}

@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import br.ufes.cdsceunes.util.serialiazers.PreferencesSerializer;
+import br.ufes.cdsceunes.util.serializers.PreferencesSerializer;
 
 @Entity
 @Table(name="preferences")

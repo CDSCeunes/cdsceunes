@@ -1,4 +1,4 @@
-package br.ufes.cdsceunes.util.serialiazers;
+package br.ufes.cdsceunes.util.serializers;
 
 
 import java.io.IOException;

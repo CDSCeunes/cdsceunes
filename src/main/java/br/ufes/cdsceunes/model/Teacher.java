@@ -17,43 +17,45 @@ import javax.persistence.Table;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import br.ufes.cdsceunes.util.serialiazers.TeacherSerializer;
+import br.ufes.cdsceunes.util.serializers.TeacherSerializer;
 
 @Entity
 @Table(name = "teacher")
 @JsonSerialize(using = TeacherSerializer.class)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Teacher extends AbstractModel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@NotBlank
 	private String name;
 
 	@ColumnDefault(value = "true")
 	private Boolean available;
-	
+
 	@OneToOne
 	private UserDetails details;
-	
-	@OneToMany(mappedBy="teacher")
+
+	@OneToMany(mappedBy = "teacher")
 	private List<OfferedClass> classes;
 
 	// @Temporal(value = TemporalType.DATE)
-	@Column(columnDefinition="DATE")
+	@Column(columnDefinition = "DATE")
 	private LocalDate admissionDate;
 
 	// @Temporal(value = TemporalType.DATE)
-	@Column(columnDefinition="DATE")
+	@Column(columnDefinition = "DATE")
 	private LocalDate returnFromLastRemoval;
 
 	// @Temporal(value = TemporalType.DATE)
-	@Column(columnDefinition="DATE")
+	@Column(columnDefinition = "DATE")
 	private LocalDate returnFromCapacitacion;
 
 	@OneToMany(mappedBy = "teacher")
@@ -78,7 +80,6 @@ public class Teacher extends AbstractModel {
 	public void setName(String name) {
 		this.name = name;
 	}
-
 
 	public LocalDate getAdmissionDate() {
 		return admissionDate;
@@ -110,10 +111,6 @@ public class Teacher extends AbstractModel {
 
 	public Boolean isAvailable() {
 		return available;
-	}
-
-	public void setAvailable(boolean available) {
-		this.available = available;
 	}
 
 	public List<Position> getPositions() {
@@ -148,11 +145,15 @@ public class Teacher extends AbstractModel {
 		return id;
 	}
 
+	public void setClasses(List<OfferedClass> classes) {
+		this.classes = classes;
+	}
+
 	@Override
 	public String toString() {
 		return name;
 	}
-	
+
 	public UserDetails getDetails() {
 		return details;
 	}

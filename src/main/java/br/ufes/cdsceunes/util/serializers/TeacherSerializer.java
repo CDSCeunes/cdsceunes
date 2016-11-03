@@ -1,4 +1,4 @@
-package br.ufes.cdsceunes.util.serialiazers;
+package br.ufes.cdsceunes.util.serializers;
 
 import java.io.IOException;
 
@@ -36,6 +36,7 @@ public class TeacherSerializer extends JsonSerializer<Teacher> {
 		teacher.getClasses().forEach(c -> {
 			try {
 				jgen.writeStartObject();
+				jgen.writeNumberField("id", c.getId());
 				jgen.writeStringField("name", c.getDiscipline().getName());
 				jgen.writeObjectField("semester", c.getSemester());
 				jgen.writeEndObject();

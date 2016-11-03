@@ -9,10 +9,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import br.ufes.cdsceunes.util.serialiazers.DisciplineSerializer;
+import br.ufes.cdsceunes.util.serializers.DisciplineSerializer;
 
 @Entity
 @Table(name = "discipline")
@@ -60,6 +61,7 @@ public class Discipline extends AbstractModel {
 		return classes;
 	}
 
+	@JsonIgnoreProperties
 	public void setClasses(List<OfferedClass> classes) {
 		this.classes = classes;
 	}
