@@ -1,0 +1,57 @@
+<form>
+    <div class="row">
+        <div class="small-5 columns">
+            <label for="name" class="text-right middle">
+                <strong>Nome</strong>
+            </label>
+        </div>
+        <div class="small-7 columns end">
+            <input type="text" placeholder="Nome" name="name" value="{{ model.name }}">
+        </div>
+    </div>
+    <div class="row">
+        <div class="small-5 columns">
+            <label for="course" class="text-right middle">
+                <strong>Curso</strong>
+            </label>
+        </div>
+        <div class="small-7 columns end">
+            <input type="text" placeholder="Curso" name="course" value="{{ model.course }}">
+        </div>
+    </div>
+    <div class="row">
+        <div class="small-5 columns">
+            <label for="teoricLoad" class="text-right middle">
+                <strong>Carga Teórica</strong>
+            </label>
+        </div>
+        <div class="small-7 columns end">
+            <input type="text" placeholder="Carga Teórica" name="teoricLoad" value="{{ model.teoricLoad }}">
+        </div>
+    </div>
+    <div class="row">
+        <div class="small-5 columns">
+            <label for="exerciseLoad" class="text-right middle">
+                <strong>Exercícios</strong>
+            </label>
+        </div>
+        <div class="small-7 columns end">
+            <input type="text" placeholder="Exercícios" name="teoricLoad" value="{{ model.teoricLoad }}">
+        </div>
+    </div>
+    <div class="row">
+        <div class="small-5 columns">
+            <label for="labLoad" class="text-right middle">
+                <strong>Carga em Laboratório</strong>
+            </label>
+        </div>
+        <div class="small-7 columns end">
+            <input type="text" placeholder="Laboratório" name="labLoad" value="{{ model.labLoad }}">
+        </div>
+    </div>
+    <div class="row">
+        <div class="medium-offset-5 small-5 columns">
+            <button class="small hollow button js-submit-discipline">Enviar</button>
+        </div>
+    </div>
+</form>

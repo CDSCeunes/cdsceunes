@@ -1,0 +1,35 @@
+<div>
+    <div class="small-3 medium-3 columns">
+        <span class="js-edit-name">{{ name }}</span>
+    </div>
+    <div class="small-3 medium-3 columns">
+        <span>{{ course }}</span>
+    </div>
+    <div class="small-3 medium-3 columns">
+        <span>{{ teoricLoad }}</span>
+    </div>
+    <div class="small-3 medium-3 columns">
+        <span>{{ exerciseLoad }}</span>
+    </div>
+    <div class="small-3 medium-3 columns">
+        <span>{{ labLoad }}</span>
+    </div>
+    <div class="medium-1 columns">
+        <a href="#disciplines/{{ id }}" class="tiny hollow button js-show-discipline">
+            <i class="fa fa-eye"></i>
+            Exibir
+        </a>
+    </div>
+    <div class="medium-1 columns">
+        <a href="#disciplines/{{ id }}/edit" class="tiny hollow button js-edit-discipline">
+            <i class="fa fa-pencil"></i>
+            Editar
+        </a>
+    </div>
+    <div class="medium-1 columns">
+        <button class="tiny hollow button radius js-delete-discipline">
+            <i class="fa fa-remove"></i>
+            Apagar
+        </button>
+    </div>
+</div>

@@ -58,7 +58,10 @@ require([
   "cs!app",
   "cs!apps/routers/login_router",
   "cs!apps/routers/teacher_router",
-  "cs!apps/routers/distribution_router"
+  "cs!apps/routers/distribution_router",
+  "cs!apps/routers/department_router",
+  "cs!apps/routers/discipline_router",
+  "cs!apps/routers/position_router"
 ], function(CDSCeunes){
   CDSCeunes.start();
 });
