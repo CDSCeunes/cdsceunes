@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 
 import br.ufes.cdsceunes.model.Department;
+import br.ufes.cdsceunes.model.Discipline;
 import br.ufes.cdsceunes.model.Teacher;
 
 public class TeacherSerializer extends JsonSerializer<Teacher> {
@@ -37,7 +38,14 @@ public class TeacherSerializer extends JsonSerializer<Teacher> {
 			try {
 				jgen.writeStartObject();
 				jgen.writeNumberField("id", c.getId());
-				jgen.writeStringField("name", c.getDiscipline().getName());
+				jgen.writeFieldName("discipline");
+				jgen.writeStartObject();
+					Discipline discipline = c.getDiscipline();
+					jgen.writeStringField("name", discipline.getName());
+					jgen.writeNumberField("teoricLoad", discipline.getTeoricLoad());
+					jgen.writeNumberField("labLoad", discipline.getLabLoad());
+					jgen.writeNumberField("exerciseLoad", discipline.getExerciseLoad());
+				jgen.writeEndObject();
 				jgen.writeObjectField("semester", c.getSemester());
 				jgen.writeEndObject();
 			} catch (IOException e) {

@@ -1,7 +1,7 @@
 <form class="form-teacher-selector">
   <div class="field">
-    <label><span>Disciplina</span></label>
-    <span>{{ name.name }}</span>
+    <label><h3>Disciplina</h3></label>
+    <h3>{{ name.name }}</h3>
   </div>
 
   <div class="field">
@@ -9,6 +9,15 @@
     {% for m in model %}
       <input type="radio" name="teacher" value="{{ m.teacher.id }}"/>{{ m.teacher.name }} <br />
     {% endfor %}
+    <input type="radio" name="teacher" value="-1" />Selecionar outro professor<br/>
+    <select class="js-select-teacher">
+      <option value="-1"> </option>
+      {% for t in teachers %}
+        <option value="{{t.id}}">
+          {{t.name}}
+        </option>
+      {% endfor %}
+    </select>
   </div>
   <input type="submit" value="Salvar"/>
 </form>

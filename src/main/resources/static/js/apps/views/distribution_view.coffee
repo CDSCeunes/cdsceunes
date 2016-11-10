@@ -27,6 +27,7 @@ define [
         {
           model: @model.sort().toJSON()
           name: @options.name.toJSON()
+          teachers: @options.teachers.toJSON()
         }
       events:
         "click input[type='submit']": 'saveSelect'
@@ -34,6 +35,7 @@ define [
         e.preventDefault()
         selected = $('input[name=teacher]:checked', '.form-teacher-selector').val()
         @trigger 'save:select', { selected: selected, class_id: @options.class_id }
+        return
     )
 
     DistributionList = Marionette.CollectionView.extend(

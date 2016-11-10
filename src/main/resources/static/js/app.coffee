@@ -98,40 +98,43 @@ define [
     return
 
   CDSCeunes.on 'before:start', ->
+
+    DialogRegion = Marionette.Region.extend(
+      closeDialog: ->
+        @$el.dialog 'destroy'
+        return
+      onEmpty: ->
+        @closeDialog()
+        return
+      onShow: (view) ->
+        self = this
+        @$el.dialog
+          modal: true
+          title: view.title
+          width: 'auto'
+          maxWidth: 600
+          fluid: true
+          responsive: true
+          resizable: false
+          close: (e, ui) ->
+            self.empty()
+            return
+        return
+    )
+
     RootContainer = Marionette.View.extend(
       el: '#app-container'
       regions:
         header: '#header-container'
         main: '#main-container'
-        dialog: '#dialog-container'
-        footer: '#footer-container')
+        dialog:
+          el: '#dialog-container'
+          regionClass: DialogRegion
+        footer: '#footer-container'
+    )
+
     CDSCeunes.regions = new RootContainer
-
-    CDSCeunes.regions.getRegion('dialog').onShow = (view) ->
-      self = this
-
-      closeDialog = ->
-        self.stopListening()
-        self.empty()
-        self.$el.dialog 'destroy'
-        return
-
-      @listenTo view, 'dialog:close', closeDialog
-      @$el.dialog
-        modal: true
-        title: view.title
-        width: 'auto'
-        maxWidth: 600
-        fluid: true
-        responsive: true
-        resizable: false
-        close: (e, ui) ->
-          closeDialog()
-          return
-      return
-
     return
-
 
   CDSCeunes.on 'start', ->
     #CDSCeunes.Secure.removeToken
