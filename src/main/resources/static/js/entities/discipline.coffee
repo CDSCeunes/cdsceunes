@@ -1,9 +1,9 @@
 define [
   'cs!app'
-  'q'
-], (CDSCeunes, Q) ->
-  CDSCeunes.module 'Entities', (Entities, CDSCeunes, Backbone, Marionette, $, _) ->
-    Entities.Discipline = Backbone.Model.extend(
+  'backbone'
+], (CDSCeunes, Backbone) ->
+  Entities = ->
+    model = Backbone.Model.extend(
       urlRoot: '/api/v1/disciplines'
       defaults:
         name: ''
@@ -18,34 +18,13 @@ define [
           return
         return
     )
-    Entities.DisciplinesCollection = Backbone.Collection.extend(
+
+    collection = Backbone.Collection.extend(
       url: '/api/v1/disciplines'
-      model: Entities.Discipline
-      comparator: 'name')
-    API =
-      getDisciplineEntity: (disciplineId) ->
-        discipline = new (Entities.Discipline)(id: disciplineId)
-        Q.promise (resolve) ->
-          discipline.fetch
-            success: (data) ->
-              resolve data
-              return
-            error: (data) ->
-              resolve undefined
-              return
-          return
-      getDisciplinesEntities: ->
-        disciplines = new (Entities.DisciplinesCollection)
-        Q.promise (resolve) ->
-          disciplines.fetch success: (data) ->
-            resolve data
-            return
-          return
-    CDSCeunes.reqres.setHandler 'discipline:entity', (id) ->
-      API.getDisciplineEntity id
-    CDSCeunes.reqres.setHandler 'discipline:entities', ->
-      API.getDisciplinesEntities()
-    CDSCeunes.reqres.setHandler 'discipline:entity:new', ->
-      new (Entities.Discipline)
-    return
-  return
+      model: model
+      comparator: 'name'
+    )
+
+    Discipline: model, DisciplinesCollection: collection
+
+  Entities()

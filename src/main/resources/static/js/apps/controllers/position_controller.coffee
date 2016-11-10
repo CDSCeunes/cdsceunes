@@ -23,6 +23,12 @@ define [
                 (position) ->
                   position.get('name').indexOf(criterion) > -1
             )
+            list_layout.on 'childview:position:new', ->
+              console.log 'Showing new position dialog'
+              CDSCeunes.regions.showChildView 'dialog', new (View.Form)(
+                model: CDSCeunes.dataRequest 'position:entity:new'
+              )
+              return
 
             list_positions = new (View.PositionsList)(collection: filtered_positions)
 

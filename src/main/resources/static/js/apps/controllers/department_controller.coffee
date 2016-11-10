@@ -23,6 +23,12 @@ define [
                 (department) ->
                   department.get('name').indexOf(criterion) > -1
             )
+            list_layout.on 'childview:department:new', ->
+              console.log 'Showing new department dialog'
+              CDSCeunes.regions.showChildView 'dialog', new (View.Form)(
+                model: CDSCeunes.dataRequest 'department:entity:new'
+              )
+              return
 
             list_departments = new (View.DepartmentsList)(collection: filtered_departments)
 
