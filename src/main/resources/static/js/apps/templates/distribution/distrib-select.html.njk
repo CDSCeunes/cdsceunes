@@ -7,7 +7,11 @@
   <div class="field">
     <label for="">Professores que se Disponibilizaram</label>
     {% for m in model %}
-      <input type="radio" name="teacher" value="{{ m.teacher.id }}"/>{{ m.teacher.name }} <br />
+      <input type="radio" name="teacher" value="{{ m.teacher.id }}"
+      {% if selected == m.teacher.id %}
+        checked="checked"
+      {% endif %}
+      />{{ m.teacher.name }} <br />
     {% endfor %}
     <input type="radio" name="teacher" value="-1" />Selecionar outro professor<br/>
     <select class="js-select-teacher">

@@ -3,6 +3,7 @@ package br.ufes.cdsceunes.model;
 import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -147,6 +148,12 @@ public class Teacher extends AbstractModel {
 
 	public void setClasses(List<OfferedClass> classes) {
 		this.classes = classes;
+	}
+
+	public List<OfferedClass> getClasses(String year, String semester) {
+		Semester semester_ = new Semester(year, semester);
+		return this.getClasses().stream().filter(e -> e.getSemester() == semester_).collect(Collectors.toList());
+		
 	}
 
 	@Override

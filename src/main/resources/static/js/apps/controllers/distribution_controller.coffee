@@ -25,12 +25,14 @@ define [
               return # end 'on:render'
 
             classesList.on 'childview:select:teacher', (args) ->
+              console.log args.teacher
               $.when(CDSCeunes.dataRequest 'preferences:entities:class', args.id).done (prefs) ->
                 selectTeacher = new (View.DistributionSelect)(
                   model: prefs
                   name: new (Backbone.Model)(name: args.name)
                   teachers: teachers
                   class_id: args.id
+                  selected: args.teacher
                 )
 
                 selectTeacher.on 'save:select', (args) ->

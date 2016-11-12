@@ -16,7 +16,12 @@ define [
         'click a.distrib-select-teacher': 'selectTeacher'
       selectTeacher: (e) ->
         e.preventDefault()
-        @triggerMethod 'select:teacher', { id: @model.id, name: @model.get('discipline').name }
+        teacher = @model.get('teacher')
+        args =
+          id: @model.id
+          name: @model.get('discipline').name
+          teacher: if teacher then teacher.id else -1
+        @triggerMethod 'select:teacher', args
         return
     )
 
@@ -28,6 +33,7 @@ define [
           model: @model.sort().toJSON()
           name: @options.name.toJSON()
           teachers: @options.teachers.toJSON()
+          selected: @options.selected
         }
       events:
         "click input[type='submit']": 'saveSelect'

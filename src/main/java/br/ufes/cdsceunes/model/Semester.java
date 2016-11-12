@@ -42,4 +42,8 @@ public class Semester {
 		return this.id;
 	}
 
+	public boolean equals(Semester obj) {
+		return this.getId() == obj.getId();
+	}
+
 }
