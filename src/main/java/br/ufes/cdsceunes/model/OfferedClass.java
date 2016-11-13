@@ -11,30 +11,38 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonView;
+
+import br.ufes.cdsceunes.jsonview.View;
 
 @Entity
 @Table(name = "offered_class")
 public class OfferedClass extends AbstractModel {
 
+	@JsonView(View.Summary.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@JsonView(View.OfferedClassWithSemester.class)
 	@ManyToOne
 	private Semester semester;
 
+	@JsonView(View.Summary.class)
+	@JsonIgnoreProperties("classes")
 	@ManyToOne
 	private Discipline discipline;
 
+	@JsonView(View.OfferedClass.class)
+	@JsonIgnoreProperties("classes")
 	@ManyToOne
 	private Teacher teacher;
 
-	@JsonIgnore
+	@JsonView(View.Summary.class)
 	@OneToMany(mappedBy = "offeredClass", fetch = FetchType.LAZY)
 	private List<Preferences> preferences;
-	
+
 	public Long getId() {
 		return this.id;
 	}

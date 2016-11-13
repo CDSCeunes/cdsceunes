@@ -18,53 +18,69 @@ import javax.persistence.Table;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonView;
 
-import br.ufes.cdsceunes.util.serializers.TeacherSerializer;
+import br.ufes.cdsceunes.jsonview.View;
 
 @Entity
 @Table(name = "teacher")
-@JsonSerialize(using = TeacherSerializer.class)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Teacher extends AbstractModel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonView(View.Summary.class)
 	private Long id;
 
 	@NotBlank
+	@JsonView(View.Summary.class)
 	private String name;
 
 	@ColumnDefault(value = "true")
+	@JsonView(View.Summary.class)
 	private Boolean available;
 
 	@OneToOne
+	@JsonView(View.SummaryWithDetails.class)
 	private UserDetails details;
 
+
+	@JsonView(View.TeacherWithClasses.class)
 	@OneToMany(mappedBy = "teacher")
+	@JsonIgnoreProperties({"teacher", "preferences"})
 	private List<OfferedClass> classes;
 
 	// @Temporal(value = TemporalType.DATE)
 	@Column(columnDefinition = "DATE")
+	@JsonView(View.Summary.class)
 	private LocalDate admissionDate;
 
 	// @Temporal(value = TemporalType.DATE)
 	@Column(columnDefinition = "DATE")
+	@JsonView(View.Summary.class)
 	private LocalDate returnFromLastRemoval;
 
 	// @Temporal(value = TemporalType.DATE)
 	@Column(columnDefinition = "DATE")
+	@JsonView(View.Summary.class)
 	private LocalDate returnFromCapacitacion;
 
+	@JsonView(View.Summary.class)
+	@JsonIgnoreProperties("teacher")
 	@OneToMany(mappedBy = "teacher")
 	private List<Position> positions;
 
+	
+	@JsonView(View.TeacherWithClasses.class)
+	@JsonIgnoreProperties("teacher")
 	@OneToMany(mappedBy = "teacher")
 	private List<Preferences> preferences;
 
+	@JsonIgnore
 	@ManyToOne
 	private Department department;
 

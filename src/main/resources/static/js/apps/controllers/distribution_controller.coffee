@@ -8,7 +8,6 @@ define [
     Distribution: Marionette.Object.extend(
       home: ->
         layout = new (View.Layout)
-
         return
       list: (year, semester) ->
         layout = new (View.Layout)
@@ -18,14 +17,13 @@ define [
           'cs!apps/radios/data/teacher_notify'
         ], ->
           $.when(CDSCeunes.dataRequest('offered_class:entities', { year: year, semester: semester }),
-                 CDSCeunes.dataRequest('teacher:entities')).done (classes, teachers) ->
+                 CDSCeunes.dataRequest('teacher:entities:with_classes', {})).done (classes, teachers) ->
             classesList = new (View.DistributionList)(collection: classes, teachers: teachers)
             layout.on 'render', ->
               layout.showChildView 'body', classesList
               return # end 'on:render'
 
             classesList.on 'childview:select:teacher', (args) ->
-              console.log args.teacher
               $.when(CDSCeunes.dataRequest 'preferences:entities:class', args.id).done (prefs) ->
                 selectTeacher = new (View.DistributionSelect)(
                   model: prefs
@@ -38,14 +36,13 @@ define [
                 selectTeacher.on 'save:select', (args) ->
                   class_ = classes.findWhere(id: args.class_id)
 
-                  class_.save({ teacher: { id: parseInt(args.selected) } }, {silent: true})
-                  class_.save(null)
+                  class_.save({ teacher: { id: parseInt(args.selected) } },
+                    success: ->
+                      class_.fetch()
+                      teachers.fetchWithClasses({}, reset: true)
+                      return
+                  )
 
-                  _.debounce( ->
-                    teachers.fetch(reset: true)
-                  , 500)()
-
-                  #CDSCeunes.regions.getRegion('dialog').$el.dialog('close')
                   CDSCeunes.regions.getRegion('dialog').empty()
 
                   return # ender 'on:save:select'

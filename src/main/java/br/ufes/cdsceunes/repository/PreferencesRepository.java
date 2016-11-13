@@ -10,6 +10,6 @@ import br.ufes.cdsceunes.model.Preferences;
 
 public interface PreferencesRepository extends JpaRepository<Preferences, Long> {
 
-	@Query("SELECT prefs FROM Preferences prefs where prefs.offeredClass.id = :id")
+	@Query("SELECT prefs FROM Preferences prefs WHERE prefs.offeredClass.id = :id")
 	public List<Preferences> findByClass(@Param("id") Long id);
 }

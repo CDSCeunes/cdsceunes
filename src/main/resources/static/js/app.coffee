@@ -8,6 +8,7 @@ define [
   'jquery-ui'
   'backbone'
   'backbone.syphon'
+#  'cs!apps/config/data_handlers'
 ], (Marionette, nunjucks, $, Secure, Error, Radio) ->
   CDSCeunes = new (Marionette.Application)
 

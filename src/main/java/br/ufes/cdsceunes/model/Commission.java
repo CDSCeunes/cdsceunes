@@ -11,26 +11,37 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import br.ufes.cdsceunes.jsonview.View;
+
 @Entity
 @Table(name = "commission")
 public class Commission extends AbstractModel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonView(View.Summary.class)
 	private Long id;
 
+	@JsonView(View.Summary.class)
 	private String name;
 
+	@JsonView(View.Summary.class)
 	private int minNumber;
 
+	@JsonView(View.Summary.class)
 	private int maxNumber;
 
 	@Column(columnDefinition="DATE")
+	@JsonView(View.Summary.class)
 	private LocalDate creationDate;
 
+	@JsonView(View.Summary.class)
 	private String scope;
 
 	@OneToMany(mappedBy = "commission")
+	@JsonView(View.Summary.class)
 	private List<Position> positions;
 
 	/* Getters and Setters */

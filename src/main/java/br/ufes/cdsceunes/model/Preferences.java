@@ -9,25 +9,31 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonView;
 
-import br.ufes.cdsceunes.util.serializers.PreferencesSerializer;
+import br.ufes.cdsceunes.jsonview.View;
 
 @Entity
 @Table(name="preferences")
-@JsonSerialize(using = PreferencesSerializer.class)
 public class Preferences extends AbstractModel {
 
+	@JsonView(View.Summary.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
+	@JsonView(View.Summary.class)
 	@Enumerated
 	private Preference value;
 
+	@JsonView(View.Summary.class)
+	@JsonIgnoreProperties({"preferences", "positions"})
 	@ManyToOne(fetch=FetchType.EAGER)
 	private Teacher teacher;
 
+	@JsonView(View.Summary.class)
+	@JsonIgnoreProperties({"preferences", "teacher", "semester"})
 	@ManyToOne
 	private OfferedClass offeredClass;
 

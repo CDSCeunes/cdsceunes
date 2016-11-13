@@ -6,17 +6,24 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import br.ufes.cdsceunes.jsonview.View;
+
 @Entity
 @Table(name="secretary")
 public class Secretary extends AbstractModel {
 	
 	@Id
 	@GeneratedValue
+	@JsonView(View.Summary.class)
 	private Long id;
 	
+	@JsonView(View.Summary.class)
 	private String name;
 
 	@OneToOne
+	@JsonView(View.SummaryWithDetails.class)
 	private UserDetails details;
 	
 	public Secretary() {

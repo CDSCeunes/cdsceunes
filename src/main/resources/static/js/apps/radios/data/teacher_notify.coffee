@@ -10,6 +10,7 @@ define [
       radioRequests:
         'teacher:entity': 'getTeacherEntity'
         'teacher:entities': 'getTeacherEntities'
+        'teacher:entities:with_classes': 'getTeacherEntitiesWithClasses'
         'teacher:entity:new': 'newTeacher'
       getTeacherEntity: (id) ->
         teacher = new (Entities.Teacher)(id: teacherId)
@@ -28,6 +29,17 @@ define [
         teachers.fetch
           success: (data) ->
             defer.resolve data
+            return
+        defer.promise()
+      getTeacherEntitiesWithClasses: (args) ->
+        defer = $.Deferred()
+        teachers = new (Entities.TeachersCollection)
+        teachers.fetchWithClasses args,
+          success: (data) ->
+            defer.resolve(data)
+            return
+          error: (data) ->
+            defer.resolve(undefined)
             return
         defer.promise()
       newTeacher: ->

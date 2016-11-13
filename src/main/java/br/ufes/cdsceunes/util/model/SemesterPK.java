@@ -25,7 +25,34 @@ public class SemesterPK implements Serializable {
 		return semester;
 	}
 
-	public boolean equals(SemesterPK obj) {
-		return this.getYear() == obj.getYear() && this.getSemester() == obj.getSemester();
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((semester == null) ? 0 : semester.hashCode());
+		result = prime * result + ((year == null) ? 0 : year.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SemesterPK other = (SemesterPK) obj;
+		if (semester == null) {
+			if (other.semester != null)
+				return false;
+		} else if (!semester.equals(other.semester))
+			return false;
+		if (year == null) {
+			if (other.year != null)
+				return false;
+		} else if (!year.equals(other.year))
+			return false;
+		return true;
 	}
 }

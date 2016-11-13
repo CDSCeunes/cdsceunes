@@ -11,13 +11,12 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.annotation.JsonView;
 
-import br.ufes.cdsceunes.util.serializers.DisciplineSerializer;
+import br.ufes.cdsceunes.jsonview.View;
 
 @Entity
 @Table(name = "discipline")
-@JsonSerialize(using = DisciplineSerializer.class)
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class Discipline extends AbstractModel {
 
@@ -25,17 +24,24 @@ public class Discipline extends AbstractModel {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@JsonView(View.Summary.class)
 	private String name;
 
+	@JsonView(View.Summary.class)
 	private String course;
 
+	@JsonView(View.Summary.class)
+	@JsonIgnoreProperties("discipline")
 	@OneToMany(mappedBy="discipline")
 	private List<OfferedClass> classes;
 
+	@JsonView(View.Summary.class)
 	private Integer teoricLoad;
 
+	@JsonView(View.Summary.class)
 	private Integer exerciseLoad;
 
+	@JsonView(View.Summary.class)
 	private Integer labLoad;
 	
 

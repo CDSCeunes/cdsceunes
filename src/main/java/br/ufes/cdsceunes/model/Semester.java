@@ -8,9 +8,11 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import br.ufes.cdsceunes.jsonview.View;
 import br.ufes.cdsceunes.util.deserializers.SemesterDeserializer;
 import br.ufes.cdsceunes.util.model.SemesterPK;
 import br.ufes.cdsceunes.util.serializers.SemesterSerializer;
@@ -22,6 +24,7 @@ import br.ufes.cdsceunes.util.serializers.SemesterSerializer;
 public class Semester {
 
 	@EmbeddedId
+	@JsonView(View.Summary.class)
 	private SemesterPK id;
 
 	@OneToMany(mappedBy = "semester")
@@ -42,8 +45,33 @@ public class Semester {
 		return this.id;
 	}
 
-	public boolean equals(Semester obj) {
-		return this.getId() == obj.getId();
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Semester other = (Semester) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+
+	public String toString() {
+		return this.id.getYear() + "/" + this.id.getSemester();
 	}
 
 }

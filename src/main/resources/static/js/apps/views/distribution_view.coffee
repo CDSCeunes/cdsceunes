@@ -14,6 +14,11 @@ define [
         button: 'a.distrib-select-teacher'
       events:
         'click a.distrib-select-teacher': 'selectTeacher'
+      modelEvents:
+        'change:teacher': 'doTeacher'
+      doTeacher: ->
+        @render()
+        return
       selectTeacher: (e) ->
         e.preventDefault()
         teacher = @model.get('teacher')
@@ -35,11 +40,30 @@ define [
           teachers: @options.teachers.toJSON()
           selected: @options.selected
         }
+      ui:
+        'radio-checked': ".form-teacher-selector input[name='teacher']:checked"
       events:
         "click input[type='submit']": 'saveSelect'
+        'change .js-select-teacher': 'changeSelect'
+        'change input[type=radio][name=teacher]': 'changeRadio'
+      changeRadio: (e) ->
+        e.preventDefault()
+        radio = $("input[name=teacher]:checked", ".form-teacher-selector").val()
+        if radio != "-1"
+          $('.js-select-teacher option[value=-1]').attr('selected', true)
+        return
+      changeSelect: (e) ->
+        e.preventDefault()
+        radio = $("input[name=teacher]:checked", ".form-teacher-selector").val()
+        if radio != "-1"
+          $("\#radio#{radio}").attr('checked', false)
+          $("\#radio-1").attr('checked', true)
+        return
       saveSelect: (e) ->
         e.preventDefault()
-        selected = $('input[name=teacher]:checked', '.form-teacher-selector').val()
+        selected = $("input[name=teacher]:checked", ".form-teacher-selector").val()
+        if selected == "-1"
+          selected =  $('.js-select-teacher').val()
         @trigger 'save:select', { selected: selected, class_id: @options.class_id }
         return
     )
@@ -56,6 +80,8 @@ define [
     DistributionTeacherItem = Marionette.View.extend(
       template: 'distribution/distrib-teacher-item'
       className: 'distrib-teacher-item'
+      serializeData: ->
+        _.extend @model.toJSON(), workload: @model.workload()
     )
 
     DistributionTeacherList = Marionette.CollectionView.extend(

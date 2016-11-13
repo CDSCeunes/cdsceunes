@@ -1,7 +1,6 @@
 define [
   'cs!app'
-  'q'
-], (CDSCeunes, Q) ->
+], (CDSCeunes) ->
   CDSCeunes.module 'Entities', (Entities, CDSCeunes, Backbone, Marionette, $, _) ->
     Entities.Distribution = Backbone.Model.extend(
       urlRoot: '/api/v1/semesters'

@@ -13,21 +13,29 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import br.ufes.cdsceunes.jsonview.View;
+
 @Entity
 @Table(name = "scenario")
 public class Scenario extends AbstractModel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonView(View.Summary.class)
 	private Long id;
 
 	@ManyToOne
+	@JsonView(View.Summary.class)
 	private Semester semester;
 
 	@OneToMany(mappedBy = "scenario")
+	@JsonView(View.Summary.class)
 	private List<DistributionResult> distribution;
 	
 	@ManyToMany(mappedBy="scenarios")
+	@JsonView(View.Summary.class)
 	private List<Semester> semesters;
 
 	@Column(nullable=false)

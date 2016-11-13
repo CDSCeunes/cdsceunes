@@ -1,3 +1,12 @@
+{% macro preference_value(value) %}
+  {% if value == "WANT" %}
+  2
+  {% elif value == "ACCEPT" %}
+  1
+  {% else %}
+  0
+  {% endif %}
+{% endmacro %}
 <form class="form-teacher-selector">
   <div class="field">
     <label><h3>Disciplina</h3></label>
@@ -6,18 +15,28 @@
 
   <div class="field">
     <label for="">Professores que se Disponibilizaram</label>
+    {% set found = false %}
     {% for m in model %}
-      <input type="radio" name="teacher" value="{{ m.teacher.id }}"
+      <input type="radio" name="teacher" id="radio{{m.teacher.id}}" value="{{ m.teacher.id }}"
       {% if selected == m.teacher.id %}
         checked="checked"
+        {% set found = true %}
       {% endif %}
-      />{{ m.teacher.name }} <br />
+      /> {{ m.teacher.name }} - {{ preference_value(m.value) }}<br />
     {% endfor %}
-    <input type="radio" name="teacher" value="-1" />Selecionar outro professor<br/>
+    <input type="radio" name="teacher" id="radio-1" value="-1"
+    {% if not found %}
+      checked="checked"
+    {% endif %}/> Selecionar outro professor<br/>
     <select class="js-select-teacher">
       <option value="-1"> </option>
       {% for t in teachers %}
-        <option value="{{t.id}}">
+        <option value="{{t.id}}"
+        {% if not found %}
+          {% if t.id == selected %}
+            selected
+          {% endif %}
+        {% endif %}>
           {{t.name}}
         </option>
       {% endfor %}

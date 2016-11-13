@@ -5,14 +5,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import br.ufes.cdsceunes.jsonview.View;
+
 @Entity
 @Table(name="role")
 public class Role {
 	
 	@Id
 	@GeneratedValue
+	@JsonView(View.SummaryWithDetails.class)
 	private Long Id;
 	
+	@JsonView(View.SummaryWithDetails.class)
 	private String name;
 
 	public Long getId() {

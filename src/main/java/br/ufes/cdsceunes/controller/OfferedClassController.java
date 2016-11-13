@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import br.ufes.cdsceunes.jsonview.View;
 import br.ufes.cdsceunes.model.OfferedClass;
 import br.ufes.cdsceunes.model.Semester;
 import br.ufes.cdsceunes.repository.OfferedClassRepository;
@@ -18,6 +21,7 @@ import br.ufes.cdsceunes.repository.OfferedClassRepository;
 @RestController
 public class OfferedClassController extends AbstractController<OfferedClass, OfferedClassRepository> {
 
+	@JsonView(View.OfferedClass.class)
 	@RequestMapping(method = RequestMethod.GET, path = "/{year}/{semester}")
 	public ResponseEntity<List<OfferedClass>> listBySemester(@PathVariable String year, @PathVariable String semester) {
 		semester = Integer.valueOf(semester).toString();
@@ -30,12 +34,14 @@ public class OfferedClassController extends AbstractController<OfferedClass, Off
 
 	}
 	
+	@JsonView(View.OfferedClass.class)
 	@RequestMapping(method = RequestMethod.PUT, path = "/{id}")
 	public ResponseEntity<OfferedClass> update(@PathVariable Long id, @RequestBody OfferedClass class_) {
 		OfferedClass found = repository.findOne(id);
 		if (found != null) {
-			OfferedClass c = repository.save(class_);
-			return new ResponseEntity<OfferedClass>(c, HttpStatus.OK);
+			found.setTeacher(class_.getTeacher());
+			repository.save(found);
+			return new ResponseEntity<OfferedClass>(found, HttpStatus.OK);
 		}
 		return new ResponseEntity<OfferedClass>(HttpStatus.NOT_FOUND);
 	}

@@ -11,11 +11,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import br.ufes.cdsceunes.jsonview.View;
+
 public abstract class AbstractController<T, T_Repository extends JpaRepository> {
 	
 	@Autowired
 	protected T_Repository repository;
 	
+	@JsonView(View.Summary.class)
 	@RequestMapping(method=RequestMethod.GET, value="")
 	public List<T> listAll() {
 		return repository.findAll();

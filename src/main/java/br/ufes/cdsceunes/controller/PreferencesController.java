@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import br.ufes.cdsceunes.jsonview.View;
 import br.ufes.cdsceunes.model.Preferences;
 import br.ufes.cdsceunes.repository.PreferencesRepository;
 
@@ -44,6 +47,7 @@ public class PreferencesController extends AbstractController<Preferences, Prefe
 		return new ResponseEntity<Preferences>(HttpStatus.BAD_REQUEST);
 	}
 	
+	@JsonView(View.Summary.class)
 	@RequestMapping(value = "/class/{id}", method = RequestMethod.GET)
 	public ResponseEntity<List<Preferences>> findPreferencesByClasses(@PathVariable("id") Long id) {
 		List<Preferences> prefs = repository.findByClass(id);

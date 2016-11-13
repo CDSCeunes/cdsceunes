@@ -10,11 +10,11 @@ define [
       url: '/api/v1/preferences'
       model: model
       comparator: (pref1, pref2) ->
-        disc1 = pref1.get('discipline').name
-        disc2 = pref2.get('discipline').name
+        disc1 = pref1.get('offeredClass').discipline.name
+        disc2 = pref2.get('offeredClass').discipline.name
         if disc1 == disc2
-          val1 = pref1.get('preference')
-          val2 = pref2.get('preference')
+          val1 = if pref1.get('value') == 'WANT' then 2 else if pref1.get('value') == 'ACCEPT' then 1 else 0
+          val2 = if pref2.get('value') == 'WANT' then 2 else if pref2.get('value') == 'ACCEPT' then 1 else 0
           if val1 < val2
             -1
           else if val1 > val2

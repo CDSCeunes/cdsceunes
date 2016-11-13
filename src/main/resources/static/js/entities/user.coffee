@@ -1,7 +1,6 @@
 define [
   'cs!app'
-  'q'
-], (CDSCeunes, Q) ->
+], (CDSCeunes) ->
   CDSCeunes.module 'Entities', (Entities, CDSCeunes, Backbone, Marionette, $, _) ->
     Entities.User = Backbone.Model.extend(
       urlRoot: 'api/v1/auth'
