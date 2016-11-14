@@ -5,9 +5,6 @@ define [
     model = Backbone.Model.extend(
       urlRoot: '/api/v1/classes'
       initialize: ->
-        @bind 'change', ->
-          @save()
-          return
         return
     )
 

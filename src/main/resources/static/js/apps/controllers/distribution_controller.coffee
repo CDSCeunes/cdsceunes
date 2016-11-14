@@ -29,17 +29,23 @@ define [
                 selectTeacher = new (View.DistributionSelect)(
                   model: prefs
                   name: new (Backbone.Model)(name: args.name)
+                  teachers: teachers
                   class_id: args.id
                 )
 
                 selectTeacher.on 'save:select', (args) ->
-                  console.log args
                   class_ = classes.findWhere(id: args.class_id)
 
-                  #class_.save()
-                  console.log class_
-                  class_.set({ teacher: { id: parseInt(args.selected) } }, silent: true)
+                  class_.save({ teacher: { id: parseInt(args.selected) } }, {silent: true})
                   class_.save(null)
+
+                  _.debounce( ->
+                    teachers.fetch(reset: true)
+                  , 500)()
+
+                  #CDSCeunes.regions.getRegion('dialog').$el.dialog('close')
+                  CDSCeunes.regions.getRegion('dialog').empty()
+
                   return # ender 'on:save:select'
 
                 CDSCeunes.regions.showChildView 'dialog', selectTeacher

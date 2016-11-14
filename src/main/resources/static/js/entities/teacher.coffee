@@ -9,6 +9,7 @@ define [
         name: ''
         login: ''
         available: true
+        workload: 0
       shouldBeShown: (search) ->
         name = @get('name').toLowerCase()
         login = @get('login').toLowerCase()
