@@ -40,7 +40,16 @@ define [
                   departments: departments
                 )
                 return
+              return
 
+            $.when(CDSCeunes.dataRequest 'department:entities').done (departments) ->
+              list_teachers.on 'childview:teacher:show', ->
+                console.log 'EXIBE'
+                CDSCeunes.regions.showChildView 'dialog', new (View.Form)(
+                  model: CDSCeunes.dataRequest 'teacher:entity:new'
+                  departments: departments
+                )
+                return
               return
 
             CDSCeunes.regions.showChildView 'main', list_layout

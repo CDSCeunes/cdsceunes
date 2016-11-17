@@ -1,0 +1,63 @@
+<form>
+  <div class="row">
+    <div class="small-5 columns">
+      <label for="password" class="text-right middle"><strong>Senha</strong></label>
+    </div>
+    <div class="small-7 columns end">
+      <input type="text" placeholder="Senha" name="password" value="{{ model.name }}">
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-5 columns">
+      <label for="department" class="text-right middle"><strong>Departamento</strong></label>
+    </div>
+    <div class="small-7 columns end">
+      <select form="teacher-form" name="department[id]" required>
+        {% for department in departments %}
+          <option value="{{department.id}}">{{department.name}}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-5 columns">
+      <label for="admissionDate" class="text-right middle"><strong>Data de admissão</strong></label>
+    </div>
+    <div class="small-7 columns end">
+      <input type="date" name="admissionDate" class="datepicker" placeholder="Ex: 2015-12-31" value="{{ model.admissionDate }}">
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-5 columns">
+      <label for="returnFromLastRemoval" class="text-right middle"><strong>Retorno do Afastamento</strong></label>
+    </div>
+    <div class="small-7 columns">
+      <input type="date" name="returnFromLastRemoval" class="datepicker" placeholder="Ex: 2015-12-31" value="{{ model.returnFromLastRemoval }}">
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-5 columns">
+      <label for="returnFromCapacitacion" class="text-right middle"><strong>Retorno da Capacitação</strong></label>
+    </div>
+    <div class="small-7 columns end">
+      <input type="date" class="datepicker" name="returnFromCapacitacion" placeholder="Ex: 2015-12-31" value="{{ model.returnFromCapacitacion }}">
+    </div>
+  </div>
+  <div class="row">
+    <div class="small-5 columns">
+      <label for="available" class="text-right middle"><strong>Disponível</strong></label>
+    </div>
+    <div class="small-7 columns end">
+      <input type="checkbox" name="available" value="true"
+      {% if model.available %}
+        checked
+      {% endif %}
+      >
+    </div>
+  </div>
+  <div class="row">
+    <div class="medium-offset-5 small-5 columns">
+      <button class="small hollow button js-submit-teacher">Enviar</button>
+    </div>
+  </div>
+</form>

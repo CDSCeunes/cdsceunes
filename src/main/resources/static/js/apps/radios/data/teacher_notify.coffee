@@ -12,7 +12,7 @@ define [
         'teacher:entities': 'getTeacherEntities'
         'teacher:entity:new': 'newTeacher'
       getTeacherEntity: (id) ->
-        teacher = new (Entities.Teacher)(id: teacherId)
+        teachers = new (Entities.Teacher)(teacherId: id)
         defer = $.Deferred()
         teachers.fetch
           success: (data) ->

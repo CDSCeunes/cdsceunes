@@ -52,6 +52,13 @@ define [
       template: 'teacher/teacher_item'
       tagName: 'div'
       className: 'row'
+      events:
+        'click a.js-show-teacher' : 'getTeacherEntity'
+      getTeacherEntity: (e) ->
+        e.preventDefault()
+        console.log 'get teacher'
+        @triggerMethod 'teacher:show'
+        return
     )
 
     TeacherBody = Marionette.CollectionView.extend(
