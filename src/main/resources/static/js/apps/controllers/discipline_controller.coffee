@@ -23,12 +23,12 @@ define [
                 (discipline) ->
                   discipline.get('name').indexOf(criterion) > -1
             )
-          list_layout.on 'childview:discipline:new', ->
-            console.log 'Showing new discipline dialog'
-            CDSCeunes.regions.showChildView 'dialog', new (View.Form)(
-              model: CDSCeunes.dataRequest 'discipline:entity:new'
-            )
-            return
+            list_layout.on 'childview:discipline:new', ->
+              console.log 'Showing new discipline dialog'
+              CDSCeunes.regions.showChildView 'dialog', new (View.Form)(
+                model: CDSCeunes.dataRequest 'discipline:entity:new'
+              )
+              return
 
             list_disciplines = new (View.DisciplinesList)(collection: filtered_disciplines)
 
