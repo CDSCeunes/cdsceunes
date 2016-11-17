@@ -27,6 +27,9 @@ define [
       ui:
         'admissionDate': '.datepicker'
         'submitData': '.js-submit-teacher'
+        'form': '#teacher-form'
+      events:
+        'submit @ui.form': 'submitData'
       title: 'Novo Professor'
       serializeData: ->
         {
@@ -34,7 +37,7 @@ define [
           departments: @options.departments.toJSON()
         }
       onRender: ->
-        @ui.admissionDate.datepicker
+        @getUI('admissionDate').datepicker
           dateFormat: 'yy-mm-dd'
           defaultDate: 0
           showAnim: 'drop'

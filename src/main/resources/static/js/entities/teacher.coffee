@@ -7,9 +7,9 @@ define [
       urlRoot: '/api/v1/teachers'
       defaults:
         name: ''
-        login: ''
+        details:
+          login: ''
         available: true
-        workload: 0
       shouldBeShown: (search) ->
         name = @get('name').toLowerCase()
         login = @get('login').toLowerCase()

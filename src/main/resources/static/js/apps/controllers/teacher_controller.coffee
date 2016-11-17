@@ -33,14 +33,29 @@ define [
               return # end show
 
             $.when(CDSCeunes.dataRequest 'department:entities').done (departments) ->
+
+
+
               list_layout.on 'childview:teacher:new', ->
-                console.log 'trigger2'
-                CDSCeunes.regions.showChildView 'dialog', new (View.Form)(
+                form_view = new (View.Form)(
                   model: CDSCeunes.dataRequest 'teacher:entity:new'
                   departments: departments
                 )
-                return
+                CDSCeunes.regions.showChildView 'dialog', form_view
 
+
+                form_view.on 'teacher:form:submit', (data) ->
+                  console.log "plzor"
+                  $.when(CDSCeunes.dataRequest 'teacher:entity:new').done (teacher) ->
+                    teacher.save(data,
+                      success: (data) ->
+                        teachers.add(teacher)
+                        CDSCeunes.regions.getRegion('dialog').empty()
+                        return
+                    )
+                    return
+                  return
+                return
               return
 
             CDSCeunes.regions.showChildView 'main', list_layout

@@ -32,30 +32,30 @@ public class TeacherSerializer extends JsonSerializer<Teacher> {
 		jgen.writeStringField("name", department.getName());
 		jgen.writeStringField("center", department.getCenter());
 		jgen.writeEndObject();
-		
+
 		jgen.writeArrayFieldStart("classes");
-		teacher.getClasses().forEach(c -> {
-			try {
-				jgen.writeStartObject();
-				jgen.writeNumberField("id", c.getId());
-				jgen.writeFieldName("discipline");
-				jgen.writeStartObject();
+		if (teacher.getClasses() != null) {
+			teacher.getClasses().forEach(c -> {
+				try {
+					jgen.writeStartObject();
+					jgen.writeNumberField("id", c.getId());
+					jgen.writeFieldName("discipline");
+					jgen.writeStartObject();
 					Discipline discipline = c.getDiscipline();
 					jgen.writeStringField("name", discipline.getName());
 					jgen.writeNumberField("teoricLoad", discipline.getTeoricLoad());
 					jgen.writeNumberField("labLoad", discipline.getLabLoad());
 					jgen.writeNumberField("exerciseLoad", discipline.getExerciseLoad());
-				jgen.writeEndObject();
-				jgen.writeObjectField("semester", c.getSemester());
-				jgen.writeEndObject();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		});
+					jgen.writeEndObject();
+					jgen.writeObjectField("semester", c.getSemester());
+					jgen.writeEndObject();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			});
+		}
 		jgen.writeEndArray();
-			
-			
 
 		jgen.writeEndObject();
 

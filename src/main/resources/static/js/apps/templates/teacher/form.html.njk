@@ -1,4 +1,4 @@
-<form>
+<form id="teacher-form">
   <div class="row">
     <div class="small-5 columns">
       <label for="name" class="text-right middle"><strong>Nome</strong></label>
@@ -9,12 +9,12 @@
   </div>
   <div class="row">
     <div class="small-5 columns">
-      <label for="login" class="text-right middle">
+      <label for="details" class="text-right middle">
         <strong>Login</strong>
       </label>
     </div>
     <div class="small-7 columns end">
-      <input type="text" placeholder="Login" name="login" value="{{ model.login }}">
+      <input type="text" placeholder="Login" name="details[login]" value="{{ model.details.login }}">
     </div>
   </div>
   <div class="row">
@@ -67,7 +67,7 @@
   </div>
   <div class="row">
     <div class="medium-offset-5 small-5 columns">
-      <button class="small hollow button js-submit-teacher">Enviar</button>
+      <input type="submit" class="small hollow button js-submit-teacher" value="Enviar"/>
     </div>
   </div>
 </form>

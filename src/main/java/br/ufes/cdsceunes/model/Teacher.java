@@ -19,8 +19,11 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import br.ufes.cdsceunes.util.deserializers.LocalDateDeserializer;
+import br.ufes.cdsceunes.util.serializers.LocalDateSerializer;
 import br.ufes.cdsceunes.util.serializers.TeacherSerializer;
 
 @Entity
@@ -48,14 +51,17 @@ public class Teacher extends AbstractModel {
 
 	// @Temporal(value = TemporalType.DATE)
 	@Column(columnDefinition = "DATE")
+	@JsonDeserialize(using=LocalDateDeserializer.class)
 	private LocalDate admissionDate;
 
 	// @Temporal(value = TemporalType.DATE)
 	@Column(columnDefinition = "DATE")
+	@JsonDeserialize(using=LocalDateDeserializer.class)
 	private LocalDate returnFromLastRemoval;
 
 	// @Temporal(value = TemporalType.DATE)
 	@Column(columnDefinition = "DATE")
+	@JsonDeserialize(using=LocalDateDeserializer.class)
 	private LocalDate returnFromCapacitacion;
 
 	@OneToMany(mappedBy = "teacher")
@@ -156,6 +162,10 @@ public class Teacher extends AbstractModel {
 
 	public UserDetails getDetails() {
 		return details;
+	}
+
+	public void setDetails(UserDetails details) {
+		this.details = details;
 	}
 
 }

@@ -45,6 +45,10 @@ public class UserDetails extends AbstractModel {
 		return roles;
 	}
 
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
 	public void setRole(Role role) {
 		roles.add(role);
 	}
