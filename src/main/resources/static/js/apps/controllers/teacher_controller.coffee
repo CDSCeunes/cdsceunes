@@ -32,17 +32,20 @@ define [
               list_layout.showChildView 'teachersRegion', list_teachers
               return # end show
 
+            list_teachers.on 'childview:teacher:delete', (arg) ->
+              console.log 'chegou aqui'
+              console.log arg
+              filtered_teachers.remove(arg)
+              arg.destroy()
+              return
+
             $.when(CDSCeunes.dataRequest 'department:entities').done (departments) ->
-
-
-
               list_layout.on 'childview:teacher:new', ->
                 form_view = new (View.Form)(
                   model: CDSCeunes.dataRequest 'teacher:entity:new'
                   departments: departments
                 )
                 CDSCeunes.regions.showChildView 'dialog', form_view
-
 
                 form_view.on 'teacher:form:submit', (data) ->
                   console.log "plzor"

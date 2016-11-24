@@ -55,6 +55,13 @@ define [
       template: 'teacher/teacher_item'
       tagName: 'div'
       className: 'row'
+      events:
+        'click button.js-delete-teacher' : 'deleteTeacherEntity'
+      deleteTeacherEntity: (e) ->
+        e.preventDefault()
+        console.log 'delete teacher'
+        @triggerMethod 'teacher:delete', @model
+        return
     )
 
     TeacherBody = Marionette.CollectionView.extend(

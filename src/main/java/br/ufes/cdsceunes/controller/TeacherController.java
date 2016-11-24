@@ -1,5 +1,7 @@
 package br.ufes.cdsceunes.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,12 +33,16 @@ public class TeacherController extends AbstractController<Teacher, TeacherReposi
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public List<Teacher> listAll() {
+		return repository.findAllAvailable();
+	}
 	/*
 	 * @RequestMapping(value = "/{id}", method = RequestMethod.GET) public
 	 * ResponseEntity<Teacher> getUserById(@PathVariable Long id) { Teacher
 	 * teacher = repository.findOne(id); if (teacher != null) { return new
 	 * ResponseEntity<Teacher>(teacher, HttpStatus.OK); } return new
-	 * ResponseEntity<Teacher>(HttpStatus.NO_CONTENT); }
+	 * ResponseEntity<Teacher>(HttpStatus.NO_CONTENT); }{}
 	 */
 
 	@RequestMapping(value = "", method = RequestMethod.POST)
@@ -55,7 +61,8 @@ public class TeacherController extends AbstractController<Teacher, TeacherReposi
 	public ResponseEntity<Teacher> delete(@PathVariable("id") Long id) {
 		Teacher teacher = repository.findOne(id);
 		if (teacher != null) {
-			repository.delete(teacher);
+			teacher.setAvailable(false);
+			repository.save(teacher);
 			return new ResponseEntity<Teacher>(HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<Teacher>(HttpStatus.BAD_REQUEST);
