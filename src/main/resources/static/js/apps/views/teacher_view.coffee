@@ -22,6 +22,35 @@ define [
         return
     )
 
+    Show = Marionette.View.extend(
+      template: 'teacher/show'
+      ui:
+        'admissionDate': '.datepicker'
+        'submitData': '.js-submit-teacher'
+        'form': '#teacher-form'
+      events:
+        'submit @ui.form': 'submitData'
+      title: 'Novo Professor'
+      serializeData: ->
+        {
+          model: @model.toJSON()
+          departments: @options.departments.toJSON()
+        }
+      onRender: ->
+        @getUI('admissionDate').datepicker
+          dateFormat: 'yy-mm-dd'
+          defaultDate: 0
+          showAnim: 'drop'
+        @ui.submitData.text 'Enviar'
+        return
+      submitData: (e) ->
+        e.preventDefault()
+        data = Backbone.Syphon.serialize(this)
+        console.log data
+        @trigger 'teacher:form:submit', data
+        return
+    )
+
     Form = Marionette.View.extend(
       template: 'teacher/form'
       ui:
@@ -57,10 +86,22 @@ define [
       className: 'row'
       events:
         'click button.js-delete-teacher' : 'deleteTeacherEntity'
+        'click a.js-show-teacher' : 'showTeacherEntity'
+        'click a.js-edit-teacher' : 'editTeacherEntity'
       deleteTeacherEntity: (e) ->
         e.preventDefault()
         console.log 'delete teacher'
         @triggerMethod 'teacher:delete', @model
+        return
+      showTeacherEntity: (e) ->
+        e.preventDefault()
+        console.log 'show teacher'
+        @triggerMethod 'teacher:show', @model
+        return
+      editTeacherEntity: (e) ->
+        e.preventDefault()
+        console.log 'edit teacher'
+        @triggerMethod 'teacher:edit', @model
         return
     )
 
@@ -79,6 +120,6 @@ define [
         return
     )
 
-    Layout: Layout, Panel: Panel, TeachersList: TeacherList, Form: Form
+    Layout: Layout, Panel: Panel, TeachersList: TeacherList, Form: Form, Show: Show
 
   View()

@@ -33,10 +33,49 @@ define [
               return # end show
 
             list_teachers.on 'childview:teacher:delete', (arg) ->
-              console.log 'chegou aqui'
+              console.log 'deletar'
               console.log arg
               filtered_teachers.remove(arg)
               arg.destroy()
+              return
+
+            $.when(CDSCeunes.dataRequest 'department:entities').done (departments) ->
+              list_teachers.on 'childview:teacher:show', (arg) ->
+                console.log 'mostrar'
+                console.log arg
+                CDSCeunes.regions.showChildView 'dialog', new (View.Show)(
+                  model: arg
+                  departments: departments
+                )
+                #teacher = filtered_teachers.findWhere(arg)
+                console.log arg.get('name')
+                console.log arg.get('login')
+                console.log arg.get('id')
+                return
+              return
+
+            $.when(CDSCeunes.dataRequest 'department:entities').done (departments) ->
+              list_teachers.on 'childview:teacher:edit', (arg) ->
+                console.log 'editar'
+                console.log arg
+
+                form_view = new (View.Form)(
+                  model: arg
+                  departments: departments
+                )
+
+                CDSCeunes.regions.showChildView 'dialog', form_view
+
+                form_view.on 'teacher:form:submit', (data) ->
+                  arg.save(data,
+                      success: (data) ->
+                        console.log 'testing'
+                        filtered_teachers.set(arg, {remove: false})
+                        CDSCeunes.regions.getRegion('dialog').empty()
+                        return
+                  )
+                  return
+                return
               return
 
             $.when(CDSCeunes.dataRequest 'department:entities').done (departments) ->

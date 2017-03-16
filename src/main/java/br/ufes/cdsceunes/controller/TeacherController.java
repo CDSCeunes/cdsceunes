@@ -29,8 +29,12 @@ public class TeacherController extends AbstractController<Teacher, TeacherReposi
 		if (t == null || t.getId() != teacher.getId()) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
-		repository.saveAndFlush(teacher);
-		return new ResponseEntity<>(HttpStatus.OK);
+		t.setName(teacher.getName());
+		t.setAdmissionDate(teacher.getAdmissionDate());
+		t.setReturnFromCapacitacion(teacher.getReturnFromCapacitacion());
+		t.setReturnFromLastRemoval(teacher.getReturnFromLastRemoval());
+		t = repository.save(t);
+		return new ResponseEntity<>(t, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
