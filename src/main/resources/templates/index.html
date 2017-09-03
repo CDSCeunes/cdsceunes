@@ -1,25 +1,27 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-	
+<!doctype html>
+<html lang="en">
+
 <head>
-<meta charset="UTF-8"/>
-<title>CDS Ceunes</title>
-<link rel="stylesheet" href="../../css/app.css" th:href="@{/css/app.css}" />
-<link rel="stylesheet" href="../../css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}" />
-<link rel="stylesheet" href="../../css/vendor/jquery-ui.css" th:href="@{/css/vendor/jquery-ui.css}" />
-<link rel="stylesheet" href="../../css/vendor/foundation.min.css" th:href="@{/css/vendor/foundation.min.css}" />
+  <meta charset="utf-8" />
+  <title>Front</title>
+  <script>
+    document.write('<base href="' + document.location + '" />');
+  </script>
+  <base href="/" />
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="icon" type="image/x-icon" href="favicon.ico"/>
+  <link rel="stylesheet" href="dist/styles.css" />
 </head>
 
-<body id="app-container" class="container-fluid">
-		<header id="header-container"></header>
-		<section id="main-container">
-			<p>CDS Ceunes</p>
-		</section>
-		<section id="dialog-container"></section>
-		<footer id="footer-container"></footer>
-	<script type="text/javascript" data-main="js/main.js"
-		src="js/vendor/require.js"></script>
+<body>
+  <app-root>Loading ...</app-root>
+<script type="text/javascript" src="dist/inline.bundle.js"></script>
+<script type="text/javascript" src="dist/polyfills.bundle.js"></script>
+<script type="text/javascript" src="dist/styles.bundle.js"></script>
+<script type="text/javascript" src="dist/vendor.bundle.js"></script>
+<script type="text/javascript" src="dist/main.bundle.js"></script>
 </body>
+
 </html>

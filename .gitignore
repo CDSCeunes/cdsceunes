@@ -3,3 +3,4 @@
 .settings/
 .tern-project
 target/
+src/main/resources/static/dist/
