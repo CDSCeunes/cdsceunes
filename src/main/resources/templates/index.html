@@ -6,22 +6,23 @@
   <title>Front</title>
   <script>
     document.write('<base href="' + document.location + '" />');
+    console.log(document.location);
   </script>
-  <base href="/" />
+  <base href="/app" />
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <link rel="icon" type="image/x-icon" href="favicon.ico"/>
-  <link rel="stylesheet" href="dist/styles.css" />
+  <link rel="stylesheet" th:href="@{dist/styles.css}" />
 </head>
 
 <body>
   <app-root>Loading ...</app-root>
-<script type="text/javascript" src="dist/inline.bundle.js"></script>
-<script type="text/javascript" src="dist/polyfills.bundle.js"></script>
-<script type="text/javascript" src="dist/styles.bundle.js"></script>
-<script type="text/javascript" src="dist/vendor.bundle.js"></script>
-<script type="text/javascript" src="dist/main.bundle.js"></script>
+<script type="text/javascript" th:src="@{/dist/inline.bundle.js}"></script>
+<script type="text/javascript" th:src="@{/dist/polyfills.bundle.js}"></script>
+<script type="text/javascript" th:src="@{/dist/styles.bundle.js}"></script>
+<script type="text/javascript" th:src="@{/dist/vendor.bundle.js}"></script>
+<script type="text/javascript" th:src="@{/dist/main.bundle.js}"></script>
 </body>
 
 </html>

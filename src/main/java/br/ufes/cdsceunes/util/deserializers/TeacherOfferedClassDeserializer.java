@@ -12,7 +12,6 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import br.ufes.cdsceunes.model.Discipline;
 import br.ufes.cdsceunes.model.OfferedClass;
-import scala.annotation.meta.setter;
 
 public class TeacherOfferedClassDeserializer extends JsonDeserializer<OfferedClass> {
 

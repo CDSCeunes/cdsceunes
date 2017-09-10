@@ -2,7 +2,6 @@ package br.ufes.cdsceunes.config;
 
 import java.util.List;
 
-import org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration.WebMvcAutoConfigurationAdapter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.datetime.DateFormatter;
@@ -11,16 +10,20 @@ import org.springframework.format.support.DefaultFormattingConversionService;
 import org.springframework.format.support.FormattingConversionService;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
 
 @Configuration
-@EnableWebMvc
-public class AppWebMvc extends WebMvcAutoConfigurationAdapter {
+//@EnableWebMvc
+public class AppWebMvc extends WebMvcConfigurerAdapter {
 
 	@Override
 	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
@@ -49,8 +52,11 @@ public class AppWebMvc extends WebMvcAutoConfigurationAdapter {
 		return conversionService;
 	}
 	
-	@Override
-	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/").setViewName("index");
-	}
+	
+	/*@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry
+			.addResourceHandler("/dist/**")
+			.addResourceLocations("dist/");
+	}*/
 }
