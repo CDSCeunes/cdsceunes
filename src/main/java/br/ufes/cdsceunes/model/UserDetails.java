@@ -1,5 +1,7 @@
 package br.ufes.cdsceunes.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -12,12 +14,12 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotBlank;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 @Entity
 @Table(name = "user_details")
-public class UserDetails extends AbstractModel {
+public class UserDetails extends AbstractModel implements org.springframework.security.core.userdetails.UserDetails {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,10 +29,11 @@ public class UserDetails extends AbstractModel {
 	@Column(length = 50, unique = true)
 	private String login;
 
-	@JsonIgnore
 	private String password;
 
-	@ManyToMany(fetch=FetchType.EAGER)
+	private Boolean enabled;
+
+	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Role> roles;
 
 	public String getLogin() {
@@ -41,12 +44,56 @@ public class UserDetails extends AbstractModel {
 		return password;
 	}
 
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public List<Role> getRoles() {
 		return roles;
 	}
 
 	public void setRole(Role role) {
 		roles.add(role);
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		final List<GrantedAuthority> authorities = new ArrayList<>();
+		for (Role role : roles) {
+			authorities.add(new SimpleGrantedAuthority(role.getName()));
+		}
+		return authorities;
+	}
+
+	@Override
+	public String getUsername() {
+		return login;
+	}
+
+	@Override
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
+		return enabled;
+	}
+
+	@Override
+	public boolean isAccountNonLocked() {
+		return enabled;
+	}
+
+	@Override
+	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
+		return enabled;
+	}
+
+	@Override
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public Long getId() {
+		return this.id;
 	}
 
 }
