@@ -1,4 +1,4 @@
-package br.ufes.cdsceunes.controller;
+package br.ufes.cdsceunes.controller.api.v1;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;

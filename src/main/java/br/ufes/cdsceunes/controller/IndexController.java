@@ -11,4 +11,8 @@ public class IndexController {
 		return "redirect:/app/";
 	}
 	
+	@RequestMapping({"/app/", "/app"})
+	public String app() {
+		return "index";
+	}
 }
