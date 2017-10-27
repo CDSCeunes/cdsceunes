@@ -1,5 +1,6 @@
 package br.ufes.cdsceunes.controller.api.v1;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Map;
 
@@ -48,7 +49,13 @@ public class TeacherController {
 	@PostMapping("")
 	public ResponseEntity<Teacher> save(@RequestBody Teacher teacher) {
 		teacher = repository.save(teacher);
-		return ResponseEntity.ok(teacher);
+
+		if (teacher == null) {
+			return ResponseEntity.unprocessableEntity().build();
+		}
+		String uri = "/api/v1/teachers" + teacher.getId().toString();
+
+		return ResponseEntity.created(URI.create(uri)).build();
 	}
 
 	@PatchMapping("/:id")
@@ -59,7 +66,7 @@ public class TeacherController {
 		}
 		List<String> errors = repository.save(updates, teacher);
 		if (!errors.isEmpty()) {
-			return new ResponseEntity<List<String>>(errors, HttpStatus.FORBIDDEN);
+			return new ResponseEntity<List<String>>(errors, HttpStatus.BAD_REQUEST);
 		}
 		return ResponseEntity.ok("resource updated");
 
@@ -73,12 +80,12 @@ public class TeacherController {
 		}
 		List<String> errors = repository.save(updates, teacher);
 		if (!errors.isEmpty()) {
-			return new ResponseEntity<List<String>>(errors, HttpStatus.FORBIDDEN);
+			return new ResponseEntity<List<String>>(errors, HttpStatus.BAD_REQUEST);
 		}
 		return ResponseEntity.ok("resource updated");
 	}
 
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/:id", method = RequestMethod.DELETE)
 	public ResponseEntity<?> delete(@PathVariable("id") Long id) {
 		Teacher teacher = repository.findOne(id);
 		if (teacher != null) {
