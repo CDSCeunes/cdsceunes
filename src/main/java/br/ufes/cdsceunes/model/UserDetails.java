@@ -91,6 +91,14 @@ public class UserDetails extends AbstractModel implements org.springframework.se
 	public boolean isEnabled() {
 		return enabled;
 	}
+	
+	public void deactivate() {
+		this.enabled = false;
+	}
+	
+	public void activate() {
+		this.enabled = true;
+	}
 
 	public Long getId() {
 		return this.id;

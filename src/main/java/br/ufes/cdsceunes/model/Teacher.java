@@ -2,7 +2,6 @@ package br.ufes.cdsceunes.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -19,13 +18,9 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.validator.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonView;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import br.ufes.cdsceunes.jsonview.TeacherView;
-import br.ufes.cdsceunes.util.serializers.TeacherSerializer;
 
 @Entity
 @Table(name = "teacher")
